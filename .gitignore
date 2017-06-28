@@ -1,5 +1,3 @@
-### https://raw.github.com/github/gitignore/4e806b70bb5ca5e29de7dab3114f64e30767eb27/Global/OSX.gitignore
-
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -60,7 +58,7 @@ proguard/
 *.iml
 
 ## Directory-based project format:
-.idea/
+.idea/*
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
