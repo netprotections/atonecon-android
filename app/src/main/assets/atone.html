@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <script src="https://auth.atone.be/v1/atone.js"></script>
+</head>
+<title>atone bla bla</title>
+<body>
+<form action="/login" method="POST">
+    <input type="text" id="login_id"/>
+    <br />
+    <input type="password" id="password"/>
+    <input type="submit"/>
+    <label id="label">abc</label>
+</form>
+<button id="atone-button">Atone</button>
+<script>
+var data = {
+    "amount": 123, //	???:??
+		"shopTransactionNo": "",		//	?????ID:??
+		"salesSettled": "",		//	????
+		"descriptionTrans": "", //	???????:??
+		"checksum": "Eba8b4JtD+inOc/zRON0D4RfODMfXwsz1hCdAmrq1CI=", //	??????
+		"customer": {
+				"name": "????",
+				"familyName": "??",
+				"givenName": "??",
+				"nameKana": "????????",
+				"familyNameKana": "?????",
+				"givenNameKana": "???",
+				"phoneNumber": "090-1111-1111",
+				"birthday": "1990-01-01",
+				"sexDivision": "1",
+				"companyName": "???????????",
+				"department": "????",
+				"zipCode": "123-4567",
+				"address": "????????1-10?6 ?????????4?",
+				"tel": "03-1234-1234",
+				"email": "no@netprotections.co.jp",
+				"totalPurchaseCount": 8,
+				"totalPurchaseAmount": 2160
+                },
+        "dest_customers": [ //	???????
+				{
+				"nname": "??",
+				"nameKana": "??????",
+				"companyName": "???????????????",
+				"department": "??????",
+				"zipCode": "123-1234",
+				"address": "????????1 1 6 ?????????4?",
+				"tel": "0312341234",
+				"email": ""
+				}],
+        "items": [ //	????
+				{
+				"id": "item-012", //	?????ID:	??
+				"name": "??012", //	???:	??
+				"price": 1500, //	????:??
+				"count": 1, //	??:	??
+				"url": "https://atone.be/items/012/" //	??URL:	??
+			    },
+				{
+				"id": "item-056",
+				"name": "??056",
+				"price": 9800,
+				"count": 1,
+				"url": "https://atone.be/items/056/"
+				}
+		]
+        }
+
+Atone.config({
+    pre_token: "WJKofkls_blabla",
+    pub_key: "dsadsadsadsadsa",
+    payment: data,
+    authenticated: function(authentication_token){
+        //adsadsadsad
+    },
+    cancelled: function(){
+        //dsadsadsa
+    },
+    failed: function(response){
+        //dsadsagg
+    },
+    successed: function(response){
+        //gfgfg
+    }
+    });
+    var button = document.getElementById("atone-button");
+    var label = document.getElementById("label");
+    button.addEventListener("click", function(e){
+        /**
+ * Atone.start();
+ */
+    label.setText("sadhusaifjsadsa");
+    }, false);
+
+</script>
+</body>
+</html>
