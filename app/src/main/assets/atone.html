@@ -11,91 +11,97 @@
     <input type="text" id="login_id"/>
     <br />
     <input type="password" id="password"/>
+    <br/>
     <input type="submit"/>
+    <br/>
     <label id="label">abc</label>
 </form>
 <button id="atone-button">Atone</button>
 <script>
-var data = {
-    "amount": 123, //	???:??
-		"shopTransactionNo": "",		//	?????ID:??
-		"salesSettled": "",		//	????
-		"descriptionTrans": "", //	???????:??
-		"checksum": "Eba8b4JtD+inOc/zRON0D4RfODMfXwsz1hCdAmrq1CI=", //	??????
-		"customer": {
-				"name": "????",
-				"familyName": "??",
-				"givenName": "??",
-				"nameKana": "????????",
-				"familyNameKana": "?????",
-				"givenNameKana": "???",
-				"phoneNumber": "090-1111-1111",
-				"birthday": "1990-01-01",
-				"sexDivision": "1",
-				"companyName": "???????????",
-				"department": "????",
-				"zipCode": "123-4567",
-				"address": "????????1-10?6 ?????????4?",
-				"tel": "03-1234-1234",
-				"email": "no@netprotections.co.jp",
-				"totalPurchaseCount": 8,
-				"totalPurchaseAmount": 2160
-                },
-        "dest_customers": [ //	???????
-				{
-				"nname": "??",
-				"nameKana": "??????",
-				"companyName": "???????????????",
-				"department": "??????",
-				"zipCode": "123-1234",
-				"address": "????????1 1 6 ?????????4?",
-				"tel": "0312341234",
-				"email": ""
-				}],
-        "items": [ //	????
-				{
-				"id": "item-012", //	?????ID:	??
-				"name": "??012", //	???:	??
-				"price": 1500, //	????:??
-				"count": 1, //	??:	??
-				"url": "https://atone.be/items/012/" //	??URL:	??
-			    },
-				{
-				"id": "item-056",
-				"name": "??056",
-				"price": 9800,
-				"count": 1,
-				"url": "https://atone.be/items/056/"
-				}
-		]
-        }
+	var data = {
+	    "amount": 123, //	???:??
+	    "shopTransactionNo": "", //	?????ID:??
+	    "salesSettled": "", //	????
+	    "descriptionTrans": "", //	???????:??
+	    "checksum": "Eba8b4JtD+inOc/zRON0D4RfODMfXwsz1hCdAmrq1CI=", //	??????
+	    "customer": {
+	        "name": "????",
+	        "familyName": "??",
+	        "givenName": "??",
+	        "nameKana": "????????",
+	        "familyNameKana": "?????",
+	        "givenNameKana": "???",
+	        "phoneNumber": "090-1111-1111",
+	        "birthday": "1990-01-01",
+	        "sexDivision": "1",
+	        "companyName": "???????????",
+	        "department": "????",
+	        "zipCode": "123-4567",
+	        "address": "????????1-10?6 ?????????4?",
+	        "tel": "03-1234-1234",
+	        "email": "no@netprotections.co.jp",
+	        "totalPurchaseCount": 8,
+	        "totalPurchaseAmount": 2160
+	    },
+	    "dest_customers": [ //	???????
+	        {
+	            "nname": "??",
+	            "nameKana": "??????",
+	            "companyName": "???????????????",
+	            "department": "??????",
+	            "zipCode": "123-1234",
+	            "address": "????????1 1 6 ?????????4?",
+	            "tel": "0312341234",
+	            "email": ""
+	        }
+	    ],
+	    "items": [ //	????
+	        {
+	            "id": "item-012", //	?????ID:	??
+	            "name": "??012", //	???:	??
+	            "price": 1500, //	????:??
+	            "count": 1, //	??:	??
+	            "url": "https://atone.be/items/012/" //	??URL:	??
+	        },
+	        {
+	            "id": "item-056",
+	            "name": "??056",
+	            "price": 9800,
+	            "count": 1,
+	            "url": "https://atone.be/items/056/"
+	        }
+	    ]
+	}
 
-Atone.config({
-    pre_token: "WJKofkls_blabla",
-    pub_key: "dsadsadsadsadsa",
-    payment: data,
-    authenticated: function(authentication_token){
-        //adsadsadsad
-    },
-    cancelled: function(){
-        //dsadsadsa
-    },
-    failed: function(response){
-        //dsadsagg
-    },
-    successed: function(response){
-        //gfgfg
-    }
-    });
-    var button = document.getElementById("atone-button");
-    var label = document.getElementById("label");
-    button.addEventListener("click", function(e){
-        /**
- * Atone.start();
- */
-    label.setText("sadhusaifjsadsa");
-    }, false);
+	Atone.config({
+	    pre_token: "WJKofkls_blabla",
+	    pub_key: "dsadsadsadsadsa",
+	    payment: data,
+	    authenticated: function(authentication_token) {
+	        //adsadsadsad
+	    },
+	    cancelled: function() {
+	        //dsadsadsa
+	    },
+	    failed: function(response) {
+	        //dsadsagg
+	    },
+	    successed: function(response) {
+	        //gfgfg
+	    }
+	});
+	var button = document.getElementById("atone-button");
+	button.addEventListener("click", function(e) {
+	    label.innerText = "12312312321";
+	    //Atone.start();
+	}, false);
 
+</script>
+
+<script>
+	var label = document.getElementById("label");
+	data.checksum = "OK changed";
+	label.innerText = data.checksum;
 </script>
 </body>
 </html>
