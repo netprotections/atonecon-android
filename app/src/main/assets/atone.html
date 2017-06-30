@@ -206,16 +206,16 @@ Atone = function() {
 	    pub_key: "bB2uNvcOP2o8fJzHpWUumA",
 	    payment: data,
 	    authenticated: function(authentication_token) {
-	        //adsadsadsad
+	        Android.onAuthenticated(authentication_token);
 	    },
 	    cancelled: function() {
-	        //dsadsadsa
+	         Android.onCancelled();
 	    },
 	    failed: function(response) {
-	        //dsadsagg
+	         Android.onFailed();
 	    },
 	    successed: function(response) {
-	        //gfgfg
+	         Android.onSuccessFul();
 	    }
 	});
 	var button = document.getElementById("atone-button");

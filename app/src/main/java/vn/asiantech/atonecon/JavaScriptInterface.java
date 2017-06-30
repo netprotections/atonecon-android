@@ -2,6 +2,7 @@ package vn.asiantech.atonecon;
 
 import android.content.Context;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -27,6 +28,7 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onAuthenticated(String authenticationToken) {
+        Toast.makeText(mContext, "onAuthenticated: " + authenticationToken, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onAuthenticationSuccess(authenticationToken);
         }
@@ -34,6 +36,7 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onCancelled() {
+        Toast.makeText(mContext, "onCancelled", Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onTransactionCancel();
         }
@@ -41,6 +44,7 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onFailed() {
+        Toast.makeText(mContext, "onFailed", Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onFailure();
         }
@@ -48,6 +52,7 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onSuccessFul() {
+        Toast.makeText(mContext, "onSuccessFul", Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onTransactionSuccess("");
         }
