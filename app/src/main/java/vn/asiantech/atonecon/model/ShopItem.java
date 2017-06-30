@@ -12,6 +12,14 @@ public class ShopItem {
     private int item_count;
     private String item_url;
 
+    public ShopItem(String shop_item_id, String item_name, int item_price, int item_count, String item_url) {
+        this.shop_item_id = shop_item_id;
+        this.item_name = item_name;
+        this.item_price = item_price;
+        this.item_count = item_count;
+        this.item_url = item_url;
+    }
+
     public String getId() {
         return shop_item_id;
     }

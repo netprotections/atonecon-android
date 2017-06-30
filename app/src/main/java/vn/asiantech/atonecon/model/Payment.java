@@ -16,6 +16,22 @@ public class Payment {
     private List<DestCustomer> dest_customers;
     private List<ShopItem> items;
 
+    public Payment() {
+    }
+
+    public Payment(int amount, String shop_transaction_no, String sales_settled,
+                   String description_trans, String checksum, Customer customer,
+                   List<DestCustomer> dest_customers, List<ShopItem> items) {
+        this.amount = amount;
+        this.shop_transaction_no = shop_transaction_no;
+        this.sales_settled = sales_settled;
+        this.description_trans = description_trans;
+        this.checksum = checksum;
+        this.customer = customer;
+        this.dest_customers = dest_customers;
+        this.items = items;
+    }
+
     public int getAmount() {
         return amount;
     }
