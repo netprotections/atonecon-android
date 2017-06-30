@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Payment {
     private int amount;
-    private String shopTransactionNo;
-    private String salesSettled;
-    private String descriptionTrans;
+    private String shop_transaction_no;
+    private String sales_settled;
+    private String description_trans;
     private String checksum;
     private Customer customer;
     private List<DestCustomer> dest_customers;
@@ -25,27 +25,27 @@ public class Payment {
     }
 
     public String getShopTransactionNo() {
-        return shopTransactionNo;
+        return shop_transaction_no;
     }
 
     public void setShopTransactionNo(String shopTransactionNo) {
-        this.shopTransactionNo = shopTransactionNo;
+        this.shop_transaction_no = shopTransactionNo;
     }
 
     public String getSalesSettled() {
-        return salesSettled;
+        return sales_settled;
     }
 
     public void setSalesSettled(String salesSettled) {
-        this.salesSettled = salesSettled;
+        this.sales_settled = salesSettled;
     }
 
     public String getDescriptionTrans() {
-        return descriptionTrans;
+        return description_trans;
     }
 
     public void setDescriptionTrans(String descriptionTrans) {
-        this.descriptionTrans = descriptionTrans;
+        this.description_trans = descriptionTrans;
     }
 
     public String getChecksum() {

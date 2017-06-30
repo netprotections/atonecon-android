@@ -6,49 +6,49 @@ package vn.asiantech.atonecon.model;
  * Class item of shop service
  */
 public class ShopItem {
-    private String id;
-    private String name;
-    private int price;
-    private int count;
-    private String url;
+    private String shop_item_id;
+    private String item_name;
+    private int item_price;
+    private int item_count;
+    private String item_url;
 
     public String getId() {
-        return id;
+        return shop_item_id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.shop_item_id = id;
     }
 
     public String getName() {
-        return name;
+        return item_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.item_name = name;
     }
 
     public int getPrice() {
-        return price;
+        return item_price;
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        this.item_price = price;
     }
 
     public int getCount() {
-        return count;
+        return item_count;
     }
 
     public void setCount(int count) {
-        this.count = count;
+        this.item_count = count;
     }
 
     public String getUrl() {
-        return url;
+        return item_url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.item_url = url;
     }
 }

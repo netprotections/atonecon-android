@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import vn.asiantech.atonecon.model.Payment;
+
 /**
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/28/17.
@@ -28,6 +30,14 @@ public class MainActivity extends Activity implements AtoneCallBack {
 
         mWebView.addJavascriptInterface(javaScriptInterface, "Android");
         mWebView.loadUrl("file:///android_asset/atone.html");
+
+        AtoneSdk.Option option = AtoneSdk.Option.builder();
+        option.payment = new Payment();
+        option.url = "";
+        option.preKey = "";
+        AtoneSdk.config(option);
+        AtoneSdk.showDialog();
+
     }
 
     @Override

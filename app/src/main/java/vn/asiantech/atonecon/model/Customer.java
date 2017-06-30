@@ -6,78 +6,78 @@ package vn.asiantech.atonecon.model;
  * Class for customer of Atone Service
  */
 public class Customer {
-    private String name;
-    private String familyName;
-    private String givenName;
-    private String nameKana;
-    private String familyNameKana;
-    private String givenNameKana;
-    private String phoneNumber;
+    private String customer_name;
+    private String customer_family_name;
+    private String customer_given_name;
+    private String customer_name_kana;
+    private String customer_family_name_kana;
+    private String customer_given_name_kana;
+    private String phone_number;
     private String birthday;
-    private String sexDivision;
-    private String companyName;
+    private String sex_division;
+    private String company_name;
     private String department;
-    private String zipCode;
+    private String zip_code;
     private String address;
     private String tel;
     private String email;
-    private int totalPurchaseCount;
-    private int totalPurchaseAmount;
+    private int total_purchase_count;
+    private int total_purchase_amount;
 
     public String getName() {
-        return name;
+        return customer_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.customer_name = name;
     }
 
     public String getFamilyName() {
-        return familyName;
+        return customer_family_name;
     }
 
     public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+        this.customer_family_name = familyName;
     }
 
     public String getGivenName() {
-        return givenName;
+        return customer_given_name;
     }
 
     public void setGivenName(String givenName) {
-        this.givenName = givenName;
+        this.customer_given_name = givenName;
     }
 
-    public String getNameKana() {
-        return nameKana;
+    public String getNameKaNa() {
+        return customer_name_kana;
     }
 
-    public void setNameKana(String nameKana) {
-        this.nameKana = nameKana;
+    public void setNameKaNa(String nameKana) {
+        this.customer_name_kana = nameKana;
     }
 
     public String getFamilyNameKana() {
-        return familyNameKana;
+        return customer_family_name_kana;
     }
 
     public void setFamilyNameKana(String familyNameKana) {
-        this.familyNameKana = familyNameKana;
+        this.customer_family_name_kana = familyNameKana;
     }
 
     public String getGivenNameKana() {
-        return givenNameKana;
+        return customer_given_name_kana;
     }
 
     public void setGivenNameKana(String givenNameKana) {
-        this.givenNameKana = givenNameKana;
+        this.customer_given_name_kana = givenNameKana;
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phone_number;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
     }
 
     public String getBirthday() {
@@ -89,19 +89,19 @@ public class Customer {
     }
 
     public String getSexDivision() {
-        return sexDivision;
+        return sex_division;
     }
 
     public void setSexDivision(String sexDivision) {
-        this.sexDivision = sexDivision;
+        this.sex_division = sexDivision;
     }
 
     public String getCompanyName() {
-        return companyName;
+        return company_name;
     }
 
     public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.company_name = companyName;
     }
 
     public String getDepartment() {
@@ -113,11 +113,11 @@ public class Customer {
     }
 
     public String getZipCode() {
-        return zipCode;
+        return zip_code;
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        this.zip_code = zipCode;
     }
 
     public String getAddress() {
@@ -145,18 +145,18 @@ public class Customer {
     }
 
     public int getTotalPurchaseCount() {
-        return totalPurchaseCount;
+        return total_purchase_count;
     }
 
     public void setTotalPurchaseCount(int totalPurchaseCount) {
-        this.totalPurchaseCount = totalPurchaseCount;
+        this.total_purchase_count = totalPurchaseCount;
     }
 
     public int getTotalPurchaseAmount() {
-        return totalPurchaseAmount;
+        return total_purchase_amount;
     }
 
     public void setTotalPurchaseAmount(int totalPurchaseAmount) {
-        this.totalPurchaseAmount = totalPurchaseAmount;
+        this.total_purchase_amount = totalPurchaseAmount;
     }
 }
