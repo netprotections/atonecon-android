@@ -1,8 +1,10 @@
 package vn.asiantech.atonecon;
 
-import android.content.Context;
+import android.app.Activity;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
+
+import vn.asiantech.atonecon.util.AtoneUtil;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -10,10 +12,10 @@ import android.widget.Toast;
  */
 public class JavaScriptInterface {
 
-    private Context mContext;
+    private Activity mContext;
     private AtoneCallBack mListener;
 
-    public JavaScriptInterface(Context context) {
+    public JavaScriptInterface(Activity context) {
         this.mContext = context;
     }
 
@@ -24,6 +26,11 @@ public class JavaScriptInterface {
      */
     public void setCallBackHandler(AtoneCallBack atoneCallBack) {
         this.mListener = atoneCallBack;
+    }
+
+    @JavascriptInterface
+    public String getPublicKey() {
+        return AtoneUtil.getAtonePublicKey(mContext);
     }
 
     @JavascriptInterface
