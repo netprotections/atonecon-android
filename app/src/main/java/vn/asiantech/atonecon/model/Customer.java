@@ -24,6 +24,30 @@ public class Customer {
     private int total_purchase_count;
     private int total_purchase_amount;
 
+    public Customer(String customer_name, String customer_family_name, String customer_given_name,
+                    String customer_name_kana, String customer_family_name_kana,
+                    String customer_given_name_kana, String phone_number, String birthday,
+                    String sex_division, String company_name, String department, String zip_code,
+                    String address, String tel, String email, int total_purchase_count, int total_purchase_amount) {
+        this.customer_name = customer_name;
+        this.customer_family_name = customer_family_name;
+        this.customer_given_name = customer_given_name;
+        this.customer_name_kana = customer_name_kana;
+        this.customer_family_name_kana = customer_family_name_kana;
+        this.customer_given_name_kana = customer_given_name_kana;
+        this.phone_number = phone_number;
+        this.birthday = birthday;
+        this.sex_division = sex_division;
+        this.company_name = company_name;
+        this.department = department;
+        this.zip_code = zip_code;
+        this.address = address;
+        this.tel = tel;
+        this.email = email;
+        this.total_purchase_count = total_purchase_count;
+        this.total_purchase_amount = total_purchase_amount;
+    }
+
     public String getName() {
         return customer_name;
     }

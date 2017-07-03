@@ -14,6 +14,19 @@ public class DestCustomer {
     private String dest_tel;
     private String dest_email;
 
+    public DestCustomer(String dest_customer_name, String dest_customer_name_kana,
+                        String dest_company_name, String dest_department, String dest_zip_code,
+                        String dest_address, String dest_tel, String dest_email) {
+        this.dest_customer_name = dest_customer_name;
+        this.dest_customer_name_kana = dest_customer_name_kana;
+        this.dest_company_name = dest_company_name;
+        this.dest_department = dest_department;
+        this.dest_zip_code = dest_zip_code;
+        this.dest_address = dest_address;
+        this.dest_tel = dest_tel;
+        this.dest_email = dest_email;
+    }
+
     public String getNname() {
         return dest_customer_name;
     }

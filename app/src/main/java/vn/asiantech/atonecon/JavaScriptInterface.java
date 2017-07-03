@@ -29,6 +29,11 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
+    public String getPayment() {
+        return AtoneUtil.getObjectDataGson();
+    }
+
+    @JavascriptInterface
     public String getPublicKey() {
         return AtoneUtil.getAtonePublicKey(mContext);
     }
