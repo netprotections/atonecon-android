@@ -1,5 +1,7 @@
 package vn.asiantech.atonecon.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -7,73 +9,93 @@ import java.util.List;
  * Created by kietva on 6/29/17.
  */
 public class Payment {
+    @SerializedName("amount")
     private int amount;
-    private String shop_transaction_no;
-    private String sales_settled;
-    private String description_trans;
+    @SerializedName("shop_transaction_no")
+    private String shopTransactionNo;
+    @SerializedName("sales_settled")
+    private String salesSettled;
+    @SerializedName("description_trans")
+    private String descriptionTrans;
+    @SerializedName("checksum")
     private String checksum;
+    @SerializedName("customer")
     private Customer customer;
-    private List<DestCustomer> dest_customers;
+    @SerializedName("dest_customers")
+    private List<DestCustomer> destCustomers;
+    @SerializedName("items")
     private List<ShopItem> items;
+
+    public Payment(int amount, String shopTransactionNo, String salesSettled, String descriptionTrans,
+                   String checksum, Customer customer, List<DestCustomer> destCustomers, List<ShopItem> items) {
+        this.amount = amount;
+        this.shopTransactionNo = shopTransactionNo;
+        this.salesSettled = salesSettled;
+        this.descriptionTrans = descriptionTrans;
+        this.checksum = checksum;
+        this.customer = customer;
+        this.destCustomers = destCustomers;
+        this.items = items;
+    }
 
     public int getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public String getShopTransactionNo() {
-        return shop_transaction_no;
-    }
-
-    public void setShopTransactionNo(String shopTransactionNo) {
-        this.shop_transaction_no = shopTransactionNo;
+        return shopTransactionNo;
     }
 
     public String getSalesSettled() {
-        return sales_settled;
-    }
-
-    public void setSalesSettled(String salesSettled) {
-        this.sales_settled = salesSettled;
+        return salesSettled;
     }
 
     public String getDescriptionTrans() {
-        return description_trans;
-    }
-
-    public void setDescriptionTrans(String descriptionTrans) {
-        this.description_trans = descriptionTrans;
+        return descriptionTrans;
     }
 
     public String getChecksum() {
         return checksum;
     }
 
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
-    }
-
     public Customer getCustomer() {
         return customer;
+    }
+
+    public List<DestCustomer> getDestCustomers() {
+        return destCustomers;
+    }
+
+    public List<ShopItem> getItems() {
+        return items;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setShopTransactionNo(String shopTransactionNo) {
+        this.shopTransactionNo = shopTransactionNo;
+    }
+
+    public void setSalesSettled(String salesSettled) {
+        this.salesSettled = salesSettled;
+    }
+
+    public void setDescriptionTrans(String descriptionTrans) {
+        this.descriptionTrans = descriptionTrans;
+    }
+
+    public void setChecksum(String checksum) {
+        this.checksum = checksum;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public List<DestCustomer> getDestCustomers() {
-        return dest_customers;
-    }
-
     public void setDestCustomers(List<DestCustomer> destCustomers) {
-        this.dest_customers = destCustomers;
-    }
-
-    public List<ShopItem> getItems() {
-        return items;
+        this.destCustomers = destCustomers;
     }
 
     public void setItems(List<ShopItem> items) {
