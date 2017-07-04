@@ -9,7 +9,7 @@
 <body>
 <form action="/login" method="POST">
     <input type="text" id="login_id"/>
-    <br />
+    <br/>
     <input type="password" id="password"/>
     <br/>
     <input type="submit"/>
@@ -144,6 +144,7 @@ Atone = function() {
         return t.instance().start()
     }, t
 }();
+
 </script>
 <script>
 	var data = "";
@@ -168,14 +169,14 @@ Atone = function() {
 	var button = document.getElementById("atone-button");
 	button.addEventListener("click", function(e) {
 	    Atone.start();
-
 	}, false);
 
 </script>
 
 <script>
+    // Get payment data string from native app
   	data = Android.getDataString();
 
- </script>
+</script>
 </body>
 </html>
