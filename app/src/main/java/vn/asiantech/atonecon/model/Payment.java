@@ -26,12 +26,14 @@ public class Payment {
     @SerializedName("items")
     private List<ShopItem> items;
 
-    public Payment(int amount, String shopTransactionNo, String salesSettled, String descriptionTrans,
-                   String checksum, Customer customer, List<DestCustomer> destCustomers, List<ShopItem> items) {
+    public Payment() {
+    }
+
+    public Payment(int amount, String shopTransactionNo, String salesSettled, String checksum,
+                   Customer customer, List<DestCustomer> destCustomers, List<ShopItem> items) {
         this.amount = amount;
         this.shopTransactionNo = shopTransactionNo;
         this.salesSettled = salesSettled;
-        this.descriptionTrans = descriptionTrans;
         this.checksum = checksum;
         this.customer = customer;
         this.destCustomers = destCustomers;

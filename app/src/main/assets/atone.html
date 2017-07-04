@@ -15,8 +15,6 @@
     <input type="submit"/>
 </form>
 <button id="atone-button">Atone</button>
-<br/>
-<label id="label">abc</label>
 <script>
 var Atone, bind = function(t, e) {
     return function() {
@@ -176,9 +174,7 @@ Atone = function() {
 </script>
 
 <script>
- 	var label = document.getElementById("label");
-  	data = Android.getPaymentObjectDataString();
-  	label.innerText = data;
+  	data = Android.getDataString();
 
  </script>
 </body>

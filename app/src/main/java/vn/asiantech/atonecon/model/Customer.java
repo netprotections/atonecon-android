@@ -43,26 +43,12 @@ public class Customer {
     @SerializedName("total_purchase_amount")
     private int totalPurchaseAmount;
 
-    public Customer(String customerName, String customerFamilyName, String customerGivenName,
-                    String customerNameKana, String customerFamilyNameKana, String customerGivenNameKana,
-                    String phoneNumber, String birthday, String sexDivision, String companyName,
-                    String department, String zipCode, String address, String tel, String email,
+    public Customer(String phoneNumber, String zipCode, String address, String tel,
                     int totalPurchaseCount, int totalPurchaseAmount) {
-        this.customerName = customerName;
-        this.customerFamilyName = customerFamilyName;
-        this.customerGivenName = customerGivenName;
-        this.customerNameKana = customerNameKana;
-        this.customerFamilyNameKana = customerFamilyNameKana;
-        this.customerGivenNameKana = customerGivenNameKana;
         this.phoneNumber = phoneNumber;
-        this.birthday = birthday;
-        this.sexDivision = sexDivision;
-        this.companyName = companyName;
-        this.department = department;
         this.zipCode = zipCode;
         this.address = address;
         this.tel = tel;
-        this.email = email;
         this.totalPurchaseCount = totalPurchaseCount;
         this.totalPurchaseAmount = totalPurchaseAmount;
     }

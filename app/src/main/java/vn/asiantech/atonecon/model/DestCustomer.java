@@ -24,16 +24,13 @@ public class DestCustomer {
     @SerializedName("dest_email")
     private String destEmail;
 
-    public DestCustomer(String destCustomerName, String destCustomerNameKana, String destCompanyName,
-                        String destDepartment, String destZipCode, String destAddress, String destTel, String destEmail) {
+    public DestCustomer(String destCustomerName, String destCustomerNameKana, String destZipCode,
+                        String destAddress, String destTel) {
         this.destCustomerName = destCustomerName;
         this.destCustomerNameKana = destCustomerNameKana;
-        this.destCompanyName = destCompanyName;
-        this.destDepartment = destDepartment;
         this.destZipCode = destZipCode;
         this.destAddress = destAddress;
         this.destTel = destTel;
-        this.destEmail = destEmail;
     }
 
     public String getDestCustomerName() {
