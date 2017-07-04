@@ -29,6 +29,11 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
+    public String getDataString() {
+        return AtoneUtil.getPaymentObjectDataString();
+    }
+
+    @JavascriptInterface
     public String getPublicKey() {
         return AtoneUtil.getAtonePublicKey(mContext);
     }

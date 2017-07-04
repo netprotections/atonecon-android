@@ -1,80 +1,99 @@
 package vn.asiantech.atonecon.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
 public class DestCustomer {
-    private String dest_customer_name;
-    private String dest_customer_name_kana;
-    private String dest_company_name;
-    private String dest_department;
-    private String dest_zip_code;
-    private String dest_address;
-    private String dest_tel;
-    private String dest_email;
+    @SerializedName("dest_customer_name")
+    private String destCustomerName;
+    @SerializedName("dest_customer_name_kana")
+    private String destCustomerNameKana;
+    @SerializedName("dest_company_name")
+    private String destCompanyName;
+    @SerializedName("dest_department")
+    private String destDepartment;
+    @SerializedName("dest_zip_code")
+    private String destZipCode;
+    @SerializedName("dest_address")
+    private String destAddress;
+    @SerializedName("dest_tel")
+    private String destTel;
+    @SerializedName("dest_email")
+    private String destEmail;
 
-    public String getNname() {
-        return dest_customer_name;
+    public DestCustomer(String destCustomerName, String destCustomerNameKana, String destZipCode,
+                        String destAddress, String destTel) {
+        this.destCustomerName = destCustomerName;
+        this.destCustomerNameKana = destCustomerNameKana;
+        this.destZipCode = destZipCode;
+        this.destAddress = destAddress;
+        this.destTel = destTel;
     }
 
-    public void setNname(String nname) {
-        this.dest_customer_name = nname;
+    public String getDestCustomerName() {
+        return destCustomerName;
     }
 
-    public String getNameKaNa() {
-        return dest_customer_name_kana;
+    public String getDestCustomerNameKana() {
+        return destCustomerNameKana;
     }
 
-    public void setNameKaNa(String nameKana) {
-        this.dest_customer_name_kana = nameKana;
+    public String getDestCompanyName() {
+        return destCompanyName;
     }
 
-    public String getCompanyName() {
-        return dest_company_name;
+    public String getDestDepartment() {
+        return destDepartment;
     }
 
-    public void setCompanyName(String companyName) {
-        this.dest_company_name = companyName;
+    public String getDestZipCode() {
+        return destZipCode;
     }
 
-    public String getDepartment() {
-        return dest_department;
+    public String getDestAddress() {
+        return destAddress;
     }
 
-    public void setDepartment(String department) {
-        this.dest_department = department;
+    public String getDestTel() {
+        return destTel;
     }
 
-    public String getZipCode() {
-        return dest_zip_code;
+    public String getDestEmail() {
+        return destEmail;
     }
 
-    public void setZipCode(String zipCode) {
-        this.dest_zip_code = zipCode;
+    public void setDestCustomerName(String destCustomerName) {
+        this.destCustomerName = destCustomerName;
     }
 
-    public String getAddress() {
-        return dest_address;
+    public void setDestCustomerNameKana(String destCustomerNameKana) {
+        this.destCustomerNameKana = destCustomerNameKana;
     }
 
-    public void setAddress(String address) {
-        this.dest_address = address;
+    public void setDestCompanyName(String destCompanyName) {
+        this.destCompanyName = destCompanyName;
     }
 
-    public String getTel() {
-        return dest_tel;
+    public void setDestDepartment(String destDepartment) {
+        this.destDepartment = destDepartment;
     }
 
-    public void setTel(String tel) {
-        this.dest_tel = tel;
+    public void setDestZipCode(String destZipCode) {
+        this.destZipCode = destZipCode;
     }
 
-    public String getEmail() {
-        return dest_email;
+    public void setDestAddress(String destAddress) {
+        this.destAddress = destAddress;
     }
 
-    public void setEmail(String email) {
-        this.dest_email = email;
+    public void setDestTel(String destTel) {
+        this.destTel = destTel;
+    }
+
+    public void setDestEmail(String destEmail) {
+        this.destEmail = destEmail;
     }
 }

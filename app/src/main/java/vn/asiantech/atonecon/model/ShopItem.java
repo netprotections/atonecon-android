@@ -1,54 +1,69 @@
 package vn.asiantech.atonecon.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  * Class item of shop service
  */
 public class ShopItem {
-    private String shop_item_id;
-    private String item_name;
-    private int item_price;
-    private int item_count;
-    private String item_url;
+    @SerializedName("shop_item_id")
+    private String shopItemId;
+    @SerializedName("item_name")
+    private String itemName;
+    @SerializedName("item_price")
+    private int itemPrice;
+    @SerializedName("item_count")
+    private int itemCount;
+    @SerializedName("item_url")
+    private String itemUrl;
 
-    public String getId() {
-        return shop_item_id;
+    public ShopItem(String shopItemId, String itemName, int itemPrice, int itemCount, String itemUrl) {
+        this.shopItemId = shopItemId;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemCount = itemCount;
+        this.itemUrl = itemUrl;
     }
 
-    public void setId(String id) {
-        this.shop_item_id = id;
+    public String getShopItemId() {
+        return shopItemId;
     }
 
-    public String getName() {
-        return item_name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.item_name = name;
+    public int getItemPrice() {
+        return itemPrice;
     }
 
-    public int getPrice() {
-        return item_price;
+    public int getItemCount() {
+        return itemCount;
     }
 
-    public void setPrice(int price) {
-        this.item_price = price;
+    public String getItemUrl() {
+        return itemUrl;
     }
 
-    public int getCount() {
-        return item_count;
+    public void setShopItemId(String shopItemId) {
+        this.shopItemId = shopItemId;
     }
 
-    public void setCount(int count) {
-        this.item_count = count;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getUrl() {
-        return item_url;
+    public void setItemPrice(int itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
-    public void setUrl(String url) {
-        this.item_url = url;
+    public void setItemCount(int itemCount) {
+        this.itemCount = itemCount;
+    }
+
+    public void setItemUrl(String itemUrl) {
+        this.itemUrl = itemUrl;
     }
 }
