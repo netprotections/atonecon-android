@@ -8,7 +8,6 @@ import vn.asiantech.atonecon.model.Payment;
  */
 public class AtoneSdk {
 
-
     public static void config(Option option) {
 
     }
