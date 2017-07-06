@@ -8,13 +8,12 @@ import vn.asiantech.atonecon.model.Payment;
  */
 public class AtoneSdk {
 
-
     public static void config(Option option) {
-
+        // TODO: 7/6/2017  Add function to configure data
     }
 
     public static void showDialog() {
-
+        // TODO: 7/6/2017 Add notify
     }
 
     /**

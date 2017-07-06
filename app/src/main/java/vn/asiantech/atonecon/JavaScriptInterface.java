@@ -11,7 +11,6 @@ import vn.asiantech.atonecon.util.AtoneUtil;
  * Created by kietva on 6/29/17.
  */
 public class JavaScriptInterface {
-
     private Activity mContext;
     private AtoneCallBack mListener;
 
