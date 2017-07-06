@@ -25,10 +25,9 @@ public class AtoneUtil {
     }
 
     public static String getAtonePublicKey(Context context) {
-        // Get stored publicKey in Manifests.xml file
         try {
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
+            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            Bundle bundle = applicationInfo.metaData;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
                 return bundle.getString("AtonePublicKey", "");
             } else {
