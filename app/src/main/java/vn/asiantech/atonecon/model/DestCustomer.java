@@ -24,13 +24,66 @@ public class DestCustomer {
     @SerializedName("dest_email")
     private String destEmail;
 
-    public DestCustomer(String destCustomerName, String destCustomerNameKana, String destZipCode,
-                        String destAddress, String destTel) {
-        this.destCustomerName = destCustomerName;
-        this.destCustomerNameKana = destCustomerNameKana;
-        this.destZipCode = destZipCode;
-        this.destAddress = destAddress;
-        this.destTel = destTel;
+    public static class Builder {
+        private String destCustomerName;
+        private String destCustomerNameKana;
+        private String destCompanyName;
+        private String destDepartment;
+        private String destZipCode;
+        private String destAddress;
+        private String destTel;
+        private String destEmail;
+
+        public Builder(String destCustomerName, String destZipCode, String destAddress) {
+            this.destCustomerName = destCustomerName;
+            this.destZipCode = destZipCode;
+            this.destAddress = destAddress;
+        }
+
+        public Builder destNameKana(String destCustomerNameKana) {
+            this.destCustomerNameKana = destCustomerNameKana;
+            return this;
+        }
+
+        public Builder destCompany(String url) {
+            this.destCompanyName = destCompanyName;
+            return this;
+        }
+
+        public Builder destDepartment(String destDepartment) {
+            this.destDepartment = destDepartment;
+            return this;
+        }
+
+        public Builder destTel(String destTel) {
+            this.destTel = destTel;
+            return this;
+        }
+
+        public Builder destEmail(String destEmail) {
+            this.destEmail = destEmail;
+            return this;
+        }
+
+        public DestCustomer build() {
+            return new DestCustomer(this);
+        }
+    }
+
+    private DestCustomer(Builder builder) {
+        destCustomerName = builder.destCustomerName;
+        destCustomerNameKana = builder.destCustomerNameKana;
+        destCompanyName = builder.destCompanyName;
+        destDepartment = builder.destDepartment;
+        destZipCode = builder.destZipCode;
+        destAddress = builder.destAddress;
+        destTel = builder.destTel;
+        destEmail = builder.destEmail;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
     public String getDestCustomerName() {
@@ -63,37 +116,5 @@ public class DestCustomer {
 
     public String getDestEmail() {
         return destEmail;
-    }
-
-    public void setDestCustomerName(String destCustomerName) {
-        this.destCustomerName = destCustomerName;
-    }
-
-    public void setDestCustomerNameKana(String destCustomerNameKana) {
-        this.destCustomerNameKana = destCustomerNameKana;
-    }
-
-    public void setDestCompanyName(String destCompanyName) {
-        this.destCompanyName = destCompanyName;
-    }
-
-    public void setDestDepartment(String destDepartment) {
-        this.destDepartment = destDepartment;
-    }
-
-    public void setDestZipCode(String destZipCode) {
-        this.destZipCode = destZipCode;
-    }
-
-    public void setDestAddress(String destAddress) {
-        this.destAddress = destAddress;
-    }
-
-    public void setDestTel(String destTel) {
-        this.destTel = destTel;
-    }
-
-    public void setDestEmail(String destEmail) {
-        this.destEmail = destEmail;
     }
 }

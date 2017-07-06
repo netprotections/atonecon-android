@@ -19,12 +19,41 @@ public class ShopItem {
     @SerializedName("item_url")
     private String itemUrl;
 
-    public ShopItem(String shopItemId, String itemName, int itemPrice, int itemCount, String itemUrl) {
-        this.shopItemId = shopItemId;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemCount = itemCount;
-        this.itemUrl = itemUrl;
+    public static class Builder {
+        private String shopItemId;
+        private String itemName;
+        private int itemPrice;
+        private int itemCount;
+        private String itemUrl;
+
+        public Builder(String shopItemId, String itemName, int itemPrice, int itemCount) {
+            this.shopItemId = shopItemId;
+            this.itemName = itemName;
+            this.itemPrice = itemPrice;
+            this.itemCount = itemCount;
+        }
+
+        public Builder url(String url) {
+            this.itemUrl = url;
+            return this;
+        }
+
+        public ShopItem build() {
+            return new ShopItem(this);
+        }
+    }
+
+    private ShopItem(Builder builder) {
+        shopItemId = builder.shopItemId;
+        itemName = builder.itemName;
+        itemPrice = builder.itemPrice;
+        itemCount = builder.itemCount;
+        itemUrl = builder.itemUrl;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
     public String getShopItemId() {
@@ -45,25 +74,5 @@ public class ShopItem {
 
     public String getItemUrl() {
         return itemUrl;
-    }
-
-    public void setShopItemId(String shopItemId) {
-        this.shopItemId = shopItemId;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public void setItemPrice(int itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
-    }
-
-    public void setItemUrl(String itemUrl) {
-        this.itemUrl = itemUrl;
     }
 }
