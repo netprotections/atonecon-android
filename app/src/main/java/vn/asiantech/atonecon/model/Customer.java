@@ -114,7 +114,7 @@ public class Customer {
             return this;
         }
 
-        public Builder department(String depart) {
+        public Builder setDepartment(String depart) {
             this.department = depart;
             return this;
         }
@@ -124,27 +124,27 @@ public class Customer {
             return this;
         }
 
-        public Builder address(String addressString) {
+        public Builder setAddress(String addressString) {
             this.address = addressString;
             return this;
         }
 
-        public Builder tel(String num) {
+        public Builder setTel(String num) {
             this.tel = num;
             return this;
         }
 
-        public Builder email(String mail) {
-            this.email = mail;
+        public Builder mail(String customerMail) {
+            this.email = customerMail;
             return this;
         }
 
-        public Builder totalPurchaseCount(int count) {
+        public Builder purchaseCount(int count) {
             this.totalPurchaseCount = count;
             return this;
         }
 
-        public Builder totalPurchaseAmount(int amount) {
+        public Builder purchaseAmount(int amount) {
             this.totalPurchaseAmount = amount;
             return this;
         }
