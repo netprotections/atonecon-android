@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements AtoneCallBack {
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(this);
         javaScriptInterface.setCallBackHandler(this);
 
+        // Load webview
         mWebView.addJavascriptInterface(javaScriptInterface, "Android");
         mWebView.loadUrl("file:///android_asset/atone.html");
 
