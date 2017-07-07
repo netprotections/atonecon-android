@@ -99,9 +99,9 @@ public class AtoneUtil {
                 .build());
 
         Payment payment = new Payment.Builder(1, "TransactionNo1", customer, shopItems)
-                .salesSettled("Sales Settled")
+                .settled("Sales Settled")
                 .description("Description")
-                .destCustomers(destCustomers)
+                .destCustomer(destCustomers)
                 .build();
 
         // Parse payment object to data string for binding to web
