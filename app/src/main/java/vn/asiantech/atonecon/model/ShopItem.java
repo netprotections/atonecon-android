@@ -19,6 +19,9 @@ public class ShopItem {
     @SerializedName("item_url")
     private String itemUrl;
 
+    /**
+     * Class support for constructing object
+     */
     public static class Builder {
         private String shopItemId;
         private String itemName;
@@ -33,8 +36,8 @@ public class ShopItem {
             this.itemCount = itemCount;
         }
 
-        public Builder url(String url) {
-            this.itemUrl = url;
+        public Builder url(String urlString) {
+            this.itemUrl = urlString;
             return this;
         }
 

@@ -24,6 +24,9 @@ public class DestCustomer {
     @SerializedName("dest_email")
     private String destEmail;
 
+    /**
+     * Class support for constructing object
+     */
     public static class Builder {
         private String destCustomerName;
         private String destCustomerNameKana;
@@ -40,28 +43,28 @@ public class DestCustomer {
             this.destAddress = destAddress;
         }
 
-        public Builder destNameKana(String destCustomerNameKana) {
-            this.destCustomerNameKana = destCustomerNameKana;
+        public Builder destNameKana(String nameKana) {
+            this.destCustomerNameKana = nameKana;
             return this;
         }
 
-        public Builder destCompany(String url) {
-            this.destCompanyName = destCompanyName;
+        public Builder destCompany(String companyName) {
+            this.destCompanyName = companyName;
             return this;
         }
 
-        public Builder destDepartment(String destDepartment) {
-            this.destDepartment = destDepartment;
+        public Builder department(String depart) {
+            this.destDepartment = depart;
             return this;
         }
 
-        public Builder destTel(String destTel) {
-            this.destTel = destTel;
+        public Builder tel(String telNumber) {
+            this.destTel = telNumber;
             return this;
         }
 
-        public Builder destEmail(String destEmail) {
-            this.destEmail = destEmail;
+        public Builder email(String mail) {
+            this.destEmail = mail;
             return this;
         }
 

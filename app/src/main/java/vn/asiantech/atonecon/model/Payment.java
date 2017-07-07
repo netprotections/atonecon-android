@@ -29,6 +29,9 @@ public class Payment {
     public Payment() {
     }
 
+    /**
+     * Class support for constructing object
+     */
     public static class Builder {
         private int amount;
         private String shopTransactionNo;
@@ -46,23 +49,23 @@ public class Payment {
             this.items = items;
         }
 
-        public Builder salesSettled(String salesSettled) {
-            this.salesSettled = salesSettled;
+        public Builder settled(String saleSettled) {
+            this.salesSettled = saleSettled;
             return this;
         }
 
-        public Builder description(String descriptionTrans) {
-            this.descriptionTrans = descriptionTrans;
+        public Builder description(String descriptTrans) {
+            this.descriptionTrans = descriptTrans;
             return this;
         }
 
-        public Builder checksum(String checksum) {
-            this.checksum = checksum;
+        public Builder setChecksum(String checksumString) {
+            this.checksum = checksumString;
             return this;
         }
 
-        public Builder destCustomers(List<DestCustomer> destCustomers) {
-            this.destCustomers = destCustomers;
+        public Builder destCustomer(List<DestCustomer> listDestCustomers) {
+            this.destCustomers = listDestCustomers;
             return this;
         }
 
@@ -78,7 +81,7 @@ public class Payment {
         descriptionTrans = builder.descriptionTrans;
         checksum = builder.checksum;
         customer = builder.customer;
-        descriptionTrans = builder.descriptionTrans;
+        destCustomers = builder.destCustomers;
         items = builder.items;
     }
 

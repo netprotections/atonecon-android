@@ -43,6 +43,9 @@ public class Customer {
     @SerializedName("total_purchase_amount")
     private int totalPurchaseAmount;
 
+    /**
+     * Class support for constructing object
+     */
     public static class Builder {
         private String customerName;
         private String customerFamilyName;
@@ -66,83 +69,83 @@ public class Customer {
             this.customerName = customerName;
         }
 
-        public Builder familyName(String customerFamilyName) {
-            this.customerFamilyName = customerFamilyName;
+        public Builder familyName(String name) {
+            this.customerFamilyName = name;
             return this;
         }
 
-        public Builder givenName(String customerGivenName) {
-            this.customerGivenName = customerGivenName;
+        public Builder givenName(String gvnName) {
+            this.customerGivenName = gvnName;
             return this;
         }
 
-        public Builder nameKana(String customerNameKana) {
-            this.customerNameKana = customerNameKana;
+        public Builder nameKana(String nmKana) {
+            this.customerNameKana = nmKana;
             return this;
         }
 
-        public Builder familyNameKana(String customerFamilyNameKana) {
-            this.customerFamilyNameKana = customerFamilyNameKana;
+        public Builder familyNameKana(String fmlNameKana) {
+            this.customerFamilyNameKana = fmlNameKana;
             return this;
         }
 
-        public Builder givenNameKana(String customerGivenNameKana) {
-            this.customerGivenNameKana = customerGivenNameKana;
+        public Builder givenNameKana(String gvnNameKana) {
+            this.customerGivenNameKana = gvnNameKana;
             return this;
         }
 
-        public Builder phone(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
+        public Builder phone(String number) {
+            this.phoneNumber = number;
             return this;
         }
 
-        public Builder birthday(String birthday) {
-            this.birthday = birthday;
+        public Builder birth(String birth) {
+            this.birthday = birth;
             return this;
         }
 
-        public Builder sex(String sexDivision) {
-            this.sexDivision = sexDivision;
+        public Builder sex(String sexDiv) {
+            this.sexDivision = sexDiv;
             return this;
         }
 
-        public Builder company(String companyName) {
-            this.companyName = companyName;
+        public Builder company(String company) {
+            this.companyName = company;
             return this;
         }
 
-        public Builder department(String department) {
-            this.department = department;
+        public Builder department(String depart) {
+            this.department = depart;
             return this;
         }
 
-        public Builder zipCode(String zipCode) {
-            this.zipCode = zipCode;
+        public Builder zipCod(String code) {
+            this.zipCode = code;
             return this;
         }
 
-        public Builder address(String address) {
-            this.address = address;
+        public Builder address(String addressString) {
+            this.address = addressString;
             return this;
         }
 
-        public Builder tel(String tel) {
-            this.tel = tel;
+        public Builder tel(String num) {
+            this.tel = num;
             return this;
         }
 
-        public Builder email(String email) {
-            this.email = email;
+        public Builder email(String mail) {
+            this.email = mail;
             return this;
         }
 
-        public Builder totalPurchaseCount(int totalPurchaseCount) {
-            this.totalPurchaseCount = totalPurchaseCount;
+        public Builder totalPurchaseCount(int count) {
+            this.totalPurchaseCount = count;
             return this;
         }
 
-        public Builder totalPurchaseAmount(int totalPurchaseAmount) {
-            this.totalPurchaseAmount = totalPurchaseAmount;
+        public Builder totalPurchaseAmount(int amount) {
+            this.totalPurchaseAmount = amount;
             return this;
         }
 
@@ -162,8 +165,8 @@ public class Customer {
         birthday = builder.birthday;
         sexDivision = builder.sexDivision;
         companyName = builder.companyName;
-        department = builder.companyName;
-        zipCode = builder.department;
+        department = builder.department;
+        zipCode = builder.zipCode;
         address = builder.address;
         tel = builder.tel;
         email = builder.email;
