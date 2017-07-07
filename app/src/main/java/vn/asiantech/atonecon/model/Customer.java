@@ -43,82 +43,140 @@ public class Customer {
     @SerializedName("total_purchase_amount")
     private int totalPurchaseAmount;
 
-    public Customer(String phoneNumber, String zipCode, String address, String tel,
-                    int totalPurchaseCount, int totalPurchaseAmount) {
-        this.phoneNumber = phoneNumber;
-        this.zipCode = zipCode;
-        this.address = address;
-        this.tel = tel;
-        this.totalPurchaseCount = totalPurchaseCount;
-        this.totalPurchaseAmount = totalPurchaseAmount;
+    /**
+     * Class support for constructing object
+     */
+    public static class Builder {
+        private String customerName;
+        private String customerFamilyName;
+        private String customerGivenName;
+        private String customerNameKana;
+        private String customerFamilyNameKana;
+        private String customerGivenNameKana;
+        private String phoneNumber;
+        private String birthday;
+        private String sexDivision;
+        private String companyName;
+        private String department;
+        private String zipCode;
+        private String address;
+        private String tel;
+        private String email;
+        private int totalPurchaseCount;
+        private int totalPurchaseAmount;
+
+        public Builder(String customerName) {
+            this.customerName = customerName;
+        }
+
+        public Builder familyName(String name) {
+            this.customerFamilyName = name;
+            return this;
+        }
+
+        public Builder givenName(String gvnName) {
+            this.customerGivenName = gvnName;
+            return this;
+        }
+
+        public Builder nameKana(String nmKana) {
+            this.customerNameKana = nmKana;
+            return this;
+        }
+
+        public Builder familyNameKana(String fmlNameKana) {
+            this.customerFamilyNameKana = fmlNameKana;
+            return this;
+        }
+
+        public Builder givenNameKana(String gvnNameKana) {
+            this.customerGivenNameKana = gvnNameKana;
+            return this;
+        }
+
+        public Builder phone(String number) {
+            this.phoneNumber = number;
+            return this;
+        }
+
+        public Builder birth(String birth) {
+            this.birthday = birth;
+            return this;
+        }
+
+        public Builder sex(String sexDiv) {
+            this.sexDivision = sexDiv;
+            return this;
+        }
+
+        public Builder company(String company) {
+            this.companyName = company;
+            return this;
+        }
+
+        public Builder setDepartment(String depart) {
+            this.department = depart;
+            return this;
+        }
+
+        public Builder zipCod(String code) {
+            this.zipCode = code;
+            return this;
+        }
+
+        public Builder setAddress(String addressString) {
+            this.address = addressString;
+            return this;
+        }
+
+        public Builder setTel(String num) {
+            this.tel = num;
+            return this;
+        }
+
+        public Builder mail(String customerMail) {
+            this.email = customerMail;
+            return this;
+        }
+
+        public Builder purchaseCount(int count) {
+            this.totalPurchaseCount = count;
+            return this;
+        }
+
+        public Builder purchaseAmount(int amount) {
+            this.totalPurchaseAmount = amount;
+            return this;
+        }
+
+        public Customer build() {
+            return new Customer(this);
+        }
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    private Customer(Builder builder) {
+        customerName = builder.customerName;
+        customerFamilyName = builder.customerFamilyName;
+        customerGivenName = builder.customerGivenName;
+        customerNameKana = builder.customerNameKana;
+        customerFamilyNameKana = builder.customerFamilyNameKana;
+        customerGivenNameKana = builder.customerGivenNameKana;
+        phoneNumber = builder.phoneNumber;
+        birthday = builder.birthday;
+        sexDivision = builder.sexDivision;
+        companyName = builder.companyName;
+        department = builder.department;
+        zipCode = builder.zipCode;
+        address = builder.address;
+        tel = builder.tel;
+        email = builder.email;
+        totalPurchaseCount = builder.totalPurchaseCount;
+        totalPurchaseAmount = builder.totalPurchaseAmount;
     }
 
-    public void setCustomerFamilyName(String customerFamilyName) {
-        this.customerFamilyName = customerFamilyName;
-    }
-
-    public void setCustomerGivenName(String customerGivenName) {
-        this.customerGivenName = customerGivenName;
-    }
-
-    public void setCustomerNameKana(String customerNameKana) {
-        this.customerNameKana = customerNameKana;
-    }
-
-    public void setCustomerFamilyNameKana(String customerFamilyNameKana) {
-        this.customerFamilyNameKana = customerFamilyNameKana;
-    }
-
-    public void setCustomerGivenNameKana(String customerGivenNameKana) {
-        this.customerGivenNameKana = customerGivenNameKana;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setSexDivision(String sexDivision) {
-        this.sexDivision = sexDivision;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setTotalPurchaseCount(int totalPurchaseCount) {
-        this.totalPurchaseCount = totalPurchaseCount;
-    }
-
-    public void setTotalPurchaseAmount(int totalPurchaseAmount) {
-        this.totalPurchaseAmount = totalPurchaseAmount;
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
     public String getCustomerName() {

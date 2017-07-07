@@ -29,15 +29,60 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(int amount, String shopTransactionNo, String salesSettled, String checksum,
-                   Customer customer, List<DestCustomer> destCustomers, List<ShopItem> items) {
-        this.amount = amount;
-        this.shopTransactionNo = shopTransactionNo;
-        this.salesSettled = salesSettled;
-        this.checksum = checksum;
-        this.customer = customer;
-        this.destCustomers = destCustomers;
-        this.items = items;
+    /**
+     * Class support for constructing object
+     */
+    public static class Builder {
+        private int amount;
+        private String shopTransactionNo;
+        private String salesSettled;
+        private String descriptionTrans;
+        private String checksum = "";
+        private Customer customer;
+        private List<DestCustomer> destCustomers;
+        private List<ShopItem> items;
+
+        public Builder(int amount, String shopTransactionNo, Customer customer, List<ShopItem> items) {
+            this.amount = amount;
+            this.shopTransactionNo = shopTransactionNo;
+            this.customer = customer;
+            this.items = items;
+        }
+
+        public Builder settled(String saleSettled) {
+            this.salesSettled = saleSettled;
+            return this;
+        }
+
+        public Builder description(String descriptTrans) {
+            this.descriptionTrans = descriptTrans;
+            return this;
+        }
+
+        public Builder setChecksum(String checksumString) {
+            this.checksum = checksumString;
+            return this;
+        }
+
+        public Builder destCustomer(List<DestCustomer> listDestCustomers) {
+            this.destCustomers = listDestCustomers;
+            return this;
+        }
+
+        public Payment build() {
+            return new Payment(this);
+        }
+    }
+
+    private Payment(Builder builder) {
+        amount = builder.amount;
+        shopTransactionNo = builder.shopTransactionNo;
+        salesSettled = builder.salesSettled;
+        descriptionTrans = builder.descriptionTrans;
+        checksum = builder.checksum;
+        customer = builder.customer;
+        destCustomers = builder.destCustomers;
+        items = builder.items;
     }
 
     public int getAmount() {
@@ -70,37 +115,5 @@ public class Payment {
 
     public List<ShopItem> getItems() {
         return items;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setShopTransactionNo(String shopTransactionNo) {
-        this.shopTransactionNo = shopTransactionNo;
-    }
-
-    public void setSalesSettled(String salesSettled) {
-        this.salesSettled = salesSettled;
-    }
-
-    public void setDescriptionTrans(String descriptionTrans) {
-        this.descriptionTrans = descriptionTrans;
-    }
-
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setDestCustomers(List<DestCustomer> destCustomers) {
-        this.destCustomers = destCustomers;
-    }
-
-    public void setItems(List<ShopItem> items) {
-        this.items = items;
     }
 }
