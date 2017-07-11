@@ -54,16 +54,16 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public void onFailed() {
-        Toast.makeText(mContext, "onFailed", Toast.LENGTH_SHORT).show();
+    public void onFailed(String response) {
+        Toast.makeText(mContext, "onFailed " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onFailure();
         }
     }
 
     @JavascriptInterface
-    public void onSuccessFul() {
-        Toast.makeText(mContext, "onSuccessFul", Toast.LENGTH_SHORT).show();
+    public void onSuccessFul(String response) {
+        Toast.makeText(mContext, "onSuccessFul " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onTransactionSuccess("");
         }
