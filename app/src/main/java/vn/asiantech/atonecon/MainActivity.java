@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements AtoneCallBack {
 
         // Load webview
         mWebView.addJavascriptInterface(javaScriptInterface, "Android");
-        mWebView.loadUrl("file:///android_asset/atone.html");
+        mWebView.loadUrl("file:///android_asset/AtoneDev.html");
 
         AtoneSdk.Option option = AtoneSdk.Option.builder();
         option.payment = new Payment();
