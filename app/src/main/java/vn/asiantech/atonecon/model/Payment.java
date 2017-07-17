@@ -1,5 +1,8 @@
 package vn.asiantech.atonecon.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
-public class Payment {
+public class Payment implements Parcelable{
     @SerializedName("amount")
     private int amount;
     @SerializedName("shop_transaction_no")
@@ -27,6 +30,40 @@ public class Payment {
     private List<ShopItem> items;
 
     public Payment() {
+    }
+
+    protected Payment(Parcel in) {
+        amount = in.readInt();
+        shopTransactionNo = in.readString();
+        salesSettled = in.readString();
+        descriptionTrans = in.readString();
+        checksum = in.readString();
+    }
+
+    public static final Creator<Payment> CREATOR = new Creator<Payment>() {
+        @Override
+        public Payment createFromParcel(Parcel in) {
+            return new Payment(in);
+        }
+
+        @Override
+        public Payment[] newArray(int size) {
+            return new Payment[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(amount);
+        dest.writeString(shopTransactionNo);
+        dest.writeString(salesSettled);
+        dest.writeString(descriptionTrans);
+        dest.writeString(checksum);
     }
 
     /**
