@@ -11,7 +11,7 @@ import java.util.List;
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
-public class Payment implements Parcelable{
+public class Payment implements Parcelable {
     @SerializedName("amount")
     private int amount;
     @SerializedName("shop_transaction_no")

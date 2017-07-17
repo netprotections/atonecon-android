@@ -122,7 +122,7 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
         }
     }
 
-    public static void startAtone (Context context, Payment payment) {
+    public static void startAtone(Context context, Payment payment) {
         Intent intent = new Intent(context, AtoneActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable("put payment", payment);
