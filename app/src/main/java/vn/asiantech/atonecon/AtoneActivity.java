@@ -146,7 +146,7 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
     }
 
     @Override
-    public void onFailure() {
-
+    public void onFailure(String failureToken) {
+        Toast.makeText(this, " " + failureToken, Toast.LENGTH_SHORT).show();
     }
 }

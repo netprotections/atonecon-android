@@ -64,7 +64,7 @@ public class JavaScriptInterface {
     public void onFailed(String response) {
         Toast.makeText(mContext, "onFailed " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
-            mListener.onFailure();
+            mListener.onFailure(response);
         }
     }
 

@@ -12,5 +12,5 @@ public interface AtoneCallBack {
 
     void onTransactionCancel();
 
-    void onFailure();
+    void onFailure(String failureToken);
 }
