@@ -58,7 +58,7 @@ public class DestCustomer {
             return this;
         }
 
-        public Builder tel(String telNumber) {
+        public Builder setTel(String telNumber) {
             this.destTel = telNumber;
             return this;
         }

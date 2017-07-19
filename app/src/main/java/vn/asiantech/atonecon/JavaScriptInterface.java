@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import vn.asiantech.atonecon.model.Payment;
 import vn.asiantech.atonecon.util.AtoneUtil;
 
 /**
@@ -13,9 +16,11 @@ import vn.asiantech.atonecon.util.AtoneUtil;
 public class JavaScriptInterface {
     private Activity mContext;
     private AtoneCallBack mListener;
+    private Payment mPayment;
 
-    public JavaScriptInterface(Activity context) {
+    public JavaScriptInterface(Activity context, Payment payment) {
         this.mContext = context;
+        this.mPayment = payment;
     }
 
     /**
@@ -29,7 +34,9 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public String getDataString() {
-        return AtoneUtil.getPaymentObjectDataString();
+        // Parse payment object to data string for binding to web
+        Gson gson = new Gson();
+        return gson.toJson(mPayment);
     }
 
     @JavascriptInterface
@@ -57,7 +64,7 @@ public class JavaScriptInterface {
     public void onFailed(String response) {
         Toast.makeText(mContext, "onFailed " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
-            mListener.onFailure();
+            mListener.onFailure(response);
         }
     }
 

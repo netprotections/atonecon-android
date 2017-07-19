@@ -12,7 +12,7 @@
 
         <meta-data android:name="AtonePublicKey" android:value="bB2uNvcOP2o8fJzHpWUumA"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".AtoneActivity">
 
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

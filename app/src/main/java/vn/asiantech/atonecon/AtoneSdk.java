@@ -20,8 +20,6 @@ public class AtoneSdk {
      * Class support optional for AtoneSDK.
      */
     public static class Option {
-
-        public String url;
         public String preKey;
         public Payment payment;
 
