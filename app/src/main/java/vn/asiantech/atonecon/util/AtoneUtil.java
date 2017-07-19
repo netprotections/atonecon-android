@@ -11,9 +11,6 @@ import android.os.Bundle;
  * Created by kietva on 6/30/17.
  */
 public class AtoneUtil {
-    private AtoneUtil() {
-    }
-
     public static String getAtonePublicKey(Context context) {
         try {
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);

@@ -34,65 +34,42 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+
+        // TODO: 7/19/2017 Get Payment from ShopApp
         // Create a payment object(for demo)
-        Customer customer = new Customer.Builder("Customer name")
-                .familyName("Family Name")
-                .givenName("GivenName")
-                .nameKana("name Kana")
-                .familyNameKana("Family Name kana")
-                .givenNameKana("Given Name Kana")
-                .phone("090-1111-1111")
-                .birth("12/12/2020")
+        Customer customer = new Customer.Builder("接続テスト")
+                .nameKana("セツゾクテスト")
+                .setPhone("090-1111-1111")
+                .birth("12/12/1990")
                 .sex("Male")
-                .company("ComPany")
-                .setDepartment("Department")
-                .zipCod("4600")
-                .setAddress("Address")
+                .company("（株）ネットプロテクションズ")
+                .setDepartment("セールスグループ")
+                .setZipCode("1234567")
+                .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
                 .setTel("080-1234-1234")
-                .mail("customer@gmail.com")
+                .mail("cnp@netprotections.co.jp")
                 .purchaseCount(8)
-                .purchaseAmount(2180)
+                .purchaseAmount(20000)
                 .build();
         List<DestCustomer> destCustomers = new ArrayList<>();
-        destCustomers.add(0, new DestCustomer.Builder("Customer Name 1", "ZipCode1", "Address 1")
-                .destNameKana("--")
-                .destCompany("Company 1")
-                .department("Department 1")
-                .tel("1231231231")
-                .email("dest@gmail.com")
-                .build());
-        destCustomers.add(1, new DestCustomer.Builder("Customer Name 2", "ZipCode 2", "Address 2")
-                .destNameKana("--")
-                .destCompany("Company 2")
-                .department("Department 2")
-                .tel("1231231232")
-                .email("dest@gmail.com")
-                .build());
-        destCustomers.add(2, new DestCustomer.Builder("Customer Name 3", "ZipCode 3", "Address 3")
-                .destNameKana("--")
-                .destCompany("Company 3")
-                .department("Department 3")
-                .tel("1231231233")
+        destCustomers.add(0, new DestCustomer.Builder("銀座太郎", "123-1234", "東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
+                .destNameKana("ぎんざたろう")
+                .destCompany("株式会社ネットプロテクションズ")
+                .department("システム部門")
+                .setTel("0312341234")
                 .email("dest@gmail.com")
                 .build());
 
         List<ShopItem> shopItems = new ArrayList<>();
-        shopItems.add(0, new ShopItem.Builder("1", "Product 1", 12001, 11)
-                .url("https://google.com.vn/")
-                .build());
-        shopItems.add(1, new ShopItem.Builder("2", "Product 2", 12002, 12)
-                .url("https://google.com.vn/")
-                .build());
-        shopItems.add(2, new ShopItem.Builder("3", "Product 3", 12003, 13)
-                .build());
-        shopItems.add(3, new ShopItem.Builder("4", "Product 4", 12004, 14)
-                .url("https://google.com.vn/")
+        shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ ", 10, 1)
+                .url("https://atone.be/items/1")
                 .build());
 
-        mPayment = new Payment.Builder(1, "TransactionNo1", customer, shopItems)
-                .settled("Sales Settled")
-                .description("Description")
+        mPayment = new Payment.Builder(10, "shop-tran-no-1500347370", customer, shopItems)
+                .settled("false")
+                .description("備考です。")
                 .destCustomer(destCustomers)
+                .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                 .build();
 
 //        // Get payment from ShopApp
@@ -122,14 +99,6 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
         }
     }
 
-    public static void startAtone(Context context, Payment payment) {
-        Intent intent = new Intent(context, AtoneActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("put payment", payment);
-        intent.putExtra("payment", bundle);
-        context.startActivity(intent);
-    }
-
     @Override
     public void onAuthenticationSuccess(String authenticationToken) {
 
@@ -149,4 +118,19 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
     public void onFailure(String failureToken) {
         Toast.makeText(this, " " + failureToken, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Start AtoneCon
+     *
+     * @param context application Context
+     * @param payment object Payment
+     */
+    public static void startAtone(Context context, Payment payment) {
+        Intent intent = new Intent(context, AtoneActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("put payment", payment);
+        intent.putExtra("payment", bundle);
+        context.startActivity(intent);
+    }
+
 }
