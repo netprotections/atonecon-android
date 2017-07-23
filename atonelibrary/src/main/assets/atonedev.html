@@ -142,7 +142,7 @@ Atone = function() {
     var data = Android.getDataString();
 
     Atone.config({
-        pre_token: "",
+        pre_token: Android.getPreToken(),
         pub_key: Android.getPublicKey(),
         payment: data,
         authenticated: function(authentication_token) {
