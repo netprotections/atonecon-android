@@ -2,6 +2,9 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 
 import atone.asiantech.vn.atonelibrary.model.Payment;
 
@@ -29,21 +32,29 @@ public class AtonePay {
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(context, payment, mOption);
         javaScriptInterface.setCallBackHandler(mAtoneCallBack);
 
-        // Load webview
-        AtoneWebView mAtoneWebView = new AtoneWebView(context);
-        mAtoneWebView.getSettings().setJavaScriptEnabled(true);
-        mAtoneWebView.addJavascriptInterface(javaScriptInterface, "Android");
-        mAtoneWebView.loadUrl("file:///android_asset/atonedev.html");
         // create an AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.dialog_webview, null);
 
+        AtoneWebView mAtoneWebView = (AtoneWebView) v.findViewById(R.id.webview);
+        EditText edit = (EditText) v.findViewById(R.id.edit);
+        edit.setFocusable(true);
+        edit.requestFocus();
+        mAtoneWebView.addJavascriptInterface(javaScriptInterface, "Android");
+        mAtoneWebView.getSettings().setJavaScriptEnabled(true);
+        // Load WebView
+        mAtoneWebView.loadUrl("file:///android_asset/atonedev.html");
         // set the WebView as the AlertDialog.Builder’s view
-        builder.setView(mAtoneWebView).show();
+        builder.setView(v);
+
+        builder.create().show();
     }
 
     public void handlerCallBack(AtoneCallBack atoneCallBack) {
         mAtoneCallBack = atoneCallBack;
     }
+
     /**
      * Class support optional for AtoneSDK.
      */

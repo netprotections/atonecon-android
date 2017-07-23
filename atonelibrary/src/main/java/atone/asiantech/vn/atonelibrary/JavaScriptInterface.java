@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import atone.asiantech.vn.atonelibrary.model.Payment;
-import atone.asiantech.vn.atonelibrary.util.AtoneUtil;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -43,7 +42,7 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public String getPublicKey() {
-        return AtoneUtil.getAtonePublicKey(mContext);
+        return mOption.publicKey;
     }
 
     @JavascriptInterface
@@ -75,7 +74,7 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void onSuccessFul(String response) {
         if (mListener != null) {
-            mListener.onTransactionSuccess("");
+            mListener.onTransactionSuccess(response);
         }
     }
 }
