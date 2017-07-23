@@ -6,7 +6,7 @@ import android.webkit.JavascriptInterface;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import atone.asiantech.vn.atonelibrary.model.Payment;
+import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -14,7 +14,7 @@ import atone.asiantech.vn.atonelibrary.model.Payment;
  */
 public class JavaScriptInterface {
     private Activity mContext;
-    private AtoneCallBack mListener;
+    private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
 
@@ -27,10 +27,10 @@ public class JavaScriptInterface {
     /**
      * This method will set listener callback from WebView.
      *
-     * @param atoneCallBack callback to Native App.
+     * @param onTransactionCallBack callback to Native App.
      */
-    public void setCallBackHandler(AtoneCallBack atoneCallBack) {
-        this.mListener = atoneCallBack;
+    public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
+        this.mListener = onTransactionCallBack;
     }
 
     @JavascriptInterface

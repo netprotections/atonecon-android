@@ -8,19 +8,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:visibility="invisible"
-        android:inputType="text" />
+        android:inputType="text"
+        android:visibility="invisible" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:indeterminate="true"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/progress_bar_custom_width" />
+        android:layout_height="@dimen/progress_bar_custom_width"
+        android:indeterminate="true" />
 
     <atone.asiantech.vn.atonelibrary.AtoneWebView
         android:id="@+id/webview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#54553012"/>
+        android:background="#54553012" />
 
 </RelativeLayout>

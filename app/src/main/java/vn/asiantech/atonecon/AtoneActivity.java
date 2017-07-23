@@ -13,20 +13,22 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import atone.asiantech.vn.atonelibrary.AtoneCallBack;
+import atone.asiantech.vn.atonelibrary.OnTransactionCallBack;
 import atone.asiantech.vn.atonelibrary.AtonePay;
-import atone.asiantech.vn.atonelibrary.model.Customer;
-import atone.asiantech.vn.atonelibrary.model.DestCustomer;
-import atone.asiantech.vn.atonelibrary.model.Payment;
-import atone.asiantech.vn.atonelibrary.model.ShopItem;
+import atone.asiantech.vn.atonelibrary.models.Customer;
+import atone.asiantech.vn.atonelibrary.models.DestCustomer;
+import atone.asiantech.vn.atonelibrary.models.Payment;
+import atone.asiantech.vn.atonelibrary.models.ShopItem;
 
-
+/**
+ * Class demo ShopApp
+ */
 public class AtoneActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mButtonAtone;
     private TextView mTextViewResetToken;
     private EditText mEditTextToken;
     private Payment mPayment;
-    private AtoneCallBack mAtoneCallBack;
+    private OnTransactionCallBack mOnTransactionCallBack;
     private AtonePay.Option mOption;
 
     @Override
@@ -46,7 +48,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         SharedPreferences prefs = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         final SharedPreferences.Editor editor = prefs.edit();
-        String preToken = prefs.getString("pre_key","");
+        String preToken = prefs.getString("pre_key", "");
         mEditTextToken.setText(preToken);
 
         // Create a payment object(for demo)
@@ -83,7 +85,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                 .build();
 
-        mAtoneCallBack = new AtoneCallBack() {
+        mOnTransactionCallBack = new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
                 Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
@@ -113,9 +115,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAtone:
-                AtonePay.getInstance().handlerCallBack(mAtoneCallBack);
+                AtonePay.getInstance().handlerCallBack(mOnTransactionCallBack);
                 AtonePay.getInstance().config(mOption);
-                AtonePay.getInstance().showDialog(this, mPayment);
+                AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
                 mOption.preKey = "";

@@ -1,4 +1,4 @@
-package atone.asiantech.vn.atonelibrary.model;
+package atone.asiantech.vn.atonelibrary.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

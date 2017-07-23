@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import atone.asiantech.vn.atonelibrary.model.Payment;
+import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -14,7 +14,7 @@ import atone.asiantech.vn.atonelibrary.model.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
-    private AtoneCallBack mAtoneCallBack;
+    private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
 
     public static AtonePay getInstance() {
@@ -28,9 +28,9 @@ public class AtonePay {
         mOption = option;
     }
 
-    public void showDialog(Activity context, Payment payment) {
+    public void performPayment(Activity context, Payment payment) {
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(context, payment, mOption);
-        javaScriptInterface.setCallBackHandler(mAtoneCallBack);
+        javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
         // create an AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -51,8 +51,8 @@ public class AtonePay {
         builder.create().show();
     }
 
-    public void handlerCallBack(AtoneCallBack atoneCallBack) {
-        mAtoneCallBack = atoneCallBack;
+    public void handlerCallBack(OnTransactionCallBack onTransactionCallBack) {
+        mOnTransactionCallBack = onTransactionCallBack;
     }
 
     /**
