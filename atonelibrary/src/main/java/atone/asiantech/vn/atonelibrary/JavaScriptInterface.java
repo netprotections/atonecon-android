@@ -1,13 +1,13 @@
-package vn.asiantech.atonecon;
+package atone.asiantech.vn.atonelibrary;
 
 import android.app.Activity;
 import android.webkit.JavascriptInterface;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import vn.asiantech.atonecon.model.Payment;
-import vn.asiantech.atonecon.util.AtoneUtil;
+import atone.asiantech.vn.atonelibrary.model.Payment;
+import atone.asiantech.vn.atonelibrary.util.AtoneUtil;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -17,10 +17,12 @@ public class JavaScriptInterface {
     private Activity mContext;
     private AtoneCallBack mListener;
     private Payment mPayment;
+    private AtonePay.Option mOption;
 
-    public JavaScriptInterface(Activity context, Payment payment) {
+    public JavaScriptInterface(Activity context, Payment payment, AtonePay.Option option) {
         this.mContext = context;
         this.mPayment = payment;
+        this.mOption = option;
     }
 
     /**
@@ -35,7 +37,7 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public String getDataString() {
         // Parse payment object to data string for binding to web
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         return gson.toJson(mPayment);
     }
 
@@ -45,8 +47,12 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
+    public String getPreToken() {
+        return mOption.preKey;
+    }
+
+    @JavascriptInterface
     public void onAuthenticated(String authenticationToken) {
-        Toast.makeText(mContext, "onAuthenticated: " + authenticationToken, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onAuthenticationSuccess(authenticationToken);
         }
@@ -54,7 +60,6 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onCancelled() {
-        Toast.makeText(mContext, "onCancelled", Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onTransactionCancel();
         }
@@ -62,7 +67,6 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onFailed(String response) {
-        Toast.makeText(mContext, "onFailed " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onFailure(response);
         }
@@ -70,7 +74,6 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public void onSuccessFul(String response) {
-        Toast.makeText(mContext, "onSuccessFul " + response, Toast.LENGTH_SHORT).show();
         if (mListener != null) {
             mListener.onTransactionSuccess("");
         }

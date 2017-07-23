@@ -1,4 +1,4 @@
-package vn.asiantech.atonecon;
+package atone.asiantech.vn.atonelibrary;
 
 import android.content.Context;
 import android.util.AttributeSet;

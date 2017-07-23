@@ -1,4 +1,4 @@
-package vn.asiantech.atonecon.model;
+package atone.asiantech.vn.atonelibrary.model;
 
 import com.google.gson.annotations.SerializedName;
 

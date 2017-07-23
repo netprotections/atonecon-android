@@ -1,4 +1,4 @@
-package vn.asiantech.atonecon.model;
+package atone.asiantech.vn.atonelibrary.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -17,7 +17,7 @@ public class Payment implements Parcelable {
     @SerializedName("shop_transaction_no")
     private String shopTransactionNo;
     @SerializedName("sales_settled")
-    private String salesSettled;
+    private boolean salesSettled;
     @SerializedName("description_trans")
     private String descriptionTrans;
     @SerializedName("checksum")
@@ -29,13 +29,10 @@ public class Payment implements Parcelable {
     @SerializedName("items")
     private List<ShopItem> items;
 
-    public Payment() {
-    }
-
     protected Payment(Parcel in) {
         amount = in.readInt();
         shopTransactionNo = in.readString();
-        salesSettled = in.readString();
+        salesSettled = in.readByte() != 0;
         descriptionTrans = in.readString();
         checksum = in.readString();
     }
@@ -61,7 +58,7 @@ public class Payment implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(amount);
         dest.writeString(shopTransactionNo);
-        dest.writeString(salesSettled);
+        dest.writeByte((byte) (salesSettled ? 1 : 0));
         dest.writeString(descriptionTrans);
         dest.writeString(checksum);
     }
@@ -72,7 +69,7 @@ public class Payment implements Parcelable {
     public static class Builder {
         private int amount;
         private String shopTransactionNo;
-        private String salesSettled;
+        private boolean salesSettled;
         private String descriptionTrans;
         private String checksum = "";
         private Customer customer;
@@ -86,7 +83,7 @@ public class Payment implements Parcelable {
             this.items = items;
         }
 
-        public Builder settled(String saleSettled) {
+        public Builder settled(boolean saleSettled) {
             this.salesSettled = saleSettled;
             return this;
         }
@@ -130,7 +127,7 @@ public class Payment implements Parcelable {
         return shopTransactionNo;
     }
 
-    public String getSalesSettled() {
+    public boolean getSalesSettled() {
         return salesSettled;
     }
 

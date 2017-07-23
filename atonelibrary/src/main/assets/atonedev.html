@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <!-- <script src="https://it-auth.a-to-ne.jp/v1/atone.js"></script> -->
 </head>
-<title>atone bla bla</title>
+<title>Atone Payment</title>
 <body>
 <form action="/login" method="POST">
     <input type="text" id="login_id"/>
@@ -16,7 +16,7 @@
 </form>
 <button id="atone-button">Atone</button>
 <script>
-var Atone, bind = function(t, e) {
+var Atone, bind = function(t, e) {	
     return function() {
         return t.apply(e, arguments)
     }
@@ -45,7 +45,7 @@ Atone = function() {
             return t = new this.j.Deferred, this.iframe = this.j("<iframe/>", {
                 src: "https://it-auth.a-to-ne.jp/payment/#/",
                 name: "authentication-form-iframe",
-                id: "authentication-form-iframe",
+                id: "authentication-form-iframe",	
                 style: "width: 100%;height: 516px;",
                 scrolling: "no",
                 allowtransparency: "true",
@@ -147,36 +147,32 @@ Atone = function() {
 
 </script>
 <script>
-	var data = "";
+    var data = Android.getDataString();
 
-	Atone.config({
-	    pre_token: "",
-	    pub_key: Android.getPublicKey(),
-	    payment: data,
-	    authenticated: function(authentication_token) {
-	        Android.onAuthenticated(authentication_token);
-	    },
-	    cancelled: function() {
-	         Android.onCancelled();
-	    },
-	    failed: function(response) {
-	         Android.onFailed();
-	    },
-	    successed: function(response) {
-	         Android.onSuccessFul();
-	    }
-	});
-	var button = document.getElementById("atone-button");
-	button.addEventListener("click", function(e) {
-	    Atone.start();
-	}, false);
-
-</script>
-
-<script>
-    // Get payment data string from native app
-  	data = Android.getDataString();
-
+    Atone.config({
+        pre_token: "",
+        pub_key: Android.getPublicKey(),
+        payment: data,
+        authenticated: function(authentication_token) {
+            Android.onAuthenticated(authentication_token);
+            console.log(authentication_token);
+        },
+        cancelled: function() {
+            Android.onCancelled();
+            console.log('cancelled');
+        },
+        failed: function(response) {
+            Android.onFailed(JSON.stringify(response));
+            console.log(response);
+        },
+        succeeded: function(response) {
+           Android.onSuccessFul(JSON.stringify(response));
+           console.log(response);
+        }
+    });
+    window.addEventListener("load", function(){
+        Atone.start();
+    });
 </script>
 </body>
 </html>

@@ -1,46 +1,59 @@
 package vn.asiantech.atonecon;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.webkit.WebView;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.asiantech.atonecon.model.Customer;
-import vn.asiantech.atonecon.model.DestCustomer;
-import vn.asiantech.atonecon.model.Payment;
-import vn.asiantech.atonecon.model.ShopItem;
+import atone.asiantech.vn.atonelibrary.AtoneCallBack;
+import atone.asiantech.vn.atonelibrary.AtonePay;
+import atone.asiantech.vn.atonelibrary.model.Customer;
+import atone.asiantech.vn.atonelibrary.model.DestCustomer;
+import atone.asiantech.vn.atonelibrary.model.Payment;
+import atone.asiantech.vn.atonelibrary.model.ShopItem;
 
-/**
- * Copyright © AsianTech Co., Ltd
- * Created by kietva on 6/28/17.
- */
-public class AtoneActivity extends Activity implements AtoneCallBack {
 
-    private AtoneWebView mWebView;
+public class AtoneActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button mButtonAtone;
+    private TextView mTextViewResetToken;
+    private EditText mEditTextToken;
     private Payment mPayment;
+    private AtoneCallBack mAtoneCallBack;
+    private AtonePay.Option mOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mWebView = (AtoneWebView) findViewById(R.id.webView);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
+        setContentView(R.layout.activity_shop);
 
-        // TODO: 7/19/2017 Get Payment from ShopApp
+        mTextViewResetToken = (TextView) findViewById(R.id.tvResetToken);
+        mTextViewResetToken.setMovementMethod(LinkMovementMethod.getInstance());
+        mTextViewResetToken.setOnClickListener(this);
+        mButtonAtone = (Button) findViewById(R.id.btnAtone);
+        mButtonAtone.setOnClickListener(this);
+        mEditTextToken = (EditText) findViewById(R.id.editText);
+
+        mOption = AtonePay.Option.builder();
+        mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
+
+        SharedPreferences prefs = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = prefs.edit();
+        String preToken = prefs.getString("pre_key","");
+        mEditTextToken.setText(preToken);
+
         // Create a payment object(for demo)
         Customer customer = new Customer.Builder("接続テスト")
                 .nameKana("セツゾクテスト")
                 .setPhone("090-1111-1111")
-                .birth("12/12/1990")
+                .birth("12/12/2020")
                 .sex("Male")
                 .company("（株）ネットプロテクションズ")
                 .setDepartment("セールスグループ")
@@ -48,7 +61,7 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
                 .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
                 .setTel("080-1234-1234")
                 .mail("cnp@netprotections.co.jp")
-                .purchaseCount(8)
+                .purchaseCount(2)
                 .purchaseAmount(20000)
                 .build();
         List<DestCustomer> destCustomers = new ArrayList<>();
@@ -57,80 +70,56 @@ public class AtoneActivity extends Activity implements AtoneCallBack {
                 .destCompany("株式会社ネットプロテクションズ")
                 .department("システム部門")
                 .setTel("0312341234")
-                .email("dest@gmail.com")
                 .build());
-
         List<ShopItem> shopItems = new ArrayList<>();
         shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ ", 10, 1)
                 .url("https://atone.be/items/1")
                 .build());
 
-        mPayment = new Payment.Builder(10, "shop-tran-no-1500347370", customer, shopItems)
-                .settled("false")
+        mPayment = new Payment.Builder(10, "shop-tran-no-1500630451", customer, shopItems)
+                .settled(false)
                 .description("備考です。")
                 .destCustomer(destCustomers)
                 .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                 .build();
 
-//        // Get payment from ShopApp
-//        try {
-//            mPayment = getIntent().getBundleExtra("payment").getParcelable("put payment");
-//        } catch (Exception e) {
-//            Log.e("AtoneActivity", "onCreate: PaymentNull");
-//        }
+        mAtoneCallBack = new AtoneCallBack() {
+            @Override
+            public void onAuthenticationSuccess(String authenToken) {
+                Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
+                mOption.preKey = authenToken;
+                editor.putString("pre_key", mOption.preKey);
+                editor.apply();
+            }
 
-        // Init Interface
-        if (mPayment != null) {
-            JavaScriptInterface javaScriptInterface = new JavaScriptInterface(this, mPayment);
-            javaScriptInterface.setCallBackHandler(this);
+            @Override
+            public void onTransactionSuccess(String result) {
+                Toast.makeText(AtoneActivity.this, "TransactionSuccess: " + result, Toast.LENGTH_SHORT).show();
+            }
 
-            // Load webview
-            mWebView.addJavascriptInterface(javaScriptInterface, "Android");
-            mWebView.loadUrl("file:///android_asset/atonedev.html");
+            @Override
+            public void onTransactionCancel() {
+                Toast.makeText(AtoneActivity.this, "Transaction Cancelled!", Toast.LENGTH_SHORT).show();
+            }
 
-            AtoneSdk.Option option = AtoneSdk.Option.builder();
-            option.payment = mPayment;
-            option.preKey = "";
-            AtoneSdk.config(option);
-            AtoneSdk.showDialog();
-        } else {
-            Toast.makeText(this, "Payment Data null!", Toast.LENGTH_SHORT).show();
-            finish();
+            @Override
+            public void onFailure(String failureToken) {
+                Toast.makeText(AtoneActivity.this, "Failure!", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnAtone:
+                AtonePay.getInstance().handlerCallBack(mAtoneCallBack);
+                AtonePay.getInstance().config(mOption);
+                AtonePay.getInstance().showDialog(this, mPayment);
+                break;
+            case R.id.tvResetToken:
+                mOption.preKey = "";
+                break;
         }
     }
-
-    @Override
-    public void onAuthenticationSuccess(String authenticationToken) {
-
-    }
-
-    @Override
-    public void onTransactionSuccess(String transactionToken) {
-
-    }
-
-    @Override
-    public void onTransactionCancel() {
-        Toast.makeText(this, "Cancelled!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onFailure(String failureToken) {
-        Toast.makeText(this, " " + failureToken, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Start AtoneCon
-     *
-     * @param context application Context
-     * @param payment object Payment
-     */
-    public static void startAtone(Context context, Payment payment) {
-        Intent intent = new Intent(context, AtoneActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("put payment", payment);
-        intent.putExtra("payment", bundle);
-        context.startActivity(intent);
-    }
-
 }

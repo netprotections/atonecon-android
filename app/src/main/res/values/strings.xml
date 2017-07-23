@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">AtoneCon</string>
+    <string name="app_name">AtoneShop</string>
+    <string name="token">認証トークン</string>
+    <string name="atone">atoneを使う</string>
+    <string name="reset_token"><u>認証情報をリセット</u></string>
 </resources>
