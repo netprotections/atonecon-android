@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="progress_bar_custom_width">50dp</dimen>
+    <dimen name="width_220">220dp</dimen>
+    <dimen name="height_50">50dp</dimen>
+    <dimen name="textview_size_15">15dp</dimen>
 </resources>

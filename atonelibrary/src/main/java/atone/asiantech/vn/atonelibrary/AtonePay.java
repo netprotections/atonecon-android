@@ -14,6 +14,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
+    private static AlertDialog sAlertDialog;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
 
@@ -22,6 +23,13 @@ public class AtonePay {
             sAtonePay = new AtonePay();
         }
         return sAtonePay;
+    }
+
+    public static AlertDialog getAlertDialogB() {
+        if (sAlertDialog != null) {
+            return sAlertDialog;
+        }
+        return null;
     }
 
     public void config(Option option) {
@@ -48,7 +56,9 @@ public class AtonePay {
         // set the WebView as the AlertDialog.Builder’s view
         builder.setView(v);
 
-        builder.create().show();
+        builder.create();
+        sAlertDialog = builder.create();
+        sAlertDialog.show();
     }
 
     public void handlerCallBack(OnTransactionCallBack onTransactionCallBack) {

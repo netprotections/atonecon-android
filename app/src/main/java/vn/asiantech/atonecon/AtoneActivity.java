@@ -30,6 +30,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private Payment mPayment;
     private OnTransactionCallBack mOnTransactionCallBack;
     private AtonePay.Option mOption;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +42,13 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mTextViewResetToken.setOnClickListener(this);
         mButtonAtone = (Button) findViewById(R.id.btnAtone);
         mButtonAtone.setOnClickListener(this);
-        mEditTextToken = (EditText) findViewById(R.id.editText);
+        mEditTextToken = (EditText) findViewById(R.id.edtToken);
 
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
         SharedPreferences prefs = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = prefs.edit();
+        editor = prefs.edit();
         String preToken = prefs.getString("pre_key", "");
         mEditTextToken.setText(preToken);
 
@@ -78,7 +79,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 .url("https://atone.be/items/1")
                 .build());
 
-        mPayment = new Payment.Builder(10, "shop-tran-no-1500630451", customer, shopItems)
+        mPayment = new Payment.Builder(10, "shop-tran-no-1500864189", customer, shopItems)
                 .settled(false)
                 .description("備考です。")
                 .destCustomer(destCustomers)
@@ -120,7 +121,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
-                mOption.preKey = "";
+                editor.remove("pre_key");
+                editor.apply();
+                mEditTextToken.setText("");
                 break;
         }
     }
