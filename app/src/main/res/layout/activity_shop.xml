@@ -50,4 +50,15 @@
         android:layout_marginTop="20dp"
         android:textSize="@dimen/textview_size_15"/>
 
+    <EditText
+        android:id="@+id/edtTransactionNo"
+        android:layout_width="@dimen/width_220"
+        android:layout_height="@dimen/height_50"
+        android:layout_below="@+id/tvResetToken"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:hint="@string/transaction_no"
+        android:layout_centerHorizontal="true"
+        android:cursorVisible="false"/>
+
 </RelativeLayout>
