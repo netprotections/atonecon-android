@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,8 +74,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(String failureToken) {
-                Toast.makeText(AtoneActivity.this, "Failure!", Toast.LENGTH_SHORT).show();
+            public void onFailure(String response) {
+                Toast.makeText(AtoneActivity.this, "Failure!" + response, Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -91,15 +90,12 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 // Create a payment object(for demo)
                 Customer customer = new Customer.Builder("接続テスト")
                         .nameKana("セツゾクテスト")
-                        .setPhone("090-1111-1111")
-                        .birth("12/12/2020")
-                        .sex("Male")
                         .company("（株）ネットプロテクションズ")
                         .setDepartment("セールスグループ")
                         .setZipCode("1234567")
                         .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
                         .setTel("080-1234-1234")
-                        .mail("cnp@netprotections.co.jp")
+                        .mail("np@netprotections.co.jp")
                         .purchaseCount(2)
                         .purchaseAmount(20000)
                         .build();
@@ -111,19 +107,17 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .setTel("0312341234")
                         .build());
                 List<ShopItem> shopItems = new ArrayList<>();
-                shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ ", 10, 1)
+                shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ", 10, 1)
                         .url("https://atone.be/items/1")
                         .build());
 
                 String transNo = "shop-tran-no-" + mEditTextTransactionNo.getText();
-                Log.d("transno", "onClick: " + transNo);
                 mPayment = new Payment.Builder(10, transNo, customer, shopItems)
                         .settled(false)
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .build();
-
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:

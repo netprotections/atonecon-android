@@ -4,4 +4,5 @@
     <dimen name="width_220">220dp</dimen>
     <dimen name="height_50">50dp</dimen>
     <dimen name="textview_size_15">15dp</dimen>
+    <dimen name="edittext_token_size_14">14dp</dimen>
 </resources>

@@ -2,6 +2,7 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.pm.ActivityInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class AtonePay {
         return sAtonePay;
     }
 
-    public static AlertDialog getAlertDialogB() {
+    public static AlertDialog getAlertDialog() {
         if (sAlertDialog != null) {
             return sAlertDialog;
         }
@@ -37,6 +38,7 @@ public class AtonePay {
     }
 
     public void performPayment(Activity context, Payment payment) {
+        context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(context, payment, mOption);
         javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
@@ -55,7 +57,6 @@ public class AtonePay {
         mAtoneWebView.loadUrl("file:///android_asset/atonedev.html");
         // set the WebView as the AlertDialog.Builder’s view
         builder.setView(v);
-
         builder.create();
         sAlertDialog = builder.create();
         sAlertDialog.show();

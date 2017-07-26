@@ -11,10 +11,13 @@
         android:layout_width="@dimen/width_220"
         android:layout_height="@dimen/height_50"
         android:background="@drawable/custom_edittext_token"
-        android:inputType="text"
+        android:focusable="false"
         android:layout_marginTop="158dp"
         android:layout_centerHorizontal="true"
-        android:cursorVisible="false"/>
+        android:cursorVisible="false"
+        android:gravity="center"
+        android:inputType="none"
+        android:textSize="@dimen/edittext_token_size_14"/>
 
     <TextView
         android:id="@+id/tvEditTextToken"
@@ -22,8 +25,8 @@
         android:layout_height="wrap_content"
         android:text="@string/token"
         android:textSize="@dimen/textview_size_15"
-        android:textColor="#3bbdfa"
-        android:background="#ffffff"
+        android:textColor="@color/blueLight"
+        android:background="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"/>
 
@@ -34,7 +37,7 @@
         android:layout_below="@+id/edtToken"
         android:text="@string/atone"
         android:textColor="#ffffff"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_20"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_button_atone"
         android:layout_centerHorizontal="true"/>

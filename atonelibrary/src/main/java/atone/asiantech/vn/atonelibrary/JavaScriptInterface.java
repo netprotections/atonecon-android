@@ -54,9 +54,6 @@ public class JavaScriptInterface {
     public void onAuthenticated(String authenticationToken) {
         if (mListener != null) {
             mListener.onAuthenticationSuccess(authenticationToken);
-            if (AtonePay.getAlertDialogB() != null) {
-                AtonePay.getAlertDialogB().cancel();
-            }
         }
     }
 
@@ -64,8 +61,8 @@ public class JavaScriptInterface {
     public void onCancelled() {
         if (mListener != null) {
             mListener.onTransactionCancel();
-            if (AtonePay.getAlertDialogB() != null) {
-                AtonePay.getAlertDialogB().cancel();
+            if (AtonePay.getAlertDialog() != null) {
+                AtonePay.getAlertDialog().cancel();
             }
         }
     }
@@ -74,8 +71,8 @@ public class JavaScriptInterface {
     public void onFailed(String response) {
         if (mListener != null) {
             mListener.onFailure(response);
-            if (AtonePay.getAlertDialogB() != null) {
-                AtonePay.getAlertDialogB().cancel();
+            if (AtonePay.getAlertDialog() != null) {
+                AtonePay.getAlertDialog().cancel();
             }
         }
     }
@@ -84,8 +81,8 @@ public class JavaScriptInterface {
     public void onSuccessFul(String response) {
         if (mListener != null) {
             mListener.onTransactionSuccess(response);
-            if (AtonePay.getAlertDialogB() != null) {
-                AtonePay.getAlertDialogB().cancel();
+            if (AtonePay.getAlertDialog() != null) {
+                AtonePay.getAlertDialog().cancel();
             }
         }
     }
