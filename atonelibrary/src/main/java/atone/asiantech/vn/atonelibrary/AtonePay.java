@@ -39,7 +39,7 @@ public class AtonePay {
 
     public void performPayment(Activity context, Payment payment) {
         context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        JavaScriptInterface javaScriptInterface = new JavaScriptInterface(context, payment, mOption);
+        JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
         javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
         // create an AlertDialog.Builder

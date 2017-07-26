@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/token"
         android:textSize="@dimen/textview_size_15"
-        android:textColor="@color/blueLight"
+        android:textColor="@color/blue"
         android:background="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"/>

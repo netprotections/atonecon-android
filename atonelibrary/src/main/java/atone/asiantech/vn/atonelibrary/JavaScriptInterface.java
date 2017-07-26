@@ -1,6 +1,5 @@
 package atone.asiantech.vn.atonelibrary;
 
-import android.app.Activity;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -13,13 +12,11 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  * Created by kietva on 6/29/17.
  */
 public class JavaScriptInterface {
-    private Activity mContext;
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
 
-    public JavaScriptInterface(Activity context, Payment payment, AtonePay.Option option) {
-        this.mContext = context;
+    public JavaScriptInterface(Payment payment, AtonePay.Option option) {
         this.mPayment = payment;
         this.mOption = option;
     }
