@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 
 import atone.asiantech.vn.atonelibrary.models.Payment;
@@ -47,14 +48,14 @@ public class AtonePay {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_webview, null);
 
-        AtoneWebView mAtoneWebView = (AtoneWebView) v.findViewById(R.id.webview);
-        EditText edit = (EditText) v.findViewById(R.id.edit);
+        WebView mWebView = (WebView) v.findViewById(R.id.webView);
+        EditText edit = (EditText) v.findViewById(R.id.edt);
         edit.setFocusable(true);
         edit.requestFocus();
-        mAtoneWebView.addJavascriptInterface(javaScriptInterface, "Android");
-        mAtoneWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.addJavascriptInterface(javaScriptInterface, "Android");
+        mWebView.getSettings().setJavaScriptEnabled(true);
         // Load WebView
-        mAtoneWebView.loadUrl("file:///android_asset/atonedev.html");
+        mWebView.loadUrl("file:///android_asset/atonedev.html");
         // set the WebView as the AlertDialog.Builder’s view
         builder.setView(v);
         builder.create();

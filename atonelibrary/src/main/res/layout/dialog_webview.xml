@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edit"
+        android:id="@+id/edt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusable="true"
@@ -17,9 +17,8 @@
         android:layout_height="@dimen/progress_bar_custom_width"
         android:indeterminate="true" />
 
-    <atone.asiantech.vn.atonelibrary.AtoneWebView
-        android:id="@+id/webview"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content" />
 </RelativeLayout>
