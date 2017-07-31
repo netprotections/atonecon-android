@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vn.asiantech.atonecon.AtoneActivity">
+
+    <EditText
+        android:id="@+id/edtToken"
+        android:layout_width="@dimen/common_button_edit_text_width_220"
+        android:layout_height="@dimen/common_button_edit_text_height_50"
+        android:background="@drawable/custom_edittext_token"
+        android:focusable="false"
+        android:layout_marginTop="158dp"
+        android:layout_centerHorizontal="true"
+        android:cursorVisible="false"
+        android:gravity="center"
+        android:inputType="none"
+        android:textSize="@dimen/edit_text_token_size_14"/>
+
+    <TextView
+        android:id="@+id/tvEditTextToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/token"
+        android:textSize="@dimen/text_view_size_15"
+        android:textColor="@color/blue"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
+
+    <Button
+        android:id="@+id/btnAtone"
+        android:layout_width="@dimen/common_button_edit_text_width_220"
+        android:layout_height="@dimen/common_button_edit_text_height_50"
+        android:layout_below="@+id/edtToken"
+        android:text="@string/atone"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/text_size_20"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button_atone"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tvResetToken"
+        android:text="@string/reset_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAtone"
+        android:textColor="@drawable/custom_text_reset_token"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_view_size_15"/>
+
+    <EditText
+        android:id="@+id/edtTransactionNo"
+        android:layout_width="@dimen/common_button_edit_text_width_220"
+        android:layout_height="@dimen/common_button_edit_text_height_50"
+        android:layout_below="@+id/tvResetToken"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:hint="@string/transaction_no"
+        android:layout_centerHorizontal="true"
+        android:cursorVisible="false"/>
+
+</RelativeLayout>

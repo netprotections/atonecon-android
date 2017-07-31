@@ -1,4 +1,4 @@
-package vn.asiantech.atonecon.model;
+package atone.asiantech.vn.atonelibrary.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -94,7 +94,7 @@ public class Customer {
             return this;
         }
 
-        public Builder phone(String number) {
+        public Builder setPhone(String number) {
             this.phoneNumber = number;
             return this;
         }
@@ -119,7 +119,7 @@ public class Customer {
             return this;
         }
 
-        public Builder zipCod(String code) {
+        public Builder setZipCode(String code) {
             this.zipCode = code;
             return this;
         }

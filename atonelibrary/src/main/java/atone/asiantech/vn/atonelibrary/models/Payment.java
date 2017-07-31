@@ -1,4 +1,7 @@
-package vn.asiantech.atonecon.model;
+package atone.asiantech.vn.atonelibrary.models;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,13 +11,13 @@ import java.util.List;
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
-public class Payment {
+public class Payment implements Parcelable {
     @SerializedName("amount")
     private int amount;
     @SerializedName("shop_transaction_no")
     private String shopTransactionNo;
     @SerializedName("sales_settled")
-    private String salesSettled;
+    private boolean salesSettled;
     @SerializedName("description_trans")
     private String descriptionTrans;
     @SerializedName("checksum")
@@ -26,7 +29,38 @@ public class Payment {
     @SerializedName("items")
     private List<ShopItem> items;
 
-    public Payment() {
+    protected Payment(Parcel in) {
+        amount = in.readInt();
+        shopTransactionNo = in.readString();
+        salesSettled = in.readByte() != 0;
+        descriptionTrans = in.readString();
+        checksum = in.readString();
+    }
+
+    public static final Creator<Payment> CREATOR = new Creator<Payment>() {
+        @Override
+        public Payment createFromParcel(Parcel in) {
+            return new Payment(in);
+        }
+
+        @Override
+        public Payment[] newArray(int size) {
+            return new Payment[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(amount);
+        dest.writeString(shopTransactionNo);
+        dest.writeByte((byte) (salesSettled ? 1 : 0));
+        dest.writeString(descriptionTrans);
+        dest.writeString(checksum);
     }
 
     /**
@@ -35,7 +69,7 @@ public class Payment {
     public static class Builder {
         private int amount;
         private String shopTransactionNo;
-        private String salesSettled;
+        private boolean salesSettled;
         private String descriptionTrans;
         private String checksum = "";
         private Customer customer;
@@ -49,7 +83,7 @@ public class Payment {
             this.items = items;
         }
 
-        public Builder settled(String saleSettled) {
+        public Builder settled(boolean saleSettled) {
             this.salesSettled = saleSettled;
             return this;
         }
@@ -93,7 +127,7 @@ public class Payment {
         return shopTransactionNo;
     }
 
-    public String getSalesSettled() {
+    public boolean getSalesSettled() {
         return salesSettled;
     }
 

@@ -1,4 +1,4 @@
-package vn.asiantech.atonecon.model;
+package atone.asiantech.vn.atonelibrary.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -58,7 +58,7 @@ public class DestCustomer {
             return this;
         }
 
-        public Builder tel(String telNumber) {
+        public Builder setTel(String telNumber) {
             this.destTel = telNumber;
             return this;
         }
