@@ -1,5 +1,6 @@
 package atone.asiantech.vn.atonelibrary;
 
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -39,12 +40,18 @@ public class JavaScriptInterface {
 
     @JavascriptInterface
     public String getPublicKey() {
-        return mOption.publicKey;
+        if (mOption != null) {
+            return mOption.publicKey != null ? mOption.publicKey : "";
+        }
+        return "";
     }
 
     @JavascriptInterface
     public String getPreToken() {
-        return mOption.preKey;
+        if (mOption != null) {
+            return mOption.preKey != null ? mOption.preKey : "";
+        }
+        return "";
     }
 
     @JavascriptInterface
