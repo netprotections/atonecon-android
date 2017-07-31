@@ -1,5 +1,6 @@
 package vn.asiantech.atonecon;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
@@ -7,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import atone.asiantech.vn.atonelibrary.AtonePay;
+import atone.asiantech.vn.atonelibrary.OnTransactionCallBack;
 import atone.asiantech.vn.atonelibrary.models.Customer;
 import atone.asiantech.vn.atonelibrary.models.DestCustomer;
 import atone.asiantech.vn.atonelibrary.models.Payment;
@@ -22,13 +25,16 @@ import atone.asiantech.vn.atonelibrary.models.ShopItem;
  */
 public class AtoneActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText mEditTextTransactionNo;
+    private EditText mEditTextToken;
     private AtonePay.Option mOption;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
+        mEditTextToken = (EditText) findViewById(R.id.edtToken);
         TextView mTextViewResetToken = (TextView) findViewById(R.id.tvResetToken);
         mTextViewResetToken.setMovementMethod(LinkMovementMethod.getInstance());
         mTextViewResetToken.setOnClickListener(this);
@@ -38,6 +44,36 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
+
+        SharedPreferences prefs = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        editor = prefs.edit();
+        String preToken = prefs.getString("pre_key", "");
+        mEditTextToken.setText(preToken);
+
+        AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
+            @Override
+            public void onAuthenticationSuccess(String authenToken) {
+                Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
+                mOption.preKey = authenToken;
+                editor.putString("pre_key", mOption.preKey);
+                editor.apply();
+            }
+
+            @Override
+            public void onTransactionSuccess(String result) {
+                Toast.makeText(AtoneActivity.this, "TransactionSuccess: " + result, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTransactionCancel() {
+                Toast.makeText(AtoneActivity.this, "Transaction Cancelled!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String response) {
+                Toast.makeText(AtoneActivity.this, "Failure!" + response, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
