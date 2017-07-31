@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
@@ -19,6 +20,7 @@ public class AtonePay {
     private static AlertDialog sAlertDialog;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
+    private WebView mWebView;
 
     public static AtonePay getInstance() {
         if (sAtonePay == null) {
@@ -48,19 +50,35 @@ public class AtonePay {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_webview, null);
 
-        WebView mWebView = (WebView) v.findViewById(R.id.webView);
+        mWebView = (WebView) v.findViewById(R.id.webView);
         EditText edit = (EditText) v.findViewById(R.id.edt);
         edit.setFocusable(true);
         edit.requestFocus();
+        ImageButton imageButton = (ImageButton) v.findViewById(R.id.imgButtonCloseDialog);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getAlertDialog() != null) {
+                    getAlertDialog().dismiss();
+                }
+            }
+        });
         mWebView.addJavascriptInterface(javaScriptInterface, "Android");
         mWebView.getSettings().setJavaScriptEnabled(true);
         // Load WebView
+        mWebView.clearCache(true);
         mWebView.loadUrl("file:///android_asset/atonedev.html");
         // set the WebView as the AlertDialog.Builder’s view
         builder.setView(v);
         builder.create();
         sAlertDialog = builder.create();
         sAlertDialog.show();
+    }
+
+    public void resetToken() {
+        if (mOption != null) {
+            mOption.preKey = "";
+        }
     }
 
     public void handlerCallBack(OnTransactionCallBack onTransactionCallBack) {

@@ -28,6 +28,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEditTextToken;
     private AtonePay.Option mOption;
     private SharedPreferences.Editor editor;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
-        SharedPreferences prefs = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        editor = prefs.edit();
-        String preToken = prefs.getString("pre_key", "");
+        mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
+        String preToken = mSharedPreferences.getString("pre_key", "");
         mEditTextToken.setText(preToken);
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
@@ -114,6 +115,14 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .build();
                 AtonePay.getInstance().performPayment(this, mPayment);
+                break;
+            case R.id.tvResetToken:
+                editor.remove("pre_key");
+                editor.apply();
+                if (AtonePay.getInstance() != null) {
+                    AtonePay.getInstance().resetToken();
+                }
+                mEditTextToken.setText("");
                 break;
         }
     }

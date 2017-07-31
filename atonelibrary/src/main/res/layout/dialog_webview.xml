@@ -11,10 +11,21 @@
         android:inputType="text"
         android:visibility="invisible" />
 
+    <ImageButton
+        android:id="@+id/imgButtonCloseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/close_dialog"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/image_button_close_margin_10"
+        android:background="@null"
+        android:src="@drawable/img_close" />
+
     <android.support.v4.widget.ContentLoadingProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_bar_custom_width"
+        android:layout_below="@+id/imgButtonCloseDialog"
         android:indeterminate="true" />
 
     <WebView
