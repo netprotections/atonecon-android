@@ -76,11 +76,12 @@ public class Payment implements Parcelable {
         private List<DestCustomer> destCustomers;
         private List<ShopItem> items;
 
-        public Builder(int amount, String shopTransactionNo, Customer customer, List<ShopItem> items) {
+        public Builder(int amount, String shopTransactionNo, Customer customer, List<ShopItem> items, String chSum) {
             this.amount = amount;
             this.shopTransactionNo = shopTransactionNo;
             this.customer = customer;
             this.items = items;
+            this.checksum = chSum;
         }
 
         public Builder settled(boolean saleSettled) {
@@ -90,11 +91,6 @@ public class Payment implements Parcelable {
 
         public Builder description(String descriptTrans) {
             this.descriptionTrans = descriptTrans;
-            return this;
-        }
-
-        public Builder setChecksum(String checksumString) {
-            this.checksum = checksumString;
             return this;
         }
 
@@ -113,10 +109,10 @@ public class Payment implements Parcelable {
         shopTransactionNo = builder.shopTransactionNo;
         salesSettled = builder.salesSettled;
         descriptionTrans = builder.descriptionTrans;
-        checksum = builder.checksum;
-        customer = builder.customer;
         destCustomers = builder.destCustomers;
+        customer = builder.customer;
         items = builder.items;
+        checksum = builder.checksum;
     }
 
     public int getAmount() {

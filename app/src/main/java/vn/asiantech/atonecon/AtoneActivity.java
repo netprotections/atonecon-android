@@ -108,11 +108,10 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .build());
 
                 String transNo = "shop-tran-no-" + mEditTextTransactionNo.getText();
-                Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems)
+                Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .settled(false)
                         .description("備考です。")
                         .destCustomer(destCustomers)
-                        .setChecksum("iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .build();
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
