@@ -36,9 +36,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_shop);
 
         mEditTextToken = (EditText) findViewById(R.id.edtToken);
-        TextView mTextViewResetToken = (TextView) findViewById(R.id.tvResetToken);
-        mTextViewResetToken.setMovementMethod(LinkMovementMethod.getInstance());
-        mTextViewResetToken.setOnClickListener(this);
+        TextView tvResetToken = (TextView) findViewById(R.id.tvResetToken);
+        tvResetToken.setMovementMethod(LinkMovementMethod.getInstance());
+        tvResetToken.setOnClickListener(this);
         Button mButtonAtone = (Button) findViewById(R.id.btnAtone);
         mButtonAtone.setOnClickListener(this);
         mEditTextTransactionNo = (EditText) findViewById(R.id.edtTransactionNo);

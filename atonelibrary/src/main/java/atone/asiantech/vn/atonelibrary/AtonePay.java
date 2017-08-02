@@ -54,7 +54,7 @@ public class AtonePay {
         EditText edit = (EditText) v.findViewById(R.id.edt);
         edit.setFocusable(true);
         edit.requestFocus();
-        ImageButton imageButton = (ImageButton) v.findViewById(R.id.imgButtonCloseDialog);
+        ImageButton imageButton = (ImageButton) v.findViewById(R.id.imgBtnCloseDialog);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
