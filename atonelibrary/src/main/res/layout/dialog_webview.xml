@@ -25,7 +25,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_bar_custom_width"
-        android:layout_below="@+id/imgButtonCloseDialog"
+        android:layout_below="@+id/imgBtnCloseDialog"
         android:indeterminate="true" />
 
     <WebView
