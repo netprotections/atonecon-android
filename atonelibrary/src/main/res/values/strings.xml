@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">AtoneLibrary</string>
-    <string name="close_dialog">Close dialog</string>
+    <string name="fragment_dialog_image_button_close_dialog">Close dialog</string>
 </resources>

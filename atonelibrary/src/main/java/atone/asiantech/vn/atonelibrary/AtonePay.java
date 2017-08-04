@@ -50,9 +50,10 @@ public class AtonePay {
         View v = inflater.inflate(R.layout.dialog_webview, null);
 
         WebView webView = v.findViewById(R.id.webView);
-        EditText edit = v.findViewById(R.id.edt);
-        edit.setFocusable(true);
-        edit.requestFocus();
+        // Get focusing to webView
+        EditText edt = v.findViewById(R.id.edt);
+        edt.setFocusable(true);
+        edt.requestFocus();
         ImageButton imageButton = v.findViewById(R.id.imgBtnCloseDialog);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

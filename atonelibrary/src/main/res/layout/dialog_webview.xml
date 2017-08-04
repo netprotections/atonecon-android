@@ -15,11 +15,11 @@
         android:id="@+id/imgBtnCloseDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/close_dialog"
+        android:contentDescription="@string/fragment_dialog_image_button_close_dialog"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/image_button_close_margin"
         android:background="@null"
-        android:src="@drawable/img_close" />
+        android:src="@drawable/ic_close_black_24dp" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
