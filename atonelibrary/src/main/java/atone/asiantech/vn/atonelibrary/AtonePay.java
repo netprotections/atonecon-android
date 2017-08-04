@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
@@ -16,7 +17,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
-    private static AlertDialog sAlertDialog;
+    private AlertDialog mAlertDialog;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
 
@@ -27,9 +28,9 @@ public class AtonePay {
         return sAtonePay;
     }
 
-    public static AlertDialog getAlertDialog() {
-        if (sAlertDialog != null) {
-            return sAlertDialog;
+    public AlertDialog getAlertDialog() {
+        if (mAlertDialog != null) {
+            return mAlertDialog;
         }
         return null;
     }
@@ -48,19 +49,36 @@ public class AtonePay {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_webview, null);
 
-        WebView mWebView = (WebView) v.findViewById(R.id.webView);
-        EditText edit = (EditText) v.findViewById(R.id.edt);
-        edit.setFocusable(true);
-        edit.requestFocus();
-        mWebView.addJavascriptInterface(javaScriptInterface, "Android");
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        WebView webView = v.findViewById(R.id.webView);
+        // Get focusing to webView
+        EditText edt = v.findViewById(R.id.edt);
+        edt.setFocusable(true);
+        edt.requestFocus();
+        ImageButton imgBtn = v.findViewById(R.id.imgBtnCloseDialog);
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getAlertDialog() != null) {
+                    getAlertDialog().dismiss();
+                }
+            }
+        });
+        webView.addJavascriptInterface(javaScriptInterface, "Android");
+        webView.getSettings().setJavaScriptEnabled(true);
         // Load WebView
-        mWebView.loadUrl("file:///android_asset/atonedev.html");
+        webView.clearCache(true);
+        webView.loadUrl("file:///android_asset/atonedev.html");
         // set the WebView as the AlertDialog.Builder’s view
         builder.setView(v);
         builder.create();
-        sAlertDialog = builder.create();
-        sAlertDialog.show();
+        mAlertDialog = builder.create();
+        mAlertDialog.show();
+    }
+
+    public void resetToken() {
+        if (mOption != null) {
+            mOption.preKey = "";
+        }
     }
 
     public void handlerCallBack(OnTransactionCallBack onTransactionCallBack) {

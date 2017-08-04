@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AtoneConDemo</string>
-    <string name="token">認証トークン</string>
-    <string name="atone">atoneを使う</string>
-    <string name="reset_token"><u>認証情報をリセット</u></string>
-    <string name="transaction_no">Transaction No</string>
+    <string name="activity_shop_text_view_token">認証トークン</string>
+    <string name="activity_shop_text_view_reset_token"><u>認証情報をリセット</u></string>
+    <string name="activity_shop_button_atone">atoneを使う</string>
+    <string name="activity_shop_edit_text_transaction_no">Transaction No</string>
 </resources>
