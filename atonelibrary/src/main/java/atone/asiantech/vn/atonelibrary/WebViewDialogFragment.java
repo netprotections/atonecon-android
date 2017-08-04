@@ -16,11 +16,17 @@ import android.widget.ImageButton;
  * Created on 8/3/2017.
  */
 
-public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener{
+public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dialog_webview, container);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
     }
 
     @Override
