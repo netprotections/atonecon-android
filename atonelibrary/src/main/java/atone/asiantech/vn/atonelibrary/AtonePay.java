@@ -1,13 +1,10 @@
 package atone.asiantech.vn.atonelibrary;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
@@ -17,7 +14,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
-    private AlertDialog mAlertDialog;
+    private DialogFragment mDialogFragment;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
 
@@ -28,9 +25,9 @@ public class AtonePay {
         return sAtonePay;
     }
 
-    public AlertDialog getAlertDialog() {
-        if (mAlertDialog != null) {
-            return mAlertDialog;
+    DialogFragment getDialogFragment() {
+        if (mDialogFragment != null) {
+            return mDialogFragment;
         }
         return null;
     }
@@ -44,35 +41,14 @@ public class AtonePay {
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
         javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
-        // create an AlertDialog.Builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.dialog_webview, null);
-
-        WebView webView = v.findViewById(R.id.webView);
-        // Get focusing to webView
-        EditText edt = v.findViewById(R.id.edt);
-        edt.setFocusable(true);
-        edt.requestFocus();
-        ImageButton imgBtn = v.findViewById(R.id.imgBtnCloseDialog);
-        imgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getAlertDialog() != null) {
-                    getAlertDialog().dismiss();
-                }
-            }
-        });
-        webView.addJavascriptInterface(javaScriptInterface, "Android");
-        webView.getSettings().setJavaScriptEnabled(true);
-        // Load WebView
-        webView.clearCache(true);
-        webView.loadUrl("file:///android_asset/atonedev.html");
-        // set the WebView as the AlertDialog.Builder’s view
-        builder.setView(v);
-        builder.create();
-        mAlertDialog = builder.create();
-        mAlertDialog.show();
+        FragmentTransaction fragmentTransaction = context.getFragmentManager().beginTransaction();
+        Fragment fragment = context.getFragmentManager().findFragmentByTag("fragment");
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.addToBackStack(null);
+        mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface);
+        mDialogFragment.show(fragmentTransaction, "fragment");
     }
 
     public void resetToken() {
