@@ -1,6 +1,5 @@
 package atone.asiantech.vn.atonelibrary;
 
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -65,8 +64,8 @@ public class JavaScriptInterface {
     public void onCancelled() {
         if (mListener != null) {
             mListener.onTransactionCancel();
-            if (AtonePay.getAlertDialog() != null) {
-                AtonePay.getAlertDialog().cancel();
+            if (AtonePay.getInstance().getAlertDialog() != null) {
+                AtonePay.getInstance().getAlertDialog().cancel();
             }
         }
     }
@@ -75,8 +74,8 @@ public class JavaScriptInterface {
     public void onFailed(String response) {
         if (mListener != null) {
             mListener.onFailure(response);
-            if (AtonePay.getAlertDialog() != null) {
-                AtonePay.getAlertDialog().cancel();
+            if (AtonePay.getInstance().getAlertDialog() != null) {
+                AtonePay.getInstance().getAlertDialog().cancel();
             }
         }
     }
@@ -85,8 +84,8 @@ public class JavaScriptInterface {
     public void onSuccessFul(String response) {
         if (mListener != null) {
             mListener.onTransactionSuccess(response);
-            if (AtonePay.getAlertDialog() != null) {
-                AtonePay.getAlertDialog().cancel();
+            if (AtonePay.getInstance().getAlertDialog() != null) {
+                AtonePay.getInstance().getAlertDialog().cancel();
             }
         }
     }

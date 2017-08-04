@@ -24,40 +24,39 @@ import atone.asiantech.vn.atonelibrary.models.ShopItem;
  * Class demo ShopApp
  */
 public class AtoneActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText mEditTextTransactionNo;
-    private EditText mEditTextToken;
+    private EditText mEdtTransactionNo;
+    private EditText mEdtToken;
     private AtonePay.Option mOption;
-    private SharedPreferences.Editor editor;
-    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        mEditTextToken = (EditText) findViewById(R.id.edtToken);
+        mEdtToken = (EditText) findViewById(R.id.edtToken);
         TextView tvResetToken = (TextView) findViewById(R.id.tvResetToken);
         tvResetToken.setMovementMethod(LinkMovementMethod.getInstance());
         tvResetToken.setOnClickListener(this);
         Button mButtonAtone = (Button) findViewById(R.id.btnAtone);
         mButtonAtone.setOnClickListener(this);
-        mEditTextTransactionNo = (EditText) findViewById(R.id.edtTransactionNo);
+        mEdtTransactionNo = (EditText) findViewById(R.id.edtTransactionNo);
 
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
-        mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        editor = mSharedPreferences.edit();
-        String preToken = mSharedPreferences.getString("pre_key", "");
-        mEditTextToken.setText(preToken);
+        SharedPreferences sharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        mEditor = sharedPreferences.edit();
+        String preToken = sharedPreferences.getString("pre_key", "");
+        mEdtToken.setText(preToken);
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
                 Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
-                editor.putString("pre_key", mOption.preKey);
-                editor.apply();
+                mEditor.putString("pre_key", mOption.preKey);
+                mEditor.apply();
             }
 
             @Override
@@ -107,7 +106,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .url("https://atone.be/items/1")
                         .build());
 
-                String transNo = "shop-tran-no-" + mEditTextTransactionNo.getText();
+                String transNo = "shop-tran-no-" + mEdtTransactionNo.getText();
                 Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .settled(false)
                         .description("備考です。")
@@ -116,12 +115,12 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
-                editor.remove("pre_key");
-                editor.apply();
+                mEditor.remove("pre_key");
+                mEditor.apply();
                 if (AtonePay.getInstance() != null) {
                     AtonePay.getInstance().resetToken();
                 }
-                mEditTextToken.setText("");
+                mEdtToken.setText("");
                 break;
         }
     }
