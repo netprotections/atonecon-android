@@ -1,19 +1,14 @@
 package atone.asiantech.vn.atonelibrary;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
+import atone.asiantech.vn.atonelibrary.Utils.NetWorkConnectivity;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
@@ -45,14 +40,7 @@ public class AtonePay {
     }
 
     public void performPayment(Activity context, Payment payment) {
-        if (ActivityCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "Please check for Access Network State in your app!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+        if (NetWorkConnectivity.isConnected(context)) {
             context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
             javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
@@ -66,7 +54,7 @@ public class AtonePay {
             mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface);
             mDialogFragment.get().show(fragmentTransaction, "fragment");
         } else {
-            Toast.makeText(context, "Please check network connection!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.error_message_network_are_not_connected, Toast.LENGTH_SHORT).show();
         }
     }
 
