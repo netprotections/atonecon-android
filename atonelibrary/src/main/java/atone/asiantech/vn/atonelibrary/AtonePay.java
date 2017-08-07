@@ -2,7 +2,6 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -13,6 +12,8 @@ import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
+
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
@@ -21,7 +22,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
-    private DialogFragment mDialogFragment;
+    private WeakReference<WebViewDialogFragment> mDialogFragment;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
 
@@ -32,7 +33,7 @@ public class AtonePay {
         return sAtonePay;
     }
 
-    DialogFragment getDialogFragment() {
+    WeakReference<WebViewDialogFragment> getDialogFragment() {
         if (mDialogFragment != null) {
             return mDialogFragment;
         }
@@ -63,7 +64,7 @@ public class AtonePay {
             }
             fragmentTransaction.addToBackStack(null);
             mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface);
-            mDialogFragment.show(fragmentTransaction, "fragment");
+            mDialogFragment.get().show(fragmentTransaction, "fragment");
         } else {
             Toast.makeText(context, "Please check network connection!", Toast.LENGTH_SHORT).show();
         }

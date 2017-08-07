@@ -13,7 +13,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
-public class JavaScriptInterface implements Parcelable{
+public class JavaScriptInterface implements Parcelable {
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
@@ -82,8 +82,9 @@ public class JavaScriptInterface implements Parcelable{
     public void onCancelled() {
         if (mListener != null) {
             mListener.onTransactionCancel();
-            if (AtonePay.getInstance().getDialogFragment() != null) {
-                AtonePay.getInstance().getDialogFragment().dismiss();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
     }
@@ -92,8 +93,9 @@ public class JavaScriptInterface implements Parcelable{
     public void onFailed(String response) {
         if (mListener != null) {
             mListener.onFailure(response);
-            if (AtonePay.getInstance().getDialogFragment() != null) {
-                AtonePay.getInstance().getDialogFragment().dismiss();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
     }
@@ -102,8 +104,9 @@ public class JavaScriptInterface implements Parcelable{
     public void onSuccessFul(String response) {
         if (mListener != null) {
             mListener.onTransactionSuccess(response);
-            if (AtonePay.getInstance().getDialogFragment() != null) {
-                AtonePay.getInstance().getDialogFragment().dismiss();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
     }

@@ -11,6 +11,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Copyright by Gio.
  * Created on 8/3/2017.
@@ -51,20 +53,23 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         imgBtn.setOnClickListener(this);
     }
 
-    static DialogFragment getInstance(JavaScriptInterface javaScriptInterface) {
+    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();
+        WeakReference<WebViewDialogFragment> webViewDialogFragmentWeakReference =
+                new WeakReference<>(webViewFragmentDialog);
         // Supply javaScriptInterface input as an argument.
         Bundle bundle = new Bundle();
         bundle.putParcelable("javaScriptInterface", javaScriptInterface);
         webViewFragmentDialog.setArguments(bundle);
 
-        return webViewFragmentDialog;
+        return webViewDialogFragmentWeakReference;
     }
 
     @Override
     public void onClick(View view) {
-        if (AtonePay.getInstance().getDialogFragment() != null) {
-            AtonePay.getInstance().getDialogFragment().dismiss();
+        if (AtonePay.getInstance().getDialogFragment() != null
+                && AtonePay.getInstance().getDialogFragment().get() != null) {
+            AtonePay.getInstance().getDialogFragment().get().dismiss();
         }
     }
 }
