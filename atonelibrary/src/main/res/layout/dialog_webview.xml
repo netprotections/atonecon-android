@@ -19,17 +19,15 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/image_button_close_margin"
         android:background="@null"
-        android:src="@drawable/ic_close_black_24dp" />
+        android:src="@drawable/ic_close_white_18dp" />
 
-    <android.support.v4.widget.ContentLoadingProgressBar
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_bar_height"
-        android:layout_below="@+id/imgBtnCloseDialog"
-        android:indeterminate="true" />
+        android:layout_centerInParent="true" />
 
     <WebView
         android:id="@+id/webView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

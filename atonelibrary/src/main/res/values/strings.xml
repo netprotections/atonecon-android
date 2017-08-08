@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AtoneLibrary</string>
     <string name="fragment_dialog_image_button_close_dialog">Close dialog</string>
+
+    <string name="error_message_network_are_not_connected">Your request cannot be completed because you are not connected to the internet!</string>
 </resources>

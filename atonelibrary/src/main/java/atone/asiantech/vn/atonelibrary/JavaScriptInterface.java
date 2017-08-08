@@ -1,5 +1,7 @@
 package atone.asiantech.vn.atonelibrary;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -11,15 +13,31 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  * Copyright © AsianTech Co., Ltd
  * Created by kietva on 6/29/17.
  */
-public class JavaScriptInterface {
+public class JavaScriptInterface implements Parcelable {
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
 
-    public JavaScriptInterface(Payment payment, AtonePay.Option option) {
+    JavaScriptInterface(Payment payment, AtonePay.Option option) {
         this.mPayment = payment;
         this.mOption = option;
     }
+
+    private JavaScriptInterface(Parcel in) {
+        mPayment = in.readParcelable(Payment.class.getClassLoader());
+    }
+
+    public static final Creator<JavaScriptInterface> CREATOR = new Creator<JavaScriptInterface>() {
+        @Override
+        public JavaScriptInterface createFromParcel(Parcel in) {
+            return new JavaScriptInterface(in);
+        }
+
+        @Override
+        public JavaScriptInterface[] newArray(int size) {
+            return new JavaScriptInterface[size];
+        }
+    };
 
     /**
      * This method will set listener callback from WebView.
@@ -64,8 +82,9 @@ public class JavaScriptInterface {
     public void onCancelled() {
         if (mListener != null) {
             mListener.onTransactionCancel();
-            if (AtonePay.getInstance().getAlertDialog() != null) {
-                AtonePay.getInstance().getAlertDialog().cancel();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
     }
@@ -74,8 +93,9 @@ public class JavaScriptInterface {
     public void onFailed(String response) {
         if (mListener != null) {
             mListener.onFailure(response);
-            if (AtonePay.getInstance().getAlertDialog() != null) {
-                AtonePay.getInstance().getAlertDialog().cancel();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
     }
@@ -84,9 +104,20 @@ public class JavaScriptInterface {
     public void onSuccessFul(String response) {
         if (mListener != null) {
             mListener.onTransactionSuccess(response);
-            if (AtonePay.getInstance().getAlertDialog() != null) {
-                AtonePay.getInstance().getAlertDialog().cancel();
+            if (AtonePay.getInstance().getDialogFragment() != null
+                    && AtonePay.getInstance().getDialogFragment().get() != null) {
+                AtonePay.getInstance().getDialogFragment().get().dismiss();
             }
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(mPayment, i);
     }
 }
