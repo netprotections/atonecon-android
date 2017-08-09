@@ -1,9 +1,11 @@
 package atone.asiantech.vn.atonelibrary;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +71,21 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
     public void onClick(View view) {
         if (AtonePay.getInstance().getDialogFragment() != null
                 && AtonePay.getInstance().getDialogFragment().get() != null) {
-            AtonePay.getInstance().getDialogFragment().get().dismiss();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.dialog_title_confirm_quit_payment);
+            builder.setCancelable(false)
+                    .setNegativeButton(R.string.button_dialog_ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogInterface, int id) {
+                            AtonePay.getInstance().getDialogFragment().get().dismiss();
+                        }
+                    })
+                    .setPositiveButton(R.string.button_dialog_cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
 }

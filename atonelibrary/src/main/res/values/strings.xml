@@ -3,4 +3,9 @@
     <string name="fragment_dialog_image_button_close_dialog">Close dialog</string>
 
     <string name="error_message_network_are_not_connected">Your request cannot be completed because you are not connected to the internet!</string>
+
+    <string name="dialog_title_confirm_quit_payment">atoneでのお買い物を終了します。よろしいですか？</string>
+
+    <string name="button_dialog_ok">OK</string>
+    <string name="button_dialog_cancel">キャンセル</string>
 </resources>

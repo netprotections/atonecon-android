@@ -21,15 +21,15 @@
         },
         cancelled: function() {
             Android.onCancelled();
-            console.log('cancelled');
         },
         failed: function(response) {
             Android.onFailed(JSON.stringify(response));
-            console.log(response);
         },
         succeeded: function(response) {
            Android.onSuccessFul(JSON.stringify(response));
-           console.log(response);
+        },
+        error: function(name, message, errors) {
+           Android.onErrors(name, message, JSON.stringify(errors));
         }
     });
     window.addEventListener("load", function(){

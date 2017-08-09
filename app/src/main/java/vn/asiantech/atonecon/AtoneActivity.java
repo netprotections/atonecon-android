@@ -1,7 +1,9 @@
 package vn.asiantech.atonecon;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -72,6 +74,21 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(String response) {
                 Toast.makeText(AtoneActivity.this, "Failure!" + response, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String name, String message, String errors) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AtoneActivity.this);
+                builder.setTitle(name);
+                builder.setMessage("Message: " + message + "\nErrors: " + errors)
+                        .setCancelable(false)
+                        .setNegativeButton(R.string.button_error_dialog_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
