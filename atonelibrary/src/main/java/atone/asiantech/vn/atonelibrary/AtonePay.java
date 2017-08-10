@@ -41,7 +41,7 @@ public class AtonePay {
 
     public void performPayment(Activity context, Payment payment) {
         if (NetWorkConnectivity.isConnected(context)) {
-            context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
             javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
