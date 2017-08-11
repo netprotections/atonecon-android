@@ -45,7 +45,11 @@ public class AtonePay {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
             } else {
-                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                if (context.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
             }
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
             javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
