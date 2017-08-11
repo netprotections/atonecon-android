@@ -80,7 +80,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
             public void onError(String name, String message, String errors) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AtoneActivity.this);
                 builder.setTitle(name);
-                builder.setMessage("Message: " + message + "\nErrors: " + errors)
+                builder.setMessage(getString(R.string.dialog_message_callback_error_message, message)
+                        + getString(R.string.dialog_message_callback_error_errors, errors))
                         .setCancelable(false)
                         .setNegativeButton(R.string.button_error_dialog_ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
