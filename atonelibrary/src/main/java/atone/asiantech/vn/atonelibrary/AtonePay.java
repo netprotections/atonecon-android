@@ -18,6 +18,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  */
 public class AtonePay {
     private static AtonePay sAtonePay;
+    static boolean sIsDialogStarted;
     private WeakReference<WebViewDialogFragment> mDialogFragment;
     private OnTransactionCallBack mOnTransactionCallBack;
     private Option mOption;
@@ -42,6 +43,9 @@ public class AtonePay {
 
     public void performPayment(Activity context, Payment payment) {
         if (NetWorkConnectivity.isConnected(context)) {
+            if (sIsDialogStarted) {
+                return;
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
             } else {
@@ -51,6 +55,7 @@ public class AtonePay {
                     context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 }
             }
+            sIsDialogStarted = true;
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
             javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 
@@ -63,7 +68,7 @@ public class AtonePay {
             mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface);
             mDialogFragment.get().show(fragmentTransaction, "fragment");
         } else {
-            Toast.makeText(context, R.string.error_message_network_are_not_connected, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.error_message_network_are_not_available, Toast.LENGTH_SHORT).show();
         }
     }
 

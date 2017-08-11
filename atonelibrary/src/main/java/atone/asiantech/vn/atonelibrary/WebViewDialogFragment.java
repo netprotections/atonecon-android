@@ -86,4 +86,10 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
             alertDialog.show();
         }
     }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        AtonePay.sIsDialogStarted = false;
+    }
 }
