@@ -7,8 +7,8 @@ import android.net.ConnectivityManager;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * Copyright by Gio.
- * Created on 8/7/2017.
+ * Copyright © AsianTech Co., Ltd
+ * Created by at-hoaiphan on 8/7/2017.
  */
 
 public class NetWorkConnectivity {

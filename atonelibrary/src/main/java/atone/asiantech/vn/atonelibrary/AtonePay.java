@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -41,7 +42,15 @@ public class AtonePay {
 
     public void performPayment(Activity context, Payment payment) {
         if (NetWorkConnectivity.isConnected(context)) {
-            context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+            } else {
+                if (context.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+            }
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);
             javaScriptInterface.setCallBackHandler(mOnTransactionCallBack);
 

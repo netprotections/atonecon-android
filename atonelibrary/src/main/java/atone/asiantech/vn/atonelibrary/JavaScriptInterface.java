@@ -111,6 +111,13 @@ public class JavaScriptInterface implements Parcelable {
         }
     }
 
+    @JavascriptInterface
+    public void onErrors(String name, String message, String errors) {
+        if (mListener != null) {
+            mListener.onError(name, message, errors);
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;

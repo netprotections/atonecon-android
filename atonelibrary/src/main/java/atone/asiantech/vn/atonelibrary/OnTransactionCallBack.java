@@ -13,4 +13,6 @@ public interface OnTransactionCallBack {
     void onTransactionCancel();
 
     void onFailure(String failureToken);
+
+    void onError(String name, String message, String errors);
 }
