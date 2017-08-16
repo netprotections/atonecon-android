@@ -147,7 +147,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /*
+    /**
      * Class runs in background to update Token when webView is showing
      */
     private class PreKeyAsyncTask extends AsyncTask<String, String, String> {
