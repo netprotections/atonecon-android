@@ -2,6 +2,7 @@ package vn.asiantech.atonecon;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEdtToken;
     private AtonePay.Option mOption;
     private SharedPreferences.Editor mEditor;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        mEditor = sharedPreferences.edit();
-        String preToken = sharedPreferences.getString("pre_key", "");
-        mEdtToken.setText(preToken);
+        mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
+        mEdtToken.setText(mSharedPreferences.getString("pre_key", ""));
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
@@ -59,6 +60,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 mOption.preKey = authenToken;
                 mEditor.putString("pre_key", mOption.preKey);
                 mEditor.apply();
+                PreKeyAsyncTask preKeyAsyncTask = new PreKeyAsyncTask();
+                preKeyAsyncTask.execute();
             }
 
             @Override
@@ -140,6 +143,19 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 }
                 mEdtToken.setText("");
                 break;
+        }
+    }
+
+    private class PreKeyAsyncTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... preKey) {
+            return mSharedPreferences.getString("pre_key", "");
+        }
+
+        @Override
+        protected void onPostExecute(String preKey) {
+            super.onPostExecute(preKey);
+            mEdtToken.setText(preKey);
         }
     }
 }
