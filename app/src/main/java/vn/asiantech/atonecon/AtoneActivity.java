@@ -32,6 +32,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private AtonePay.Option mOption;
     private SharedPreferences.Editor mEditor;
     private SharedPreferences mSharedPreferences;
+    private String mPreKey = "pre_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,14 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
-        mEdtToken.setText(mSharedPreferences.getString("pre_key", ""));
+        mEdtToken.setText(mSharedPreferences.getString(mPreKey, ""));
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
                 Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
-                mEditor.putString("pre_key", mOption.preKey);
+                mEditor.putString(mPreKey, mOption.preKey);
                 mEditor.apply();
                 PreKeyAsyncTask preKeyAsyncTask = new PreKeyAsyncTask();
                 preKeyAsyncTask.execute();
@@ -136,7 +137,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
-                mEditor.remove("pre_key");
+                mEditor.remove(mPreKey);
                 mEditor.apply();
                 if (AtonePay.getInstance() != null) {
                     AtonePay.getInstance().resetToken();
@@ -146,10 +147,13 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /*
+     * Class runs in background to update Token when webView is showing
+     */
     private class PreKeyAsyncTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... preKey) {
-            return mSharedPreferences.getString("pre_key", "");
+            return mSharedPreferences.getString(mPreKey, "");
         }
 
         @Override
