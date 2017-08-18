@@ -131,7 +131,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .build();
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
