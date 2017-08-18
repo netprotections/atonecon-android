@@ -6,3 +6,7 @@ Atone Con Android Team
 Workflow
 -----------------
 Check out here : https://github.com/AsianTechInc/TechnicalCenter/blob/master/general/workflow.md
+
+Guideline for Shop
+-----------------
+Check out here: https://github.com/AsianTechInc/AtoneCon-Android/blob/master/docs/Guideline-AtoneCon-Android-SDK.pdf
