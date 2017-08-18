@@ -2,6 +2,8 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -40,6 +42,8 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         JavaScriptInterface javaScriptInterface = getArguments().getParcelable("javaScriptInterface");
         webView.addJavascriptInterface(javaScriptInterface, "Android");
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+
         // Load WebView
         webView.loadUrl("file:///android_asset/atonedev.html");
         webView.setVisibility(View.INVISIBLE);  // To show ProgressBar

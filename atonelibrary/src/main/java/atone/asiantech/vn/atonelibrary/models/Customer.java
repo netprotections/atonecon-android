@@ -154,7 +154,7 @@ public class Customer {
         }
     }
 
-    private Customer(Builder builder) {
+    public Customer(Builder builder) {
         customerName = builder.customerName;
         customerFamilyName = builder.customerFamilyName;
         customerGivenName = builder.customerGivenName;

@@ -2,6 +2,7 @@ package vn.asiantech.atonecon;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEdtToken;
     private AtonePay.Option mOption;
     private SharedPreferences.Editor mEditor;
+    private static final String PRE_KEY = "pre_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +51,14 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         SharedPreferences sharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         mEditor = sharedPreferences.edit();
-        String preToken = sharedPreferences.getString("pre_key", "");
-        mEdtToken.setText(preToken);
+        mEdtToken.setText(sharedPreferences.getString(PRE_KEY, ""));
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
                 Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
-                mEditor.putString("pre_key", mOption.preKey);
+                mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
             }
 
@@ -130,10 +131,11 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .build();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
-                mEditor.remove("pre_key");
+                mEditor.remove(PRE_KEY);
                 mEditor.apply();
                 if (AtonePay.getInstance() != null) {
                     AtonePay.getInstance().resetToken();
