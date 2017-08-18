@@ -3,7 +3,6 @@ package vn.asiantech.atonecon;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,8 +31,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEdtToken;
     private AtonePay.Option mOption;
     private SharedPreferences.Editor mEditor;
-    private SharedPreferences mSharedPreferences;
-    private String mPreKey = "pre_key";
+    private static final String PRE_KEY = "pre_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +49,17 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
-        mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        mEditor = mSharedPreferences.edit();
-        mEdtToken.setText(mSharedPreferences.getString(mPreKey, ""));
+        SharedPreferences sharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        mEditor = sharedPreferences.edit();
+        mEdtToken.setText(sharedPreferences.getString(PRE_KEY, ""));
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
                 Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
-                mEditor.putString(mPreKey, mOption.preKey);
+                mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
-                PreKeyAsyncTask preKeyAsyncTask = new PreKeyAsyncTask();
-                preKeyAsyncTask.execute();
             }
 
             @Override
@@ -139,29 +135,13 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
-                mEditor.remove(mPreKey);
+                mEditor.remove(PRE_KEY);
                 mEditor.apply();
                 if (AtonePay.getInstance() != null) {
                     AtonePay.getInstance().resetToken();
                 }
                 mEdtToken.setText("");
                 break;
-        }
-    }
-
-    /**
-     * Class runs in background to update Token when webView is showing
-     */
-    private class PreKeyAsyncTask extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... preKey) {
-            return mSharedPreferences.getString(mPreKey, "");
-        }
-
-        @Override
-        protected void onPostExecute(String preKey) {
-            super.onPostExecute(preKey);
-            mEdtToken.setText(preKey);
         }
     }
 }
