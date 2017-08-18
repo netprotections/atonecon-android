@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,17 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
             @Override
             public void onPageFinished(WebView view, String url) {
                 webView.setVisibility(View.VISIBLE);
+            }
+
+            /**
+             * Using this deprecated function because the newer one is used for Android API 24 only
+             */
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.d("WebViewDialogFragment", "shouldOverrideUrlLoading: ");
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(i);
+                return true;
             }
         });
         ImageButton imgBtn = view.findViewById(R.id.imgBtnCloseDialog);
