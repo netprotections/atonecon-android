@@ -59,7 +59,6 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
              */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("WebViewDialogFragment", "shouldOverrideUrlLoading: ");
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(i);
                 return true;
