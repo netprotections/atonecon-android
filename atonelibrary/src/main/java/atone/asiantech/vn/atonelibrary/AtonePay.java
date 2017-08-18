@@ -3,8 +3,6 @@ package atone.asiantech.vn.atonelibrary;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -45,15 +43,6 @@ public class AtonePay {
         if (NetWorkConnectivity.isConnected(context)) {
             if (sIsDialogStarted) {
                 return;
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-            } else {
-                if (context.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                } else {
-                    context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                }
             }
             sIsDialogStarted = true;
             JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, mOption);

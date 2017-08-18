@@ -2,6 +2,7 @@ package vn.asiantech.atonecon;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -134,6 +135,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .build();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
