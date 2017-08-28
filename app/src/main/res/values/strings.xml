@@ -5,5 +5,12 @@
     <string name="activity_shop_button_atone">atoneを使う</string>
     <string name="activity_shop_edit_text_transaction_no">加盟店取引IDを入力</string>
 
+    <string name="dialog_message_callback_error_message">Message: %s</string>
+    <string name="dialog_message_callback_error_errors">\nErrors: %s</string>
+    <string name="dialog_message_callback_authentication">Authentication: </string>
+    <string name="dialog_message_callback_cancel">Transaction Cancelled!</string>
+    <string name="dialog_message_callback_success">Success: </string>
+    <string name="dialog_message_callback_failure">Failure: </string>
+
     <string name="button_error_dialog_ok">OK</string>
 </resources>

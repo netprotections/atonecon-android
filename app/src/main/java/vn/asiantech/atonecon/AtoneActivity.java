@@ -56,7 +56,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
-                Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_authentication)
+                        + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
                 mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
@@ -79,7 +80,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onTransactionCancel() {
-                Toast.makeText(AtoneActivity.this, "Transaction Cancelled!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_cancel),
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
