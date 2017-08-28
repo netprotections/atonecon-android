@@ -3,14 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:inputType="text"
-        android:visibility="invisible" />
-
     <ImageButton
         android:id="@+id/imgBtnCloseDialog"
         android:layout_width="wrap_content"
@@ -19,7 +11,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/image_button_close_margin"
         android:background="@null"
-        android:src="@drawable/ic_close_white_18dp" />
+        android:src="@drawable/ic_close_blue" />
 
     <ProgressBar
         android:layout_width="match_parent"
