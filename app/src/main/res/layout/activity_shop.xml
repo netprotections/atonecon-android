@@ -58,7 +58,7 @@
         android:layout_width="@dimen/common_button_edit_text_width"
         android:layout_height="@dimen/common_button_edit_text_height"
         android:layout_below="@+id/tvResetToken"
-        android:inputType="number"
+        android:inputType="text"
         android:layout_marginTop="20dp"
         android:hint="@string/activity_shop_edit_text_transaction_no"
         android:layout_centerHorizontal="true"

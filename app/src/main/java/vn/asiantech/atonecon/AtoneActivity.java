@@ -125,7 +125,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .url("https://atone.be/items/1")
                         .build());
 
-                String transNo = "shop-tran-no-" + mEdtTransactionNo.getText();
+                String transNo = mEdtTransactionNo.getText().toString();
                 Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .settled(false)
                         .description("備考です。")
