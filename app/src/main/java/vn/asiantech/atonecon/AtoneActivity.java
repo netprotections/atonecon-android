@@ -56,7 +56,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
-                Toast.makeText(AtoneActivity.this, "Authentication: " + authenToken, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_authentication)
+                        + authenToken, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
                 mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
@@ -64,27 +65,49 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onTransactionSuccess(String result) {
-                Toast.makeText(AtoneActivity.this, "TransactionSuccess: " + result, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AtoneActivity.this);
+                builder.setTitle(R.string.dialog_message_callback_success);
+                builder.setMessage(result)
+                        .setCancelable(false)
+                        .setNegativeButton(R.string.button_dialog_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
 
             @Override
             public void onTransactionCancel() {
-                Toast.makeText(AtoneActivity.this, "Transaction Cancelled!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_cancel),
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(String response) {
-                Toast.makeText(AtoneActivity.this, "Failure!" + response, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AtoneActivity.this);
+                builder.setTitle(R.string.dialog_message_callback_failure);
+                builder.setMessage(response)
+                        .setCancelable(false)
+                        .setNegativeButton(R.string.button_dialog_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
 
             @Override
             public void onError(String name, String message, String errors) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AtoneActivity.this);
                 builder.setTitle(name);
+                String errorsGet = errors.replace("\\\"", "\"");
                 builder.setMessage(getString(R.string.dialog_message_callback_error_message, message)
-                        + getString(R.string.dialog_message_callback_error_errors, errors))
+                        + getString(R.string.dialog_message_callback_error_errors, errorsGet))
                         .setCancelable(false)
-                        .setNegativeButton(R.string.button_error_dialog_ok, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.button_dialog_ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
@@ -125,7 +148,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .url("https://atone.be/items/1")
                         .build());
 
-                String transNo = "shop-tran-no-" + mEdtTransactionNo.getText();
+                String transNo = mEdtTransactionNo.getText().toString();
                 Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
                         .settled(false)
                         .description("備考です。")

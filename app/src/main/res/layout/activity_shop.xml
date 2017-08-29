@@ -12,8 +12,7 @@
         android:layout_height="@dimen/common_button_edit_text_height"
         android:background="@drawable/custom_edit_text_token"
         android:focusable="false"
-        android:layout_marginTop="158dp"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:cursorVisible="false"
         android:gravity="center"
         android:inputType="none"
@@ -27,8 +26,9 @@
         android:textSize="@dimen/common_text_view_size"
         android:textColor="@android:color/holo_blue_light"
         android:background="@android:color/white"
+        android:layout_above="@+id/btnAtone"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginBottom="43dp" />
 
     <Button
         android:id="@+id/btnAtone"
@@ -56,12 +56,15 @@
     <EditText
         android:id="@+id/edtTransactionNo"
         android:layout_width="@dimen/common_button_edit_text_width"
-        android:layout_height="@dimen/common_button_edit_text_height"
-        android:layout_below="@+id/tvResetToken"
-        android:inputType="number"
-        android:layout_marginTop="20dp"
+        android:layout_height="@dimen/common_button_edit_text_trans_no_height"
+        android:inputType="text"
+        android:background="@drawable/custom_edit_text_transaction_no"
         android:hint="@string/activity_shop_edit_text_transaction_no"
-        android:layout_centerHorizontal="true"
-        android:cursorVisible="false"/>
+        android:cursorVisible="false"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_alignBottom="@+id/tvToken"
+        android:layout_alignLeft="@+id/btnAtone"
+        android:layout_alignStart="@+id/btnAtone" />
 
 </RelativeLayout>
