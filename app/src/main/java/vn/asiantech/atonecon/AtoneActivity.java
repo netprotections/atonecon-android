@@ -167,4 +167,5 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
 }
