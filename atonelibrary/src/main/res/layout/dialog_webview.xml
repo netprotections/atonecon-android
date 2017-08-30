@@ -11,7 +11,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/image_button_close_margin"
         android:background="@null"
-        android:src="@drawable/ic_close_white" />
+        android:src="@drawable/ic_close" />
 
     <ProgressBar
         android:layout_width="match_parent"
