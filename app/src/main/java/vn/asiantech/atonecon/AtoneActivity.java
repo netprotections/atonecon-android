@@ -2,7 +2,7 @@ package vn.asiantech.atonecon;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +31,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEdtToken;
     private AtonePay.Option mOption;
     private SharedPreferences.Editor mEditor;
+    private SharedPreferences mSharedPreferences;
     private static final String PRE_KEY = "pre_key";
 
     @Override
@@ -49,9 +50,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
-        mEditor = sharedPreferences.edit();
-        mEdtToken.setText(sharedPreferences.getString(PRE_KEY, ""));
+        mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
+        mEdtToken.setText(mSharedPreferences.getString(PRE_KEY, ""));
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
@@ -61,6 +62,8 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 mOption.preKey = authenToken;
                 mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
+                ShowingPreKeyAsyncTask showingPreKeyAsyncTask = new ShowingPreKeyAsyncTask();
+                showingPreKeyAsyncTask.execute();
             }
 
             @Override
@@ -154,7 +157,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .build();
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
             case R.id.tvResetToken:
@@ -165,6 +168,23 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 }
                 mEdtToken.setText("");
                 break;
+        }
+    }
+
+    /**
+     * Class runs in background to update Token when webView is showing
+     */
+    private class ShowingPreKeyAsyncTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... preKey) {
+            return mSharedPreferences.getString(PRE_KEY, "");
+        }
+
+        @Override
+        protected void onPostExecute(String preKey) {
+            super.onPostExecute(preKey);
+            mEdtToken.setText(preKey);
+            cancel(true);
         }
     }
 }
