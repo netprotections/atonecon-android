@@ -11,7 +11,7 @@ import atone.asiantech.vn.atonelibrary.Utils.NetWorkConnectivity;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
- * The class supports functions to perform transaction and get callback from server.
+ * The class supports the functions to configure, perform transaction and get callback from server.
  */
 public class AtonePay {
     static boolean sIsDialogStarted;
@@ -21,7 +21,10 @@ public class AtonePay {
     private Option mOption;
 
     /**
-     * Getting AtonePay object
+     * Getting AtonePay object.
+     * <p>Static object variable will store configuration, transaction data and get response callback.
+     * It will be alive during the process of transaction execution.
+     * <p>Configuration and transaction data will be clear when finishing transaction or shop-app stopped.
      *
      * @return current Atone object, if there isn't any object, it will create a new object.
      */
@@ -41,8 +44,11 @@ public class AtonePay {
 
     /**
      * Configuring keys.
+     * Method permit to bind publicKey argument and preKey argument of option object for configuration.
+     * <p>ShopApp has to call this method to define configuration. Each shop will have specific
+     * publicKey and preKey. Without them, payment form cannot perform, transaction will be failed.
      *
-     * @param option option of configuration.
+     * @param option option of configuration. Binding shop-app's option to configure in web-view.
      */
     public void config(Option option) {
         mOption = option;
@@ -50,6 +56,11 @@ public class AtonePay {
 
     /**
      * Start payment: show atone form.
+     * <p><li>Method permits to call and show payment form for shop-user.
+     * <li>Atone form is started only if network is connected. If network is not available, it will
+     * have a message to inform network status.
+     * <li>At a same time, it's only a payment form starting. The sIsDialogStarted argument is a flag
+     * to prevent more than one payment form can be started at a same time.
      *
      * @param context application context in which you can getting accession to UI.
      * @param payment data binding to server.
@@ -77,7 +88,8 @@ public class AtonePay {
     }
 
     /**
-     * Clear authentication-token.
+     * Clear authentication-token. If <i>option</i> is not null, it will remove <i>preKey</i> in
+     * <i>Option</i> and user will have to login to AtonePay again.
      */
     public void resetToken() {
         if (mOption != null) {
@@ -86,7 +98,14 @@ public class AtonePay {
     }
 
     /**
-     * Handle callback from server.
+     * Handle callback from server and return response to shop app.
+     * <p> There are 5 callbacks:
+     * <li><i>onAuthenticationSuccess:</i> Return <i>preKey</i> from server after login succeeded.
+     * <li><i>onTransactionSuccess:</i> Return <i>successResponse</i> from server when transaction succeeded.
+     * <li><i>onTransactionCancel:</i> Return callback response when transaction canceled.
+     * <li><i>onFailure:</i> Return <i>failureResponse</i> from server when transaction failed.
+     * <li><i>onError:</i> Return <i>errorName</i>, <i>errorMessage</i> and <i>errorsArray</i> from
+     * server when transaction is error.
      *
      * @param onTransactionCallBack response from server.
      */

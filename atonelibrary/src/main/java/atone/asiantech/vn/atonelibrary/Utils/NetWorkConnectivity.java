@@ -8,6 +8,8 @@ import android.support.v4.app.ActivityCompat;
 
 /**
  * The class supports a method for checking network connection.
+ * The one of condition for starting library is network connected and it will read network state
+ * to check network connection.
  */
 
 public class NetWorkConnectivity {
@@ -15,8 +17,8 @@ public class NetWorkConnectivity {
      * The function return boolean value in checking internet permission.
      *
      * @param context application context in which you can access to connection information.
-     * @return True value if INTERNET and ACCESS_NETWORK_STATE permission are granted.
-     * False value if they are not granted.
+     * @return <p>True value if ACCESS_NETWORK_STATE permission is granted and the network is available.
+     * <p>False value if ACCESS_NETWORK_STATE permission is not granted or the network is unavailable.
      */
     public static boolean isConnected(Context context) {
         if (ActivityCompat.checkSelfPermission(context,

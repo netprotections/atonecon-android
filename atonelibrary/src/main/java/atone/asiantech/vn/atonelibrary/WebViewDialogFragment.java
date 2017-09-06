@@ -17,8 +17,8 @@ import android.widget.ImageButton;
 import java.lang.ref.WeakReference;
 
 /**
- * Copyright by Gio.
- * Created on 8/3/2017.
+ * Custom Dialog Fragment includes web-view to load Atone form. The web-view is loaded form html
+ * file stored in assets folder.
  */
 
 public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {

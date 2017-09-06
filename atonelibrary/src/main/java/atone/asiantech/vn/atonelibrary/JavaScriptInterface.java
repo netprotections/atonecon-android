@@ -10,9 +10,11 @@ import com.google.gson.GsonBuilder;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
- * A javaScriptInterface gets response from web-view and sends it to native.
+ * A javaScriptInterface gets response from web-view. All methods are called in html file stored in
+ * assets folder. Native will handle responses throw <i>OnTransactionCallBack</i> interface and shop-app
+ * side can get them.
  */
-public class JavaScriptInterface implements Parcelable {
+class JavaScriptInterface implements Parcelable {
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
@@ -30,9 +32,15 @@ public class JavaScriptInterface implements Parcelable {
     };
 
     /**
-     * This method will set listener callback from WebView.
+     * This method will set listener callback from WebView and return to native.
+     * <p> There are 5 callbacks:
+     * <li><i>onAuthenticated:</i> Call <i>onAuthenticationSuccess</i> method.
+     * <li><i>onSuccessFul:</i> Call <i>onTransactionSuccess</i> method.
+     * <li><i>onCancelled:</i> Call <i>onTransactionCancelReturn</i> method.
+     * <li><i>onFailed:</i> Call <i>onFailure</i> method.
+     * <li><i>onErrors:</i> Call <i>onError</i> method.
      *
-     * @param onTransactionCallBack callback to Native App.
+     * @param onTransactionCallBack callback to native App.
      */
     public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
         this.mListener = onTransactionCallBack;
@@ -40,12 +48,12 @@ public class JavaScriptInterface implements Parcelable {
 
     /**
      * Getting payment data.
+     * <i>Parse payment object to data string for binding to web</i>
      *
      * @return payment data in json string.
      */
     @JavascriptInterface
     public String getDataString() {
-        // Parse payment object to data string for binding to web
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         return gson.toJson(mPayment);
     }
@@ -77,7 +85,8 @@ public class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * Authentication Success Response.
+     * Authentication Success Response. Return <i>authenticationToken</i> from server to native.
+     * Shop can perform to login atone one time.
      *
      * @param authenticationToken string token is sent after login succeed.
      */
@@ -89,7 +98,7 @@ public class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * Cancel callback.
+     * Return <i>Cancel callback</i> when transaction canceled.
      */
     @JavascriptInterface
     public void onCancelled() {
@@ -103,7 +112,8 @@ public class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * Failure Response.
+     * Return <i>Failure Response</i> from server when transaction failed.
+     * <p> Failure response is json object in string type.
      *
      * @param response failure string response from server when transaction failed.
      */
@@ -119,7 +129,8 @@ public class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * SuccessFul Response.
+     * Return <i>SuccessFul Response</i> from server when transaction succeed.
+     * <p> SuccessFul response is json object in string type.
      *
      * @param response success string response from server when transaction succeed.
      */
@@ -135,7 +146,11 @@ public class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * Error Response.
+     * Return <i>Error Response</i> from server when transaction has error.
+     * <p> Error response includes 3 argument:
+     * <li>name:</li> error name in string type.
+     * <li>message:</li> error message in string type.
+     * <li>errors:</li> list the errors of payment in json array format with string type.
      *
      * @param name    error name.
      * @param message error message.
