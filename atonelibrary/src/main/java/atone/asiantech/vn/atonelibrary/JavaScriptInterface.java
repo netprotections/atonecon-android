@@ -10,22 +10,12 @@ import com.google.gson.GsonBuilder;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
- * Copyright © AsianTech Co., Ltd
- * Created by kietva on 6/29/17.
+ * A javaScriptInterface gets response from web-view and sends it to native.
  */
 public class JavaScriptInterface implements Parcelable {
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
-
-    JavaScriptInterface(Payment payment, AtonePay.Option option) {
-        this.mPayment = payment;
-        this.mOption = option;
-    }
-
-    private JavaScriptInterface(Parcel in) {
-        mPayment = in.readParcelable(Payment.class.getClassLoader());
-    }
 
     public static final Creator<JavaScriptInterface> CREATOR = new Creator<JavaScriptInterface>() {
         @Override
@@ -48,6 +38,11 @@ public class JavaScriptInterface implements Parcelable {
         this.mListener = onTransactionCallBack;
     }
 
+    /**
+     * Getting payment data.
+     *
+     * @return payment data in json string.
+     */
     @JavascriptInterface
     public String getDataString() {
         // Parse payment object to data string for binding to web
@@ -55,6 +50,11 @@ public class JavaScriptInterface implements Parcelable {
         return gson.toJson(mPayment);
     }
 
+    /**
+     * Getting PublicKey.
+     *
+     * @return PublicKey which is configured from native app. Return empty string if PublicKey is null.
+     */
     @JavascriptInterface
     public String getPublicKey() {
         if (mOption != null) {
@@ -63,6 +63,11 @@ public class JavaScriptInterface implements Parcelable {
         return "";
     }
 
+    /**
+     * Getting PrivateToken.
+     *
+     * @return configured PrivateToken which is sent from server. Return empty string if PrivateKey is null.
+     */
     @JavascriptInterface
     public String getPreToken() {
         if (mOption != null) {
@@ -71,6 +76,11 @@ public class JavaScriptInterface implements Parcelable {
         return "";
     }
 
+    /**
+     * Authentication Success Response.
+     *
+     * @param authenticationToken string token is sent after login succeed.
+     */
     @JavascriptInterface
     public void onAuthenticated(String authenticationToken) {
         if (mListener != null) {
@@ -78,6 +88,9 @@ public class JavaScriptInterface implements Parcelable {
         }
     }
 
+    /**
+     * Cancel callback.
+     */
     @JavascriptInterface
     public void onCancelled() {
         if (mListener != null) {
@@ -89,6 +102,11 @@ public class JavaScriptInterface implements Parcelable {
         }
     }
 
+    /**
+     * Failure Response.
+     *
+     * @param response failure string response from server when transaction failed.
+     */
     @JavascriptInterface
     public void onFailed(String response) {
         if (mListener != null) {
@@ -100,6 +118,11 @@ public class JavaScriptInterface implements Parcelable {
         }
     }
 
+    /**
+     * SuccessFul Response.
+     *
+     * @param response success string response from server when transaction succeed.
+     */
     @JavascriptInterface
     public void onSuccessFul(String response) {
         if (mListener != null) {
@@ -111,6 +134,13 @@ public class JavaScriptInterface implements Parcelable {
         }
     }
 
+    /**
+     * Error Response.
+     *
+     * @param name error name.
+     * @param message error message.
+     * @param errors errors string in json array format.
+     */
     @JavascriptInterface
     public void onErrors(String name, String message, String errors) {
         if (mListener != null) {
@@ -126,5 +156,14 @@ public class JavaScriptInterface implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeParcelable(mPayment, i);
+    }
+
+    JavaScriptInterface(Payment payment, AtonePay.Option option) {
+        this.mPayment = payment;
+        this.mOption = option;
+    }
+
+    private JavaScriptInterface(Parcel in) {
+        mPayment = in.readParcelable(Payment.class.getClassLoader());
     }
 }

@@ -66,6 +66,12 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         imgBtn.setOnClickListener(this);
     }
 
+    /**
+     * Create instance object.
+     *
+     * @param javaScriptInterface handle callback from web-view.
+     * @return WebViewDialogFragment WeakReference object to avoid leak memory.
+     */
     static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();
         WeakReference<WebViewDialogFragment> webViewDialogFragmentWeakReference =
