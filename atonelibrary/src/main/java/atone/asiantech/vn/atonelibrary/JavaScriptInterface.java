@@ -137,9 +137,9 @@ public class JavaScriptInterface implements Parcelable {
     /**
      * Error Response.
      *
-     * @param name error name.
+     * @param name    error name.
      * @param message error message.
-     * @param errors errors string in json array format.
+     * @param errors  errors string in json array format.
      */
     @JavascriptInterface
     public void onErrors(String name, String message, String errors) {

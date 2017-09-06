@@ -16,7 +16,7 @@ public class NetWorkConnectivity {
      *
      * @param context application context in which you can access to connection information.
      * @return True value if INTERNET and ACCESS_NETWORK_STATE permission are granted.
-     *         False value if they are not granted.
+     * False value if they are not granted.
      */
     public static boolean isConnected(Context context) {
         if (ActivityCompat.checkSelfPermission(context,

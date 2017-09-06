@@ -1,5 +1,7 @@
 package atone.asiantech.vn.atonelibrary.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -37,7 +39,7 @@ public class DestCustomer {
         private String destTel;
         private String destEmail;
 
-        public Builder(String destCustomerName, String destZipCode, String destAddress) {
+        public Builder(@NonNull String destCustomerName, @NonNull String destZipCode, @NonNull String destAddress) {
             this.destCustomerName = destCustomerName;
             this.destZipCode = destZipCode;
             this.destAddress = destAddress;
