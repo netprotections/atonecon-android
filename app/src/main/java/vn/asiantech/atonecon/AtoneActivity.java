@@ -49,6 +49,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
+        mOption.developEnvironment = true;
 
         mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
