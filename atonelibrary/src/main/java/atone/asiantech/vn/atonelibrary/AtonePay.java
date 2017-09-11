@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
-import atone.asiantech.vn.atonelibrary.Utils.NetWorkConnectivity;
+import atone.asiantech.vn.atonelibrary.utils.NetWorkConnectivity;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
