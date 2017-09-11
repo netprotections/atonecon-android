@@ -70,7 +70,7 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
      * Create instance object.
      *
      * @param javaScriptInterface handle callback from web-view.
-     * @return WebViewDialogFragment WeakReference object to avoid leak memory.
+     * @return {@link WeakReference<WebViewDialogFragment>} object to avoid leak memory.
      */
     static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();

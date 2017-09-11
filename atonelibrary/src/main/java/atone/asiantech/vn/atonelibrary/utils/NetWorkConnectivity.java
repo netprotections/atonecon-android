@@ -1,4 +1,4 @@
-package atone.asiantech.vn.atonelibrary.Utils;
+package atone.asiantech.vn.atonelibrary.utils;
 
 import android.Manifest;
 import android.content.Context;

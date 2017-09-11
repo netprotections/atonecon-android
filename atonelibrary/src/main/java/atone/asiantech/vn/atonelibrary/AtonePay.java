@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
-import atone.asiantech.vn.atonelibrary.Utils.NetWorkConnectivity;
+import atone.asiantech.vn.atonelibrary.utils.NetWorkConnectivity;
 import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
@@ -26,7 +26,7 @@ public class AtonePay {
      * It will be alive during the process of transaction execution.
      * <p>Configuration and transaction data will be clear when finishing transaction or shop-app stopped.
      *
-     * @return current Atone object, if there isn't any object, it will create a new object.
+     * @return {@link #sAtonePay} current Atone object, if there isn't any object, it will create a new object.
      */
     public static AtonePay getInstance() {
         if (sAtonePay == null) {
@@ -44,11 +44,12 @@ public class AtonePay {
 
     /**
      * Configuring keys.
-     * Method permit to bind publicKey argument and preKey argument of option object for configuration.
+     * Method permit to bind {@link Option#publicKey} argument and {@link Option#preKey} argument of option object for configuration.
      * <p>ShopApp has to call this method to define configuration. Each shop will have specific
-     * publicKey and preKey. Without them, payment form cannot perform, transaction will be failed.
+     * <i>publicKey</i> and <i>preKey</i>. Without them, payment form cannot perform, transaction will be failed.
      *
      * @param option option of configuration. Binding shop-app's option to configure in web-view.
+     * @see Option
      */
     public void config(Option option) {
         mOption = option;
@@ -64,6 +65,8 @@ public class AtonePay {
      *
      * @param context application context in which you can getting accession to UI.
      * @param payment data binding to server.
+     * @see Payment
+     * @see android.content.Context
      */
     public void performPayment(Activity context, Payment payment) {
         if (NetWorkConnectivity.isConnected(context)) {
@@ -88,8 +91,8 @@ public class AtonePay {
     }
 
     /**
-     * Clear authentication-token. If <i>option</i> is not null, it will remove <i>preKey</i> in
-     * <i>Option</i> and user will have to login to AtonePay again.
+     * Clear authentication-token. If {@link Option} is not null, it will remove {@link Option#preKey} in
+     * {@link Option} and user will have to login to AtonePay again.
      */
     public void resetToken() {
         if (mOption != null) {
@@ -100,7 +103,7 @@ public class AtonePay {
     /**
      * Handle callback from server and return response to shop app.
      * <p> There are 5 callbacks:
-     * <li><i>onAuthenticationSuccess:</i> Return <i>preKey</i> from server after login succeeded.
+     * <li><i>onAuthenticationSuccess:</i> Return {@link Option#preKey} from server after login succeeded.
      * <li><i>onTransactionSuccess:</i> Return <i>successResponse</i> from server when transaction succeeded.
      * <li><i>onTransactionCancel:</i> Return callback response when transaction canceled.
      * <li><i>onFailure:</i> Return <i>failureResponse</i> from server when transaction failed.
@@ -108,6 +111,7 @@ public class AtonePay {
      * server when transaction is error.
      *
      * @param onTransactionCallBack response from server.
+     * @see OnTransactionCallBack
      */
     public void handlerCallBack(OnTransactionCallBack onTransactionCallBack) {
         mOnTransactionCallBack = onTransactionCallBack;
@@ -115,6 +119,9 @@ public class AtonePay {
 
     /**
      * Class supports optional for AtoneSDK.
+     * It is inner class of {@link AtonePay}
+     *
+     * @see AtonePay
      */
     public static class Option {
         public String preKey;

@@ -11,7 +11,7 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
 
 /**
  * A javaScriptInterface gets response from web-view. All methods are called in html file stored in
- * assets folder. Native will handle responses throw <i>OnTransactionCallBack</i> interface and shop-app
+ * assets folder. Native will handle responses throw {@link OnTransactionCallBack} interface and shop-app
  * side can get them.
  */
 class JavaScriptInterface implements Parcelable {
@@ -41,6 +41,7 @@ class JavaScriptInterface implements Parcelable {
      * <li><i>onErrors:</i> Call <i>onError</i> method.
      *
      * @param onTransactionCallBack callback to native App.
+     * @see OnTransactionCallBack
      */
     public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
         this.mListener = onTransactionCallBack;
