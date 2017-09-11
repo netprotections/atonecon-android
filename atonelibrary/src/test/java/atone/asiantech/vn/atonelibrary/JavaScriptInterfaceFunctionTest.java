@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Copyright © AsianTech Co., Ltd
- * Created by Gio on 8/24/2017.
+ * Created by at-hoaiphan on 8/24/2017.
  */
 
 @RunWith(MyRobolectricTestRunner.class)

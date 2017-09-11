@@ -1,0 +1,33 @@
+﻿[
+  {
+    "customer_name": "接続テスト",
+    "customer_name_kana": "セツゾクテスト",
+    "company_name": "（株）ネットプロテクションズ",
+    "department": "セールスグループ",
+    "zip_code": "1234567",
+    "address": "東京都中央区銀座１－１０ー６　銀座ファーストビル４階",
+    "tel": "080-1234-1234",
+    "email": "np@netprotections.co.jp",
+    "total_purchase_amount": 20000,
+    "total_purchase_count": 2
+  },
+  {
+    "customer_name": null,
+    "customer_family_name": null,
+    "customer_given_name": null,
+    "customer_name_kana": null,
+    "customer_family_name_kana": null,
+    "customer_given_name_kana": null,
+    "phone_number": null,
+    "birthday": null,
+    "sex_division": null,
+    "company_name": null,
+    "department": null,
+    "zip_code": null,
+    "address": null,
+    "tel": null,
+    "email": null,
+    "total_purchase_amount": null,
+    "total_purchase_count": null
+  }
+]
