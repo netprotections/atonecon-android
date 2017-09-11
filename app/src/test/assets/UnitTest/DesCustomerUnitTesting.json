@@ -1,0 +1,21 @@
+﻿[
+  {
+    "dest_customer_name": "銀座太郎",
+    "dest_customer_name_kana": "ぎんざたろう",
+    "dest_company_name": "株式会社ネットプロテクションズ",
+    "dest_department": "システム部門",
+    "dest_zip_code": "123-1234",
+    "dest_address": "東京都中央区銀座１－１０ー６　銀座ファーストビル４階",
+    "dest_tel": "0312341234"
+  },
+  {
+    "dest_customer_name": null,
+    "dest_customer_name_kana": null,
+    "dest_company_name": null,
+    "dest_department": null,
+    "dest_zip_code": null,
+    "dest_address": null,
+    "dest_tel": null,
+    "dest_email": null
+  }
+]
