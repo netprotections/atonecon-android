@@ -1,12 +1,3 @@
-Atone Con Android Team
------------------
-
-[![Build Status](https://circleci.com/gh/AsianTechInc/Atonecon-Android/tree/master.svg?style=shield&circle-token=47ad1bba2de729235789563ac4826028328afa82)](https://circleci.com/gh/AsianTechInc/Atonecon-Android/tree/master.svg?style=shield&circle-token=47ad1bba2de729235789563ac4826028328afa82)
-
-Workflow
------------------
-Check out here : https://github.com/AsianTechInc/TechnicalCenter/blob/master/general/workflow.md
-
 AtoneCon Android SDK
 ==================
 ## A. Requirement
@@ -20,11 +11,6 @@ AtoneCon Android SDK
 compile 'jp.atone.library:atone-con:1.0.0'
 ```
 - Build project.
-- Permission: Add these permission in Manifest.xml
-```
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-```
 
 ## C. Usage
 ------
@@ -111,6 +97,11 @@ If it hasn't value, it wouldn't be mentioned.
 AtonePay.Option option = AtonePay.Option.builder();
 option.publicKey = "public-key";
 option.preKey = "pre-key";
+/**
+* Use below line if you want to implement library in develope environment.
+* Skip it in product implementation.
+*/
+option.developeEnvironment = true;
 AtonePay.getInstance().config(option);
 
 // Perform Payment
@@ -164,10 +155,7 @@ AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
 ## D. Error
 -----
 
-**Check format parameter**
-
-
-- Here are checked format parameter errors at the registering transaction
+**List - Error Code**
 
 
 <table border=1>
@@ -176,228 +164,163 @@ AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
       <th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
     </tr>
     <tr>
-    <th rowspan="27">400</th>
-    <th rowspan="27">InvalidRequest</th>
-    <td>EATN0102</td><td width="90%">決済認証トークンの形式が不正です。</td><td>authentication_token</td>
+    <th rowspan="52">400</th>
+    <th rowspan="52">InvalidRequest</th>
+    <td>EATN0301</td><td width="90%">決済認証トークンが指定されていません。</td><td>NP_Token</td>
     </tr>
     <tr>
-    <td>EATN0105</td><td>課⾦額は7桁以内の半⾓数値で設定して下さい。</td><td>amount</td>
+    <td>EATN0302</td><td>決済認証トークンの形式が不正です。</td><td>NP_Token</td>
     </tr>
     <tr>
-    <td>EATN0106</td><td>加盟店取引番号は100⽂字以内の半⾓英数字記号で設定して下さい。</td><td>shop_transaction_no</td>
+    <td>EATN0307</td><td>追跡トークンの形式が不正です。</td><td>track_token</td>
     </tr>
     <tr>
-    <td>EATN0108</td><td>売上確定はtrueまたはfalseのいずれかを設定して下さい。</td><td>sales_settled</td>
+    <td>EATN0309</td><td>SMSを規定回数以上送信しています。明日以降に再度お試しください。</td><td>track_token</td>
     </tr>
     <tr>
-    <td>EATN0109</td><td>加盟店取引備考は255⽂字以内で設定して下さい。</td><td>description_trans</td>
+    <td>EATN0312</td><td>利用ポイント数がポイント残高を超過しています。</td><td>NP_Token</td>
     </tr>
     <tr>
-    <td>EATN0110</td><td>加盟店商品IDは100⽂字以内の半⾓英数字記号で設定して下さい。</td><td>shop_item_id</td>
+    <td>EATN0313</td><td>SMSの再送信ができません。</td><td>NP_Token</td>
     </tr>
     <tr>
-    <td>EATN0113</td><td>商品名は100⽂字以内で設定して下さい。 </td><td>item_name</td>
+    <td>EATN0331</td><td>課金額は1以上の7桁以内の半角数値で設定して下さい。</td><td>amount</td>
     </tr>
     <tr>
-    <td>EATN0114</td><td>商品単価は6桁以内の半⾓数値で設定して下さい。</td><td>item_price</td>
+    <td>EATN0332</td><td>加盟店取引IDは100文字以内の半角英数字記号で設定して下さい。</td><td>shop_transaction_no</td>
     </tr>
     <tr>
-    <td>EATN0115</td><td>個数は5桁以内の半⾓数値で設定して下さい。</td><td>item_count</td>
+    <td>EATN0333</td><td>売上確定はtrueまたはfalseのいずれかを設定して下さい。</td><td>sales_settled</td>
     </tr>
     <tr>
-    <td>EATN0111</td><td>商品明細に値が設定されていません。</td><td>items</td>
-    </tr>
-    <td>EATN0143</td><td>住所は255⽂字以内で設定してください。</td><td>item_url</td>
-    <tr>
-    <td>EATN0135</td><td>⽒名は100⽂字以内の全⾓で設定してください。</td><td>customer_name</td>
+    <td>EATN0334</td><td>加盟店取引備考は改行以外の制御文字を除く255文字以内で設定して下さい。</td><td>description_trans</td>
     </tr>
     <tr>
-    <td>EATN0136</td><td>ひらがな⽒名は128⽂字以内の全⾓で設定してください。</td><td>customer_name_kana</td>
+    <td>EATN0335</td><td>加盟店商品IDは100文字以内の半角英数字記号で設定して下さい。</td><td>shop_item_id</td>
     </tr>
     <tr>
-    <td>EATN0137</td><td>会社名は100⽂字以内の全⾓で設定してください。</td><td>company_name</td>
+    <td>EATN0336</td><td>商品明細に値が設定されていません。</td><td>items</td>
     </tr>
     <tr>
-    <td>EATN0138</td><td>部署名は30⽂字以内の全⾓で設定してください</td><td>department</td>
+    <td>EATN0337</td><td>商品明細数は9999以下で設定して下さい。</td><td>items</td>
     </tr>
     <tr>
-    <td>EATN0139</td><td>郵便番号は半⾓数字7桁または半⾓数字3桁+"-"+半⾓数字4桁で設定してく</td><td>zip_code</td>
+    <td>EATN0338</td><td>商品名は100文字以内で設定して下さい。</td><td>item_name</td>
     </tr>
     <tr>
-    <td>EATN0140</td><td>住所は255⽂字以内で設定してください。</td><td>address</td>
+    <td>EATN0339</td><td>商品単価は6桁以内の半角数値で設定して下さい。</td><td>item_price</td>
     </tr>
     <tr>
-    <td>EATN0141</td><td>電話番号は0から始まる半⾓数字10,11桁または半⾓数字2,3桁+"-"+半⾓</td><td>tel</td>
+    <td>EATN0340</td><td>個数は5桁以内の半角数値で設定して下さい。</td><td>item_count</td>
+    </tr>
+    <td>EATN0341</td><td>商品URLは1000文字以内で設定して下さい。</td><td>item_url</td>
+    <tr>
+    <td>EATN0342</td><td>氏名は100文字以内の全角で設定してください。</td><td>customer_name</td>
     </tr>
     <tr>
-    <td>EATN0142</td><td>メールアドレスは255⽂字以内の正しい形式で設定してください。</td><td>email</td>
+    <td>EATN0343</td><td>ひらがな氏名は128文字以内の全角で設定してください。</td><td>customer_name_kana</td>
     </tr>
     <tr>
-    <td>EATN0144</td><td>サービス提供先数は9以下で設定して下さい。	</td><td></td>
+    <td>EATN0344</td><td>会社名は100文字以内で設定してください。</td><td>company_name</td>
     </tr>
     <tr>
-    <td>EATN0145</td><td>姓は50⽂字以内の全⾓で設定してください。</td><td>customer_family_name</td>
+    <td>EATN0345</td><td>部署名は30文字以内で設定してください。</td><td>department</td>
     </tr>
     <tr>
-    <td>EATN0146</td><td>名は50⽂字以内の全⾓で設定してください。</td><td>customer_given_name</td>
+    <td>EATN0346</td><td>郵便番号は半角数字7桁または半角数字3桁+"-"+半角数字4桁で設定してください。</td><td>zip_code</td>
     </tr>
     <tr>
-    <td>EATN0147</td><td>ひらがな姓は64⽂字以内の全⾓で設定してください。</td><td>customer_family_name_kana</td>
+    <td>EATN0347</td><td>住所は255文字以内で設定してください。</td><td>address</td>
     </tr>
     <tr>
-    <td>EATN0148</td><td>ひらがな名は64⽂字以内の全⾓で設定してください。</td><td>customer_given_name_kana</td>
+    <td>EATN0348</td><td>電話番号は0から始まる半角数字10,11桁または半角数字2,3桁+"-"+半角数字4桁+"-"+半角数字4桁で設定してください。</td><td>tel</td>
     </tr>
     <tr>
-    <td>EATN0149</td><td>携帯電話番号は070,080,090始まりの半⾓数字10,11桁または半⾓数字</td><td>phone_number</td>
+    <td>EATN0349</td><td>メールアドレスは255文字以内の正しい形式で設定してください。</td><td>email</td>
     </tr>
     <tr>
-    <td>EATN0150</td><td>Th年⽉⽇はYYYY-MM-DD形式の⽇付を設定してください。</td><td>birthday</td>
+    <td>EATN0350</td><td>利用ポイント数は7桁以内の半角数値で設定してください。</td><td>subtract_point</td>
     </tr>
     <tr>
-    <td>EATN0151</td><td>性別は男性:1,   ⼥性:2で設定してください。</td><td>sex_division</td>
+    <td>EATN0351</td><td>不正なチェックサムです。</td><td>checksum</td>
+    </tr>
+    <tr>
+    <td>EATN0352</td><td>HTTPリクエストのContent-Typeにはapplication/jsonを指定して下さい。</td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0353</td><td>サービス提供先数は9以下で設定して下さい。</td><td>dest_cusomers</td>
+    </tr>
+    <tr>
+    <td>EATN0354</td><td>姓は50文字以内の全角で設定してください。</td><td>customer_family_name</td>
+    </tr>
+    <tr>
+    <td>EATN0355</td><td>名は50文字以内の全角で設定してください。</td><td>customer_given_name</td>
+    </tr>
+    <tr>
+    <td>EATN0356</td><td>ひらがな姓は64文字以内の全角で設定してください。</td><td>customer_family_name_kana</td>
+    </tr>
+    <tr>
+    <td>EATN0357</td><td>ひらがな名は64文字以内の全角で設定してください。</td><td>customer_given_name_kana</td>
+    </tr>
+    <tr>
+    <td>EATN0358</td><td>携帯電話番号は070,080,090始まりの半角数字10,11桁または半角数字2,3桁+"-"+半角数字4桁+"-"+半角数字4桁で設定してください。</td><td>phone_number</td>
+    </tr>
+    <tr>
+    <td>EATN0359</td><td>生年月日はYYYY-MM-DD形式の日付を設定してください。</td><td>birthday</td>
+    </tr>
+    <tr>
+    <td>EATN0360</td><td>性別は男性:1, 女性:2で設定してください。</td><td>sex_division</td>
+    </tr>
+    <tr>
+    <td>EATN0361</td><td>累計購入回数は0以上の7桁以内の半角数値で設定して下さい。</td><td>total_purchase_count</td>
+    </tr>
+    <tr>
+    <td>EATN0362</td><td>累計購入金額は0以上の8桁以内の半角数値で設定して下さい。</td><td>total_purchase_amount</td>
+    </tr>
+    <tr>
+    <td>EATN0303</td><td>"決済認証トークンは有効ではありません。
+→無効化を設定する日付がある revoke date
+日付を設定する。
+ログインスキップが実行されない"</td><td>NP_Token</td>
+    </tr>
+    <tr>
+    <td>EATN0303</td><td>決済認証トークンは有効ではありません。</td><td>NP_Token</td>
+    </tr>
+    <tr>
+    <td>EATN0306</td><td>認証に失敗しました。</td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0360</td><td>有効なサービス利用契約が無いため処理できません。</td><td>NP_Token</td>
+    </tr>
+    <tr>
+    <td>EATN0363</td><td>有効な電話番号が会員に設定されていないため処理できません。</td><td>NP_Token</td>
+    </tr>
+    <tr>
+    <td>EATN0304</td><td>店舗公開可能鍵のデータが存在しません。</td><td>shop_public_key</td>
+    </tr>
+    <tr>
+    <td>EATN0308</td><td>会員追跡のデータが存在しません。</td><td>track_token</td>
+    </tr>
+    <tr>
+    <td>EATN0310</td><td>SMS認証のデータが存在しません。</td><td>sms_token</td>
+    </tr>
+    <tr>
+    <td>EATN0399</td><td>現在サービスを利用できません。恐れ入りますが、時間を空けて再度お試し下さい。</td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0398</td><td>不正なリクエストです。</td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0397</td><td>HTTPリクエストに含まれるJSONの形式が不正です。</td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0396</td><td></td><td>-</td>
+    </tr>
+    <tr>
+    <td>EATN0311</td><td>SMS認証に5回以上失敗しました。明日以降に再度お試しください。</td><td></td>
+    </tr>
+    <tr>
+    <td>EATN0305</td><td>携帯番号のデータが存在しません。</td><td></td>
     </tr>
   </body>
-</table>
-
-**Check Handler**
-
-- Here are checked handler errors at registering transaction.
-- Check duplicated transaction code of the shop: Check only transactions with OK result.
-<table border=1>
-<body>
-<tr>
-      <th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-    </tr>
-    <tr>
-    <th rowspan="4">400</th>
-    <th rowspan="4">InvalidRequest</th>
-    <td>EATN0112</td><td>商品明細数は9999以下で設定して下さい。</td><td>items</td>
-    </tr>
-     <tr>
-    <td>EATN1101</td><td>同じ加盟店取引番号が既に登録されています。</td><td>shop_transaction_no</td>
-    </tr>
-     <tr>
-    <td>EATN1102</td><td>課⾦額と商品明細⾦額の合計が⼀致していません。</td><td>null</td>
-    </tr>
-     <tr>
-    <td>EATN1104</td><td>加盟店検証⽤以外の会員情報が指定されています。</td><td>null</td>
-    </tr>
-     <tr>
-    <th rowspan="1">403</th><th rowspan="1">Forbidden</th><td>EATN0130</td><td>有効なサービス利⽤契約が無いため処理できません。</td><td>null</td>
-    </tr>
-</body>
-</table>
-
----
----
----
-**Authentication**
-
-- Not set/Not found "Private Key" or the store is temporarily unavailable.
-
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-<tr>
-    <td>401</td><td>Unauthorized</td><td>EATN0129</td><td width="70%">認証に失敗しました。  </td><td>None</td>
-    </tr>
-</tr>
-</body>
-</table>
-
-**Check handler**
-
-- **Settlement auth**
-
-	  - Check Private Key and Transaction auth token string. If that combined string is not true, set error.
-
-	  - Settlement auth token is expired because customer change password
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>400</td><td>InvalidRequest</td><td>EATN0103</td><td width="50%">不正な決済認証トークンです。</td><td>authentication_token</td>
-</tr>
-</body>
-</table>
-
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>400</td><td>InvalidRequest</td><td>EATN0104</td><td width="50%">決済認証トークンが無効化されています。</td><td>authentication_token</td>
-</tr>
-</body>
-</table>
-
-- **Transaction auth**
-	- Check Private Key and Transaction object ID string. If that combined string is not true, set error.
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>404</td><td>NotFound</td><td>EATN0133</td><td width="60%">該ftの取引が存在しません。</td><td>null</td>
-</tr5
-</body>
-</table>
-
-**Other errors**
-
-- The requested URL path is incorrect
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>404</td><td>NotFound</td><td>EATN0126</td><td width="60%">不正なリクエストです。</td><td>None</td>
-</tr>
-</body>
-</table>
-
-- Service contract with shop is not signed
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>403</td><td>Forbidden</td><td>EATN0130</td><td width="60%">有効なサービス利⽤契約が無いため処理できません。</td><td>null</td>
-</tr>
-</body>
-</table>
-
-- Service is maintaining or temporarily unable to use for some reason
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>503</td><td>ServiceUnavailable</td><td>EATN9901</td><td>現在メンテナンス中のためサービスが利⽤できません。
-恐れ⼊りますが、時間を空けて再度お試し下さい。
-</td><td>None</td>
-</tr>
-</body>
-</table>
-
-- Can not process request due to API server error on NP system
-<table border="1">
-<body>
-<tr>
-<th>Status code</th><th>Type</th><th>Error code</th><th>Error message</th><th>Error item</th>
-</tr>
-<tr>
-    <td>500</td><td>InternalServerError</td><td>EATN9999</td><td>現在サービスを利⽤できません。恐れ⼊りますが、時間
-を空けて再度お試し下さい。
-</td><td>None</td>
-</tr>
-</body>
 </table>
