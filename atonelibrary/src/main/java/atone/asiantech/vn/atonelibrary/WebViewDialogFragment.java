@@ -22,6 +22,7 @@ import java.lang.ref.WeakReference;
  */
 
 public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {
+    private static boolean sIsDevelopEnvironment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +73,8 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
      * @param javaScriptInterface handle callback from web-view.
      * @return {@link WeakReference<WebViewDialogFragment>} object to avoid leak memory.
      */
-    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
+    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface, boolean developEnvironment) {
+        sIsDevelopEnvironment = developEnvironment;
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();
         WeakReference<WebViewDialogFragment> webViewDialogFragmentWeakReference =
                 new WeakReference<>(webViewFragmentDialog);
