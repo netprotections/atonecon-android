@@ -2,6 +2,7 @@ package atone.asiantech.vn.atonelibrary.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -76,7 +77,8 @@ public class Payment implements Parcelable {
         private List<DestCustomer> destCustomers;
         private List<ShopItem> items;
 
-        public Builder(int amount, String shopTransactionNo, Customer customer, List<ShopItem> items, String checkSumString) {
+        public Builder(int amount, @NonNull String shopTransactionNo, @NonNull Customer customer,
+                       @NonNull List<ShopItem> items, @NonNull String checkSumString) {
             this.amount = amount;
             this.shopTransactionNo = shopTransactionNo;
             this.customer = customer;

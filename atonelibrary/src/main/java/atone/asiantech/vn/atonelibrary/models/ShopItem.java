@@ -1,5 +1,7 @@
 package atone.asiantech.vn.atonelibrary.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -29,7 +31,7 @@ public class ShopItem {
         private int itemCount;
         private String itemUrl;
 
-        public Builder(String shopItemId, String itemName, int itemPrice, int itemCount) {
+        public Builder(@NonNull String shopItemId, @NonNull String itemName, int itemPrice, int itemCount) {
             this.shopItemId = shopItemId;
             this.itemName = itemName;
             this.itemPrice = itemPrice;

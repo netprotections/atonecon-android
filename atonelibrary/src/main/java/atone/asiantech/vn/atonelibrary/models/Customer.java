@@ -1,5 +1,7 @@
 package atone.asiantech.vn.atonelibrary.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -65,7 +67,7 @@ public class Customer {
         private int totalPurchaseCount;
         private int totalPurchaseAmount;
 
-        public Builder(String customerName) {
+        public Builder(@NonNull String customerName) {
             this.customerName = customerName;
         }
 

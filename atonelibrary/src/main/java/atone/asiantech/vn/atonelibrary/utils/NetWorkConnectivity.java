@@ -7,11 +7,19 @@ import android.net.ConnectivityManager;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * Copyright © AsianTech Co., Ltd
- * Created by at-hoaiphan on 8/7/2017.
+ * The class supports a method for checking network connection.
+ * The one of condition for starting library is network connected and it will read network state
+ * to check network connection.
  */
 
 public class NetWorkConnectivity {
+    /**
+     * The function return boolean value in checking internet permission.
+     *
+     * @param context application context in which you can access to connection information.
+     * @return <p>True value if ACCESS_NETWORK_STATE permission is granted and the network is available.
+     * <p>False value if ACCESS_NETWORK_STATE permission is not granted or the network is unavailable.
+     */
     public static boolean isConnected(Context context) {
         if (ActivityCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
