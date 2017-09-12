@@ -45,7 +45,11 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         webView.getSettings().setJavaScriptEnabled(true);
 
         // Load WebView
-        webView.loadUrl("file:///android_asset/atonedev.html");
+        if (sIsDevelopEnvironment) {
+            webView.loadUrl("file:///android_asset/atonedev.html");
+        } else {
+            webView.loadUrl("file:///android_asset/atoneprod.html");
+        }
         webView.setVisibility(View.INVISIBLE);  // To show ProgressBar
         webView.setWebViewClient(new WebViewClient() {
             @Override

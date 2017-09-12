@@ -83,7 +83,7 @@ public class AtonePay {
                 fragmentTransaction.remove(fragment);
             }
             fragmentTransaction.addToBackStack(null);
-            mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface);
+            mDialogFragment = WebViewDialogFragment.getInstance(javaScriptInterface, mOption.developEnvironment);
             mDialogFragment.get().show(fragmentTransaction, "fragment");
         } else {
             Toast.makeText(context, R.string.error_message_network_are_not_available, Toast.LENGTH_SHORT).show();
@@ -126,6 +126,7 @@ public class AtonePay {
     public static class Option {
         public String preKey;
         public String publicKey;
+        public boolean developEnvironment;
 
         /**
          * Create instance object.
