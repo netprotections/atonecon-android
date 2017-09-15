@@ -38,6 +38,6 @@ public class WebViewDialogFragmentFunctionTest extends BaseTest {
     public void testGetInstance() {
         Payment payment = data.get(0);
         JavaScriptInterface javaScriptInterface = new JavaScriptInterface(payment, AtonePay.Option.builder());
-        assertNotNull(WebViewDialogFragment.getInstance(javaScriptInterface));
+        assertNotNull(WebViewDialogFragment.getInstance(javaScriptInterface, true));
     }
 }

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +63,12 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
              */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(i);
-                return true;
+                if (Patterns.WEB_URL.matcher(url).matches()) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(i);
+                    return true;
+                }
+                return false;
             }
         });
         ImageButton imgBtn = view.findViewById(R.id.imgBtnCloseDialog);
