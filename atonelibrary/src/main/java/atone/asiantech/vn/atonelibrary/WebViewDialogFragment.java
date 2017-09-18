@@ -23,7 +23,6 @@ import java.lang.ref.WeakReference;
  */
 
 public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {
-    private static boolean sIsDevelopEnvironment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,11 +45,7 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         webView.getSettings().setJavaScriptEnabled(true);
 
         // Load WebView
-        if (sIsDevelopEnvironment) {
-            webView.loadUrl("file:///android_asset/atonedev.html");
-        } else {
-            webView.loadUrl("file:///android_asset/atoneprod.html");
-        }
+        webView.loadUrl("file:///android_asset/atone.html");
         webView.setVisibility(View.INVISIBLE);  // To show ProgressBar
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -81,8 +76,7 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
      * @param javaScriptInterface handle callback from web-view.
      * @return {@link WeakReference<WebViewDialogFragment>} object to avoid leak memory.
      */
-    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface, boolean developEnvironment) {
-        sIsDevelopEnvironment = developEnvironment;
+    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();
         WeakReference<WebViewDialogFragment> webViewDialogFragmentWeakReference =
                 new WeakReference<>(webViewFragmentDialog);

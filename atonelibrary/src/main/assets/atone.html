@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <script src="https://auth.atone.be/v1/atone.js"></script>
+    <script>
+        var script = document.createElement('script');
+        script.src = Android.getScriptUrl();
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
 </head>
 <title>Atone Payment</title>
 <body>
 <script>
+    window.addEventListener("load", function(){
     var dataStr = Android.getDataString();
     var data = JSON.parse(dataStr);
 
@@ -30,12 +35,8 @@
         error: function(name, message, errors) {
            Android.onErrors(name, message, JSON.stringify(errors));
         }
+    }, Atone.start);
     });
-    window.addEventListener("load", function(){
-        Atone.start();
-    });;
-
-
 </script>
 </body>
 </html>
