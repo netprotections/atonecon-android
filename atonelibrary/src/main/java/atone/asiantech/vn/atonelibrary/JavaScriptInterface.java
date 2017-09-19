@@ -2,7 +2,6 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -121,12 +120,7 @@ class JavaScriptInterface implements Parcelable {
             mListener.onAuthenticationSuccess(authenticationToken);
         }
     }
-    @JavascriptInterface
-    public void onShowing() {
-        if (mListener != null) {
-            Log.d("checkshow", "onShowing: ");
-        }
-    }
+
     /**
      * Return <i>Cancel callback</i> when transaction canceled.
      */
