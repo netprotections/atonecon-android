@@ -15,6 +15,8 @@ import atone.asiantech.vn.atonelibrary.models.Payment;
  * side can get them.
  */
 class JavaScriptInterface implements Parcelable {
+    private static final String URL_DEV = "https://ct-auth.a-to-ne.jp/v1/atone.js";
+    private static final String URL_PROD = "https://auth.atone.be/v1/atone.js";
     private OnTransactionCallBack mListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
@@ -45,6 +47,27 @@ class JavaScriptInterface implements Parcelable {
      */
     public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
         this.mListener = onTransactionCallBack;
+    }
+
+    /**
+     * Get Atone JavaScript Url.
+     * A javascript supports functions for performing payment
+     *
+     * @return variable <i>resourceJavaScript</i> in {@link AtonePay#mOption} if it is not null and not empty.
+     * {@link JavaScriptInterface#URL_DEV} if variable <i>developEnvironment</i> is set *true*
+     * {@link JavaScriptInterface#URL_PROD} in default.
+     */
+    @JavascriptInterface
+    public String getScriptUrl() {
+        if (mOption.resourceJavaScript != null) {
+            if (!mOption.resourceJavaScript.isEmpty()) {
+                return mOption.resourceJavaScript;
+            }
+        }
+        if (mOption.developEnvironment) {
+            return URL_DEV;
+        }
+        return URL_PROD;
     }
 
     /**

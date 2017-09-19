@@ -3,10 +3,12 @@ package atone.asiantech.vn.atonelibrary;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,6 @@ import java.lang.ref.WeakReference;
  */
 
 public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {
-    private static boolean sIsDevelopEnvironment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,11 +46,7 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         webView.getSettings().setJavaScriptEnabled(true);
 
         // Load WebView
-        if (sIsDevelopEnvironment) {
-            webView.loadUrl("file:///android_asset/atonedev.html");
-        } else {
-            webView.loadUrl("file:///android_asset/atoneprod.html");
-        }
+        webView.loadUrl("file:///android_asset/atone.html");
         webView.setVisibility(View.INVISIBLE);  // To show ProgressBar
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -62,9 +59,12 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
              */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(i);
-                return true;
+                if (Patterns.WEB_URL.matcher(url).matches()) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(i);
+                    return true;
+                }
+                return false;
             }
         });
         ImageButton imgBtn = view.findViewById(R.id.imgBtnCloseDialog);
@@ -77,8 +77,7 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
      * @param javaScriptInterface handle callback from web-view.
      * @return {@link WeakReference<WebViewDialogFragment>} object to avoid leak memory.
      */
-    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface, boolean developEnvironment) {
-        sIsDevelopEnvironment = developEnvironment;
+    static WeakReference<WebViewDialogFragment> getInstance(JavaScriptInterface javaScriptInterface) {
         WebViewDialogFragment webViewFragmentDialog = new WebViewDialogFragment();
         WeakReference<WebViewDialogFragment> webViewDialogFragmentWeakReference =
                 new WeakReference<>(webViewFragmentDialog);
