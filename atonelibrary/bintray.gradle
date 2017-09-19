@@ -33,6 +33,7 @@ bintray {
     pkg {
         repo = bintrayRepo
         name = bintrayName
+        userOrg = bintrayOrganization
         desc = libraryDescription
         publish = true
         publicDownloadNumbers = true

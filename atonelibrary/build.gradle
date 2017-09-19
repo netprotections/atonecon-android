@@ -4,6 +4,7 @@ ext {
     bintrayRepo = 'AtoneLibrary'  // The Bintray Repository's name
     bintrayName = 'atone-con-package' // The Package's name in Repository
     publishedGroupId = 'jp.co.netprotections'
+    bintrayOrganization = 'netprotections'
     libraryName = 'AtoneLibrary'
     artifact = 'atonelibrary' // Library's name
 
