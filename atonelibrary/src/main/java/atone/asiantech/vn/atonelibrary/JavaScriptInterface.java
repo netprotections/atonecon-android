@@ -2,6 +2,7 @@ package atone.asiantech.vn.atonelibrary;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ class JavaScriptInterface implements Parcelable {
     private static final String URL_DEV = "https://ct-auth.a-to-ne.jp/v1/atone.js";
     private static final String URL_PROD = "https://auth.atone.be/v1/atone.js";
     private OnTransactionCallBack mListener;
+    private OnFormRenderListener mFormListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
 
@@ -47,6 +49,10 @@ class JavaScriptInterface implements Parcelable {
      */
     public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
         this.mListener = onTransactionCallBack;
+    }
+
+    public void setFormRenderListener(OnFormRenderListener listener) {
+        mFormListener = listener;
     }
 
     /**
@@ -134,6 +140,14 @@ class JavaScriptInterface implements Parcelable {
             }
         }
     }
+
+    @JavascriptInterface
+    public void onFormLoaded() {
+        if (mFormListener != null) {
+            mFormListener.onFormTransactionOpened();
+        }
+    }
+
 
     /**
      * Return <i>Failure Response</i> from server when transaction failed.

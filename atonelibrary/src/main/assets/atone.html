@@ -8,6 +8,9 @@
         script.src = Android.getScriptUrl();
         document.getElementsByTagName('head')[0].appendChild(script);
     </script>
+    <style>
+        body, html {background: transparent}
+    </style>
 </head>
 <title>Atone Payment</title>
 <style>
@@ -20,10 +23,20 @@
 <body>
 <center><img id="loading_image" src="https://it-auth.a-to-ne.jp/assets/img_loading-481d47c4b5e794cc929652bd595421499994bd60d3150b1a3655780eef0dcbbd.gif" width=65px height=65px></center>
 <script>
+    var bodyTags = document.getElementsByTagName("body");
+    var bodyTag = bodyTags[0];
+    bodyTag.addEventListener("DOMNodeInserted", function (event) {
+    console.log(event);
+       if (event.srcElement.nodeName == 'IFRAME') {
+               event.srcElement.onload = function () {
+                    Android.onFormLoaded();
+               }
+       }
+    }, false);
+
     window.addEventListener("load", function(){
     var dataStr = Android.getDataString();
     var data = JSON.parse(dataStr);
-
     Atone.config({
         pre_token: Android.getPreToken(),
         pub_key: Android.getPublicKey(),
@@ -45,6 +58,7 @@
         }
     }, Atone.start);
     });
+
 </script>
 </body>
 </html>

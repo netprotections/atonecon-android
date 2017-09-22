@@ -18,16 +18,25 @@ import android.widget.ImageButton;
 
 import java.lang.ref.WeakReference;
 
+import static android.view.View.GONE;
+
 /**
  * Custom Dialog Fragment includes web-view to load Atone form. The web-view is loaded form html
  * file stored in assets folder.
  */
 
 public class WebViewDialogFragment extends DialogFragment implements View.OnClickListener {
+    private static final String TAG = "WebViewDialog";
+
+    private ImageButton mImgClose;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_webview, container);
+        View view = inflater.inflate(R.layout.dialog_webview, container);
+        mImgClose = view.findViewById(R.id.imgBtnCloseDialog);
+        mImgClose.setOnClickListener(this);
+        return view;
     }
 
     @Override
@@ -42,18 +51,27 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
         // Get field from view
         final WebView webView = view.findViewById(R.id.webView);
         JavaScriptInterface javaScriptInterface = getArguments().getParcelable("javaScriptInterface");
-        webView.addJavascriptInterface(javaScriptInterface, "Android");
+        if (javaScriptInterface != null) {
+            // Handle form opened
+            javaScriptInterface.setFormRenderListener(new OnFormRenderListener() {
+                @Override
+                public void onFormTransactionOpened() {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mImgClose.setVisibility(GONE);
+                        }
+                    });
+                }
+            });
+            webView.addJavascriptInterface(javaScriptInterface, "Android");
+        }
         webView.getSettings().setJavaScriptEnabled(true);
-
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
         // Load WebView
         webView.loadUrl("file:///android_asset/atone.html");
-        webView.setVisibility(View.INVISIBLE);  // To show ProgressBar
         webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                webView.setVisibility(View.VISIBLE);
-            }
-
             /**
              * Using this deprecated function because the newer one is used for Android API 24 only
              */
@@ -67,8 +85,6 @@ public class WebViewDialogFragment extends DialogFragment implements View.OnClic
                 return false;
             }
         });
-        ImageButton imgBtn = view.findViewById(R.id.imgBtnCloseDialog);
-        imgBtn.setOnClickListener(this);
     }
 
     /**
