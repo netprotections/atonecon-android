@@ -18,6 +18,7 @@ class JavaScriptInterface implements Parcelable {
     private static final String URL_DEV = "https://ct-auth.a-to-ne.jp/v1/atone.js";
     private static final String URL_PROD = "https://auth.atone.be/v1/atone.js";
     private OnTransactionCallBack mListener;
+    private OnFormRenderListener mFormListener;
     private Payment mPayment;
     private AtonePay.Option mOption;
 
@@ -47,6 +48,10 @@ class JavaScriptInterface implements Parcelable {
      */
     public void setCallBackHandler(OnTransactionCallBack onTransactionCallBack) {
         this.mListener = onTransactionCallBack;
+    }
+
+    public void setFormRenderListener(OnFormRenderListener listener) {
+        mFormListener = listener;
     }
 
     /**
@@ -106,6 +111,16 @@ class JavaScriptInterface implements Parcelable {
             return mOption.preKey != null ? mOption.preKey : "";
         }
         return "";
+    }
+
+    /**
+     * Return callback when form loaded in web-view that can handle to optimize in web showing process.
+     */
+    @JavascriptInterface
+    public void onFormLoaded() {
+        if (mFormListener != null) {
+            mFormListener.onFormTransactionOpened();
+        }
     }
 
     /**
