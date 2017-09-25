@@ -1,58 +1,56 @@
-AtoneCon Android SDK
+[English Document here](https://github.com/netprotections/atonecon-android/blob/master/README.en.md)
 ==================
-## A. Requirement
+決済モジュール導入ライブラリ Android
+==================
+## A. 要件
 ------
 - Android 4.0+
 - Android Studio
-## B. Installation
+## B. インストール
 ------
-- Add `dependency` to `build.gradle`.
+- `dependency` を `build.gradle` に追加
 ```
 compile 'jp.co.netprotections:atonelibrary:1.0.0'
 ```
-- Build project.
+-  プロジェクトをビルド
 
-## C. Usage
+## C. 使用方法
 ------
-**1. Configuration**
+**1. コンフィグ**
 
-**Customer**
+**購入者**
 
 ```
 
-// Binding data
-// Config Customer
-// Required property: name
+// データの紐付け
+// 購入者のコンフィグ
+// 要素必須: name
 Customer customer = new Customer.Builder("接続テスト")
 /**
-The following attributes are not required
-If the attribute has value, it must be passed to the object.
-If it hasn't value, it wouldn't be mentioned.
+下記は要素必須ではない項目。 ただし、値がある場合はその値をパラメータに必ず設定しなければならない。
 */
-			.nameKana("セツゾクテスト")		// String
-            .company("（株）ネットプロテクションズ")	// String
-            .setDepartment("セールスグループ")	// String
-            .setZipCode("1234567")	// String
+            .nameKana("セツゾクテスト")        // String
+            .company("（株）ネットプロテクションズ")  // String
+            .setDepartment("セールスグループ")  // String
+            .setZipCode("1234567")  // String
             .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")// String
-            .setTel("080-1234-1234")	// String
-            .mail("np@netprotections.co.jp")	// String
-            .purchaseCount(2)	// Int
-            .purchaseAmount(20000)	// Int
+            .setTel("080-1234-1234")    // String
+            .mail("np@netprotections.co.jp")    // String
+            .purchaseCount(2)   // Int
+            .purchaseAmount(20000)  // Int
             .build();
+           
+``` 
+**サービス提供先(配送先)**
 
 ```
-**DestCustomer**
-
-```
-// Config DesCustomer (The atribute isn't required)
-// Required property:DestCustomerName, DestZipcode and DestAddress
+// サービス提供先のコンフィグ (attributeは必須ではない)
+//要素必須:DestCustomerName, DestZipcode and DestAddress
 List<DestCustomer> destCustomers = new ArrayList<>();
 destCustomers.add(0, new DestCustomer.Builder("銀座太郎", "123-1234",
-		 "東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
+         "東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
 /**
-The following attributes are not required
-If the attribute has value, it must be passed to the object.
-If it hasn't value, it wouldn't be mentioned.
+下記は要素必須ではない項目。 ただし、値がある場合はその値をパラメータに必ず設定しなければならない。
 */
               .destNameKana("ぎんざたろう")
               .destCompany("株式会社ネットプロテクションズ")
@@ -60,30 +58,25 @@ If it hasn't value, it wouldn't be mentioned.
               .setTel("0312341234")
               .build());
 ```
-**ShopItem**
+**商品明細**
 ```
-// Config ShopItem
-// Required property: Id, Name, Price and Count
+// 商品明細のコンフィグ
+// 要素必須: Id, Name, Price and Count
 List<ShopItem> shopItems = new ArrayList<>();
 shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ", 10, 1)
 /**
-The following attributes are not required
-If the attribute has value, it must be passed to the object.
-If it hasn't value, it wouldn't be mentioned.
-*/
-			.url("https://atone.be/items/1")
+下記は要素必須ではない項目。 ただし、値がある場合はその値をパラメータに必ず設定しなければならない。
+            .url("https://atone.be/items/1")
             .build());
 ```
-**Payment**
+**決済**
 ```
-// Config Payment
-// Required property: Amount, TransactionNo, Customer, Item and Checksum
-Payment payment = new Payment.Builder(10, transNo, customer, shopItems,
-			"iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
+// 決済のコンフィグ
+// 要素必須: Amount, TransactionNo, Customer, Item and Checksum
+Payment payment = new Payment.Builder(10, transNo, customer, shopItems, 
+            "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
 /**
-The following attributes are not required
-If the attribute has value, it must be passed to the object.
-If it hasn't value, it wouldn't be mentioned.
+下記は要素必須ではない項目。 ただし、値がある場合はその値をパラメータに必ず設定しなければならない。
 */
             .settled(false)
             .description("備考です。")
@@ -91,37 +84,38 @@ If it hasn't value, it wouldn't be mentioned.
             .build();
 ```
 
-**Config**
+**コンフィグ**
 ```
-// Create options of Atone Pay
+// 決済のオプションを作成
 AtonePay.Option option = AtonePay.Option.builder();
 option.publicKey = "public-key";
 option.preKey = "pre-key";
 /**
-* Use below line if you want to implement library in develope environment.
-* Skip it in product implementation.
+* 開発環境でライブラリを実装する場合は、以下の行を使用してください。
+* 本番環境の実装ではスキップしてください。
 */
 option.developeEnvironment = true;
+
 AtonePay.getInstance().config(option);
 
-// Perform Payment
-// Open WebView and show transaction screen
+// 決済の実行
+// ウィンドウを開き、トランザクションの画面を表示
 AtonePay.getInstance().performPayment(this, payment);
 ```
 ---
-**2. Handler Callback**
+**2. コールバック処理**
 ```
 AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
             public void onAuthenticationSuccess(String authenToken) {
-            	// Return authenticatedToken
+                // authenticatedTokenを返却
             }
 
             @Override
             public void onTransactionSuccess(String response) {
-                // Transaction Succeed
+                // トランザクションが成功
                 /**
-                * response type: Json String:
+                * response type: Json String: 
                 *{r"id":"tr_lPv9Bf16QgV0I40y",
                 *"authorization_result":1,"subtract_point":0}
                 */
@@ -134,17 +128,17 @@ AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
 
             @Override
             public void onFailure(String response) {
-                // Transaction Failed
+                // トランザクションの失敗
                 /**
-                * response type: Json String:
-                *{"id" : "tr_V5ifmUlcFZ5tC8uJ","authorization_result" : 2 #
+                * response type: Json String: 
+                *{"id" : "tr_V5ifmUlcFZ5tC8uJ","authorization_result" : 2 # 
                 *2:NG"authorization_result_ng_reason" : 9 # 1: ⾦額超過, 9:その他 }
                 */
             }
-
+            
             @Override
             public void onError(String name, String message, String errors) {
-                // Transaction Error
+                // トランザクションエラー
                 /**
                 * errors type: Json array
                 */
@@ -152,11 +146,8 @@ AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
         });
 ```
 
-## D. Error
+## D. エラー
 -----
-
-**List - Error Code**
-
 
 <table border=1>
   <body>
