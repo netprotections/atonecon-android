@@ -10,7 +10,7 @@
 ------
 - `dependency` を `build.gradle` に追加
 ```
-compile 'jp.co.netprotections:atonelibrary:1.0.0'
+compile 'jp.co.netprotections:atonelibrary:1.0.1'
 ```
 -  プロジェクトをビルド
 
