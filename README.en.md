@@ -159,5 +159,5 @@ AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
 
 **List - Error Code**
 
-Please check "atone Implementation Manual".
+- Check "atone Implementation Manual".
 
