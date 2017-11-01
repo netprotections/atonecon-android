@@ -44,7 +44,7 @@ public class AtonePay {
 
     /**
      * Configuring keys.
-     * Method permit to bind {@link Option#publicKey} argument and {@link Option#preKey} argument of option object for configuration.
+     * Method permit to bind {@link Option#publicKey} argument, {@link Option#preKey} and {@link Option#terminalId} argument of option object for configuration.
      * <p>ShopApp has to call this method to define configuration. Each shop will have specific
      * <i>publicKey</i> and <i>preKey</i>. Without them, payment form cannot perform, transaction will be failed.
      *
@@ -126,6 +126,7 @@ public class AtonePay {
     public static class Option {
         public String preKey;
         public String publicKey;
+        public String terminalId;
         public boolean developEnvironment;
         public String resourceJavaScript;
 

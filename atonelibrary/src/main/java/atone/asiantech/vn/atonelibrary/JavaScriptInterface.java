@@ -124,15 +124,15 @@ class JavaScriptInterface implements Parcelable {
     }
 
     /**
-     * Authentication Success Response. Return <i>authenticationToken</i> from server to native.
+     * Authentication Success Response. Return <i>authenticationToken</i> and <i>userNo</i> from server to native.
      * Shop can perform to login atone one time.
      *
      * @param authenticationToken string token is sent after login succeed.
      */
     @JavascriptInterface
-    public void onAuthenticated(String authenticationToken) {
+    public void onAuthenticated(String authenticationToken, String userNo) {
         if (mListener != null) {
-            mListener.onAuthenticationSuccess(authenticationToken);
+            mListener.onAuthenticationSuccess(authenticationToken, userNo);
         }
     }
 

@@ -31,8 +31,8 @@
         pre_token: Android.getPreToken(),
         pub_key: Android.getPublicKey(),
         payment: data,
-        authenticated: function(authentication_token) {
-            Android.onAuthenticated(authentication_token);
+        authenticated: function(authentication_token, user_no) {
+            Android.onAuthenticated(authentication_token, user_no);
         },
         cancelled: function() {
             Android.onCancelled();
