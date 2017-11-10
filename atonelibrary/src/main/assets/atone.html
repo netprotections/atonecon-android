@@ -30,6 +30,7 @@
     Atone.config({
         pre_token: Android.getPreToken(),
         pub_key: Android.getPublicKey(),
+        terminal_id: Android.getTerminalId(),
         payment: data,
         authenticated: function(authentication_token, user_no) {
             Android.onAuthenticated(authentication_token, user_no);

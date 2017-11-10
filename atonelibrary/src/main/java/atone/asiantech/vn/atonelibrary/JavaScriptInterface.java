@@ -114,6 +114,19 @@ class JavaScriptInterface implements Parcelable {
     }
 
     /**
+     * Getting TerminalId.
+     *
+     * @return configured TerminalId which is sent from server. Return empty string if TerminalId is null.
+     */
+    @JavascriptInterface
+    public String getTerminalId() {
+        if (mOption != null) {
+            return mOption.terminalId != null ? mOption.terminalId : "";
+        }
+        return "";
+    }
+
+    /**
      * Return callback when form loaded in web-view that can handle to optimize in web showing process.
      */
     @JavascriptInterface

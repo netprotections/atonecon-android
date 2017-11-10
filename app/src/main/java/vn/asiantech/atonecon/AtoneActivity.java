@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,7 +61,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthenticationSuccess(String authenToken, String userNo) {
                 Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_authentication)
-                        + authenToken, Toast.LENGTH_SHORT).show();
+                        + authenToken + getString(R.string.dialog_message_callback_user_no) + userNo, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
                 mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
@@ -164,7 +163,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
                 String transNo = mEdtTransactionNo.getText().toString();
                 List<Integer> transOption = new ArrayList<>();
-                transOption.add(0);
+//                transOption.add(0);
                 Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "ikIqa9qe/8Bxv6oOgmrYuIzphxr+0yW7HYbQu/WgUz4=")
                         .settled(false)
                         .transactionOption(transOption)
