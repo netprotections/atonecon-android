@@ -51,7 +51,6 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
         mOption.developEnvironment = true;
         mOption.terminalId = "";
-        mOption.resourceJavaScript = "https://it-auth.a-to-ne.jp/v1/atone.js";
 
         mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
@@ -163,7 +162,6 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
                 String transNo = mEdtTransactionNo.getText().toString();
                 List<Integer> transOption = new ArrayList<>();
-//                transOption.add(0);
                 Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "ikIqa9qe/8Bxv6oOgmrYuIzphxr+0yW7HYbQu/WgUz4=")
                         .settled(false)
                         .transactionOption(transOption)
