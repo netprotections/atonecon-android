@@ -50,6 +50,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mOption = AtonePay.Option.builder();
         mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
         mOption.developEnvironment = true;
+        mOption.terminalId = "";
 
         mSharedPreferences = getSharedPreferences("AtoneKey", MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
@@ -57,9 +58,9 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
         AtonePay.getInstance().handlerCallBack(new OnTransactionCallBack() {
             @Override
-            public void onAuthenticationSuccess(String authenToken) {
+            public void onAuthenticationSuccess(String authenToken, String userNo) {
                 Toast.makeText(AtoneActivity.this, getString(R.string.dialog_message_callback_authentication)
-                        + authenToken, Toast.LENGTH_SHORT).show();
+                        + authenToken + getString(R.string.dialog_message_callback_user_no) + userNo, Toast.LENGTH_SHORT).show();
                 mOption.preKey = authenToken;
                 mEditor.putString(PRE_KEY, mOption.preKey);
                 mEditor.apply();
@@ -130,15 +131,22 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
 
                 // Create a payment object(for demo)
                 Customer customer = new Customer.Builder("接続テスト")
+                        .familyName("接続")
+                        .givenName("テスト")
                         .nameKana("セツゾクテスト")
+                        .familyNameKana("セツゾク")
+                        .givenNameKana("テスト")
+                        .sex("1")
                         .company("（株）ネットプロテクションズ")
                         .setDepartment("セールスグループ")
-                        .setZipCode("1234567")
+                        .setZipCode("8491611")
                         .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
                         .setTel("080-1234-1234")
-                        .mail("np@netprotections.co.jp")
-                        .purchaseCount(2)
-                        .purchaseAmount(20000)
+                        .mail("m_register_test0001@fufururu.info")
+                        .birth("1984-08-17")
+                        .setPhone("09062910606")
+                        .purchaseCount(2000)
+                        .purchaseAmount(1000)
                         .build();
                 List<DestCustomer> destCustomers = new ArrayList<>();
                 destCustomers.add(0, new DestCustomer.Builder("銀座太郎", "123-1234", "東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
@@ -153,8 +161,11 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .build());
 
                 String transNo = mEdtTransactionNo.getText().toString();
-                Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "iq4gHR9I8LTszpozjDIaykNjuIsYg+m/pR6JFKggr5Q=")
+                List<Integer> transOption = new ArrayList<>();
+                Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "ikIqa9qe/8Bxv6oOgmrYuIzphxr+0yW7HYbQu/WgUz4=")
                         .settled(false)
+                        .transactionOption(transOption)
+                        .setUserNo("user_no-1509419147")
                         .description("備考です。")
                         .destCustomer(destCustomers)
                         .build();

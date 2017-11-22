@@ -8,6 +8,7 @@
     <string name="dialog_message_callback_error_message">Message: %s</string>
     <string name="dialog_message_callback_error_errors">\nErrors: %s</string>
     <string name="dialog_message_callback_authentication">Authentication: </string>
+    <string name="dialog_message_callback_user_no">\nUser No: </string>
     <string name="dialog_message_callback_cancel">Transaction Cancelled!</string>
     <string name="dialog_message_callback_success">Success: </string>
     <string name="dialog_message_callback_failure">Failure: </string>
