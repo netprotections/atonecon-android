@@ -28,9 +28,9 @@ jobs:
 
 workflows:
   version: 2
-  build_and_deploy:
-    jobs:
-      - check
-  test:
-    override:
-      - scripts/saddler.sh
+    test:
+      override:
+        - scripts/saddler.sh
+      build_and_deploy:
+        jobs:
+          - check
