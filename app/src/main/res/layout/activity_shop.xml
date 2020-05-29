@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/tvResetToken"
-        android:text="@string/activity_shop_text_view_reset_token"
+        android:text="activity_shop_text_view_reset_token"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAtone"
