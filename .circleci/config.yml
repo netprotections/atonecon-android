@@ -24,9 +24,7 @@ jobs:
 
       - store_artifacts:
           path: app/build/reports/
-  test:
-    override:
-      - scripts/saddler.sh
+
 
 workflows:
   version: 2
