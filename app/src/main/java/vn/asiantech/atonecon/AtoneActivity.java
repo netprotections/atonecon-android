@@ -22,6 +22,7 @@ import atone.asiantech.vn.atonelibrary.OnTransactionCallBack;
 import atone.asiantech.vn.atonelibrary.models.Customer;
 import atone.asiantech.vn.atonelibrary.models.DestCustomer;
 import atone.asiantech.vn.atonelibrary.models.Payment;
+import atone.asiantech.vn.atonelibrary.models.ServiceSupplier;
 import atone.asiantech.vn.atonelibrary.models.ShopItem;
 
 /**
@@ -145,13 +146,13 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .setTel("+813-1234-1234")
                         .mail("no@netprotections.co.jp")
                         .birth("1990-01-01")
-                        .setPhone("+8190-1111-1111")
+                        .setPhone("09011111111")
                         .purchaseCount(8)
                         .purchaseAmount(2160)
                         .shopCustomerId("123456ABCDEFG")
                         .membershipPeriod(30)
                         .identificationStatus(Arrays.asList(1, 3))
-                        .pastMerchandiseCategory(Arrays.asList(Arrays.asList("レディース", "ファッション小物", "手袋")))
+                        .pastMerchandiseCategory(Arrays.asList(Arrays.asList("レディース", "ファッション小物")))
                         .pastBrandName(Arrays.asList("エルメス"))
                         .pastPaymentWay(Arrays.asList(1, 5))
                         .terminalId("123456ABCDEFG")
@@ -166,14 +167,22 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 List<ShopItem> shopItems = new ArrayList<>();
                 shopItems.add(0, new ShopItem.Builder("item-012", "商品012", 1500, 1)
                         .url("https://atone.be/items/012/")
-                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物", "手袋"))
+                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物"))
                         .brandName("エルメス")
                         .build());
                 shopItems.add(1, new ShopItem.Builder("item-077", "商品077", 580, 2)
                         .url("https://atone.be/items/012/")
-                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物", "手袋"))
+                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物"))
                         .brandName("エルメス")
                         .build());
+                ServiceSupplier serviceSupplier = new ServiceSupplier.Builder()
+                        .shopCustomerId("123456ABCDEFG")
+                        .membershipPeriod(30)
+                        .identificationStatus(Arrays.asList(1, 3))
+                        .totalSalesCount(2)
+                        .totalSalesAmount(2160)
+                        .pastMerchandiseCategory(Arrays.asList(Arrays.asList("レディース", "ファッション小物")))
+                        .build();
 
                 String transNo = mEdtTransactionNo.getText().toString();
                 List<Integer> transOption = new ArrayList<>();
@@ -184,6 +193,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                         .setUserNo("shop-user-no-001")
                         .description("取引備考欄")
                         .destCustomer(destCustomers)
+                        .serviceSupplier(serviceSupplier)
                         .build();
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;

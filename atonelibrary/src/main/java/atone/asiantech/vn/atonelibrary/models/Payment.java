@@ -33,6 +33,8 @@ public class Payment implements Parcelable {
     private List<DestCustomer> destCustomers;
     @SerializedName("items")
     private List<ShopItem> items;
+    @SerializedName("service_supplier")
+    private ServiceSupplier serviceSupplier;
 
     protected Payment(Parcel in) {
         amount = in.readInt();
@@ -84,6 +86,7 @@ public class Payment implements Parcelable {
         private Customer customer;
         private List<DestCustomer> destCustomers;
         private List<ShopItem> items;
+        private ServiceSupplier serviceSupplier;
 
         public Builder(int amount, @NonNull String shopTransactionNo, @NonNull Customer customer,
                        @NonNull List<ShopItem> items, @NonNull String checkSumString) {
@@ -119,6 +122,11 @@ public class Payment implements Parcelable {
             return this;
         }
 
+        public Builder serviceSupplier(ServiceSupplier serviceSupplier) {
+            this.serviceSupplier = serviceSupplier;
+            return this;
+        }
+
         public Payment build() {
             return new Payment(this);
         }
@@ -134,6 +142,7 @@ public class Payment implements Parcelable {
         destCustomers = builder.destCustomers;
         customer = builder.customer;
         items = builder.items;
+        serviceSupplier = builder.serviceSupplier;
         checksum = builder.checksum;
     }
 
@@ -175,5 +184,9 @@ public class Payment implements Parcelable {
 
     public String getUserNo() {
         return userNo;
+    }
+
+    public ServiceSupplier getServiceSupplier() {
+        return serviceSupplier;
     }
 }
