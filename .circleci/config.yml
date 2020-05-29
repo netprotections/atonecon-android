@@ -31,3 +31,6 @@ workflows:
   build_and_deploy:
     jobs:
       - check
+  test:
+    override:
+      - scripts/saddler.sh
