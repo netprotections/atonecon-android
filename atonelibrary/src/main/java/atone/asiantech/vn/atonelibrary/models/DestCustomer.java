@@ -23,8 +23,6 @@ public class DestCustomer {
     private String destAddress;
     @SerializedName("dest_tel")
     private String destTel;
-    @SerializedName("dest_email")
-    private String destEmail;
 
     /**
      * Class support for constructing object
@@ -37,7 +35,6 @@ public class DestCustomer {
         private String destZipCode;
         private String destAddress;
         private String destTel;
-        private String destEmail;
 
         public Builder(@NonNull String destCustomerName, @NonNull String destZipCode, @NonNull String destAddress) {
             this.destCustomerName = destCustomerName;
@@ -65,11 +62,6 @@ public class DestCustomer {
             return this;
         }
 
-        public Builder email(String mail) {
-            this.destEmail = mail;
-            return this;
-        }
-
         public DestCustomer build() {
             return new DestCustomer(this);
         }
@@ -83,7 +75,6 @@ public class DestCustomer {
         destZipCode = builder.destZipCode;
         destAddress = builder.destAddress;
         destTel = builder.destTel;
-        destEmail = builder.destEmail;
     }
 
     @Override
@@ -117,9 +108,5 @@ public class DestCustomer {
 
     public String getDestTel() {
         return destTel;
-    }
-
-    public String getDestEmail() {
-        return destEmail;
     }
 }

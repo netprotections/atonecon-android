@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import atone.asiantech.vn.atonelibrary.AtonePay;
@@ -21,6 +22,7 @@ import atone.asiantech.vn.atonelibrary.OnTransactionCallBack;
 import atone.asiantech.vn.atonelibrary.models.Customer;
 import atone.asiantech.vn.atonelibrary.models.DestCustomer;
 import atone.asiantech.vn.atonelibrary.models.Payment;
+import atone.asiantech.vn.atonelibrary.models.ServiceSupplier;
 import atone.asiantech.vn.atonelibrary.models.ShopItem;
 
 /**
@@ -48,7 +50,7 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
         mEdtTransactionNo = (EditText) findViewById(R.id.edtTransactionNo);
 
         mOption = AtonePay.Option.builder();
-        mOption.publicKey = "bB2uNvcOP2o8fJzHpWUumA";
+        mOption.publicKey = "aDVVzTz0bZwg_uEjlOXVVQ";
         mOption.developEnvironment = true;
         mOption.terminalId = "";
 
@@ -130,44 +132,68 @@ public class AtoneActivity extends AppCompatActivity implements View.OnClickList
                 AtonePay.getInstance().config(mOption);
 
                 // Create a payment object(for demo)
-                Customer customer = new Customer.Builder("接続テスト")
-                        .familyName("接続")
-                        .givenName("テスト")
-                        .nameKana("セツゾクテスト")
-                        .familyNameKana("セツゾク")
-                        .givenNameKana("テスト")
+                Customer customer = new Customer.Builder("注文太郎")
+                        .familyName("注文")
+                        .givenName("太郎")
+                        .nameKana("ちゅうもんたろう")
+                        .familyNameKana("ちゅうもん")
+                        .givenNameKana("たろう")
                         .sex("1")
-                        .company("（株）ネットプロテクションズ")
-                        .setDepartment("セールスグループ")
-                        .setZipCode("8491611")
+                        .company("ネットプロテクションズ")
+                        .setDepartment("セールス")
+                        .setZipCode("123-4567")
                         .setAddress("東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
-                        .setTel("080-1234-1234")
-                        .mail("m_register_test0001@fufururu.info")
-                        .birth("1984-08-17")
-                        .setPhone("09062910606")
-                        .purchaseCount(2000)
-                        .purchaseAmount(1000)
+                        .setTel("+813-1234-1234")
+                        .mail("no@netprotections.co.jp")
+                        .birth("1990-01-01")
+                        .setPhone("09011111111")
+                        .purchaseCount(8)
+                        .purchaseAmount(2160)
+                        .shopCustomerId("123456ABCDEFG")
+                        .membershipPeriod(30)
+                        .identificationStatus(Arrays.asList(1, 3))
+                        .pastMerchandiseCategory(Arrays.asList(Arrays.asList("レディース", "ファッション小物")))
+                        .pastBrandName(Arrays.asList("エルメス"))
+                        .pastPaymentWay(Arrays.asList(1, 5))
+                        .terminalId("123456ABCDEFG")
                         .build();
                 List<DestCustomer> destCustomers = new ArrayList<>();
-                destCustomers.add(0, new DestCustomer.Builder("銀座太郎", "123-1234", "東京都中央区銀座１－１０ー６　銀座ファーストビル４階")
+                destCustomers.add(0, new DestCustomer.Builder("銀座太郎", "123-1234", "東京都中央区銀座１−１３−１５　ダイワロイヤル銀座ビル　オフィスフロア　３階")
                         .destNameKana("ぎんざたろう")
                         .destCompany("株式会社ネットプロテクションズ")
                         .department("システム部門")
-                        .setTel("0312341234")
+                        .setTel("+81312341234")
                         .build());
                 List<ShopItem> shopItems = new ArrayList<>();
-                shopItems.add(0, new ShopItem.Builder("1", "１０円チョコ", 10, 1)
-                        .url("https://atone.be/items/1")
+                shopItems.add(0, new ShopItem.Builder("item-012", "商品012", 1500, 1)
+                        .url("https://atone.be/items/012/")
+                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物"))
+                        .brandName("エルメス")
                         .build());
+                shopItems.add(1, new ShopItem.Builder("item-077", "商品077", 580, 2)
+                        .url("https://atone.be/items/012/")
+                        .merchandiseCategory(Arrays.asList("レディース", "ファッション小物"))
+                        .brandName("エルメス")
+                        .build());
+                ServiceSupplier serviceSupplier = new ServiceSupplier.Builder()
+                        .shopCustomerId("123456ABCDEFG")
+                        .membershipPeriod(30)
+                        .identificationStatus(Arrays.asList(1, 3))
+                        .totalSalesCount(2)
+                        .totalSalesAmount(2160)
+                        .pastMerchandiseCategory(Arrays.asList(Arrays.asList("レディース", "ファッション小物")))
+                        .build();
 
                 String transNo = mEdtTransactionNo.getText().toString();
                 List<Integer> transOption = new ArrayList<>();
-                Payment mPayment = new Payment.Builder(10, transNo, customer, shopItems, "ikIqa9qe/8Bxv6oOgmrYuIzphxr+0yW7HYbQu/WgUz4=")
-                        .settled(false)
+                transOption.add(3);
+                Payment mPayment = new Payment.Builder(12460, transNo, customer, shopItems, "Eba8b4JtD+inOc/zRON0D4RfODMfXwsz1hCdAmrq1CI=")
+                        .settled(true)
                         .transactionOption(transOption)
-                        .setUserNo("user_no-1509419147")
-                        .description("備考です。")
+                        .setUserNo("shop-user-no-001")
+                        .description("取引備考欄")
                         .destCustomer(destCustomers)
+                        .serviceSupplier(serviceSupplier)
                         .build();
                 AtonePay.getInstance().performPayment(this, mPayment);
                 break;
