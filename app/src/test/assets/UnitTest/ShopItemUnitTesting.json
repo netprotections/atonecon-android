@@ -1,0 +1,16 @@
+﻿[
+  {
+    "shop_item_id": "1",
+    "item_name": "１０円チョコ",
+    "item_price": 10,
+    "item_count": 1,
+    "item_url": "https://atone.be/items/1"
+  },
+  {
+    "shop_item_id": null,
+    "item_name": null,
+    "item_price": null,
+    "item_count": null,
+    "item_url": null
+  }
+]

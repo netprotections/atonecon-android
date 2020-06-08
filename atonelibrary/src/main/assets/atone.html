@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <script src="https://it-auth.a-to-ne.jp/v1/atone.js"></script>
+    <script>
+        var script = document.createElement('script');
+        script.src = Android.getScriptUrl();
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+    </script>
 </head>
 <title>Atone Payment</title>
 <body>
 <script>
+    var bodyTags = document.getElementsByTagName("body");
+    var bodyTag = bodyTags[0];
+    bodyTag.addEventListener("DOMNodeInserted", function (event) {
+       if (event.srcElement.nodeName == 'IFRAME') {
+               event.srcElement.onload = function () {
+                    Android.onFormLoaded();
+               }
+       }
+    }, false);
+
+    window.addEventListener("load", function(){
     var dataStr = Android.getDataString();
     var data = JSON.parse(dataStr);
 
     Atone.config({
         pre_token: Android.getPreToken(),
         pub_key: Android.getPublicKey(),
+        terminal_id: Android.getTerminalId(),
         payment: data,
-        authenticated: function(authentication_token) {
-            Android.onAuthenticated(authentication_token);
-            console.log(authentication_token);
+        authenticated: function(authentication_token, user_no) {
+            Android.onAuthenticated(authentication_token, user_no);
         },
         cancelled: function() {
             Android.onCancelled();
@@ -31,11 +47,8 @@
         error: function(name, message, errors) {
            Android.onErrors(name, message, JSON.stringify(errors));
         }
+    }, Atone.start);
     });
-    window.addEventListener("load", function(){
-        Atone.start();
-    });;
-
 
 </script>
 </body>

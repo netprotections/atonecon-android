@@ -1,6 +1,10 @@
 package atone.asiantech.vn.atonelibrary.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -18,6 +22,10 @@ public class ShopItem {
     private int itemCount;
     @SerializedName("item_url")
     private String itemUrl;
+    @SerializedName("brand_name")
+    private String brandName;
+    @SerializedName("merchandise_category")
+    private List<String> merchandiseCategory;
 
     /**
      * Class support for constructing object
@@ -28,8 +36,10 @@ public class ShopItem {
         private int itemPrice;
         private int itemCount;
         private String itemUrl;
+        private String brandName;
+        private List<String> merchandiseCategory;
 
-        public Builder(String shopItemId, String itemName, int itemPrice, int itemCount) {
+        public Builder(@NonNull String shopItemId, @NonNull String itemName, int itemPrice, int itemCount) {
             this.shopItemId = shopItemId;
             this.itemName = itemName;
             this.itemPrice = itemPrice;
@@ -38,6 +48,16 @@ public class ShopItem {
 
         public Builder url(String urlString) {
             this.itemUrl = urlString;
+            return this;
+        }
+
+        public Builder brandName(String brandName) {
+            this.brandName = brandName;
+            return this;
+        }
+
+        public Builder merchandiseCategory(List<String> merchandiseCategory) {
+            this.merchandiseCategory = merchandiseCategory;
             return this;
         }
 
@@ -52,6 +72,8 @@ public class ShopItem {
         itemPrice = builder.itemPrice;
         itemCount = builder.itemCount;
         itemUrl = builder.itemUrl;
+        brandName = builder.brandName;
+        merchandiseCategory = builder.merchandiseCategory;
     }
 
     @Override
@@ -77,5 +99,13 @@ public class ShopItem {
 
     public String getItemUrl() {
         return itemUrl;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public List<String> getMerchandiseCategory() {
+        return merchandiseCategory;
     }
 }

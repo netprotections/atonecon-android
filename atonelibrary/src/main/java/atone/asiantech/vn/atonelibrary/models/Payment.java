@@ -2,6 +2,7 @@ package atone.asiantech.vn.atonelibrary.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -16,6 +17,10 @@ public class Payment implements Parcelable {
     private int amount;
     @SerializedName("shop_transaction_no")
     private String shopTransactionNo;
+    @SerializedName("user_no")
+    private String userNo;
+    @SerializedName("transaction_options")
+    private List<Integer> transactionOptions;
     @SerializedName("sales_settled")
     private boolean salesSettled;
     @SerializedName("description_trans")
@@ -28,10 +33,13 @@ public class Payment implements Parcelable {
     private List<DestCustomer> destCustomers;
     @SerializedName("items")
     private List<ShopItem> items;
+    @SerializedName("service_supplier")
+    private ServiceSupplier serviceSupplier;
 
     protected Payment(Parcel in) {
         amount = in.readInt();
         shopTransactionNo = in.readString();
+        userNo = in.readString();
         salesSettled = in.readByte() != 0;
         descriptionTrans = in.readString();
         checksum = in.readString();
@@ -58,6 +66,7 @@ public class Payment implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(amount);
         dest.writeString(shopTransactionNo);
+        dest.writeString(userNo);
         dest.writeByte((byte) (salesSettled ? 1 : 0));
         dest.writeString(descriptionTrans);
         dest.writeString(checksum);
@@ -69,19 +78,33 @@ public class Payment implements Parcelable {
     public static class Builder {
         private int amount;
         private String shopTransactionNo;
+        private String userNo;
+        private List<Integer> transactionOptions;
         private boolean salesSettled;
         private String descriptionTrans;
         private String checksum = "";
         private Customer customer;
         private List<DestCustomer> destCustomers;
         private List<ShopItem> items;
+        private ServiceSupplier serviceSupplier;
 
-        public Builder(int amount, String shopTransactionNo, Customer customer, List<ShopItem> items, String checkSumString) {
+        public Builder(int amount, @NonNull String shopTransactionNo, @NonNull Customer customer,
+                       @NonNull List<ShopItem> items, @NonNull String checkSumString) {
             this.amount = amount;
             this.shopTransactionNo = shopTransactionNo;
             this.customer = customer;
             this.items = items;
             this.checksum = checkSumString;
+        }
+
+        public Builder setUserNo(String userId) {
+            this.userNo = userId;
+            return this;
+        }
+
+        public Builder transactionOption(List<Integer> transOptions) {
+            this.transactionOptions = transOptions;
+            return this;
         }
 
         public Builder settled(boolean saleSettled) {
@@ -99,6 +122,11 @@ public class Payment implements Parcelable {
             return this;
         }
 
+        public Builder serviceSupplier(ServiceSupplier serviceSupplier) {
+            this.serviceSupplier = serviceSupplier;
+            return this;
+        }
+
         public Payment build() {
             return new Payment(this);
         }
@@ -107,11 +135,14 @@ public class Payment implements Parcelable {
     private Payment(Builder builder) {
         amount = builder.amount;
         shopTransactionNo = builder.shopTransactionNo;
+        userNo = builder.userNo;
+        transactionOptions = builder.transactionOptions;
         salesSettled = builder.salesSettled;
         descriptionTrans = builder.descriptionTrans;
         destCustomers = builder.destCustomers;
         customer = builder.customer;
         items = builder.items;
+        serviceSupplier = builder.serviceSupplier;
         checksum = builder.checksum;
     }
 
@@ -145,5 +176,17 @@ public class Payment implements Parcelable {
 
     public List<ShopItem> getItems() {
         return items;
+    }
+
+    public List<Integer> getTransactionOptions() {
+        return transactionOptions;
+    }
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public ServiceSupplier getServiceSupplier() {
+        return serviceSupplier;
     }
 }

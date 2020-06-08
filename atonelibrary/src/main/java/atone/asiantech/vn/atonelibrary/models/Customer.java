@@ -1,6 +1,10 @@
 package atone.asiantech.vn.atonelibrary.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * Copyright © AsianTech Co., Ltd
@@ -42,6 +46,20 @@ public class Customer {
     private int totalPurchaseCount;
     @SerializedName("total_purchase_amount")
     private int totalPurchaseAmount;
+    @SerializedName("shop_customer_id")
+    private String shopCustomerId;
+    @SerializedName("membership_period")
+    private int membershipPeriod;
+    @SerializedName("identification_status")
+    private List<Integer> identificationStatus;
+    @SerializedName("past_merchandise_category")
+    private List<List<String>> pastMerchandiseCategory;
+    @SerializedName("past_brand_name")
+    private List<String> pastBrandName;
+    @SerializedName("past_payment_way")
+    private List<Integer> pastPaymentWay;
+    @SerializedName("terminal_id")
+    private String terminalId;
 
     /**
      * Class support for constructing object
@@ -64,8 +82,15 @@ public class Customer {
         private String email;
         private int totalPurchaseCount;
         private int totalPurchaseAmount;
+        private String shopCustomerId;
+        private int membershipPeriod;
+        private List<Integer> identificationStatus;
+        private List<List<String>> pastMerchandiseCategory;
+        private List<String> pastBrandName;
+        private List<Integer> pastPaymentWay;
+        private String terminalId;
 
-        public Builder(String customerName) {
+        public Builder(@NonNull String customerName) {
             this.customerName = customerName;
         }
 
@@ -146,6 +171,41 @@ public class Customer {
 
         public Builder purchaseAmount(int amount) {
             this.totalPurchaseAmount = amount;
+            return this;
+        }
+
+        public Builder shopCustomerId(String shopCustomerId) {
+            this.shopCustomerId = shopCustomerId;
+            return this;
+        }
+
+        public Builder membershipPeriod(int membershipPeriod) {
+            this.membershipPeriod = membershipPeriod;
+            return this;
+        }
+
+        public Builder identificationStatus(List<Integer> identificationStatus) {
+            this.identificationStatus = identificationStatus;
+            return this;
+        }
+
+        public Builder pastMerchandiseCategory(List<List<String>> pastMerchandiseCategory) {
+            this.pastMerchandiseCategory = pastMerchandiseCategory;
+            return this;
+        }
+
+        public Builder pastBrandName(List<String> pastBrandName) {
+            this.pastBrandName = pastBrandName;
+            return this;
+        }
+
+        public Builder pastPaymentWay(List<Integer> pastPaymentWay) {
+            this.pastPaymentWay = pastPaymentWay;
+            return this;
+        }
+
+        public Builder terminalId(String terminalId) {
+            this.terminalId = terminalId;
             return this;
         }
 
@@ -245,5 +305,33 @@ public class Customer {
 
     public int getTotalPurchaseAmount() {
         return totalPurchaseAmount;
+    }
+
+    public String getShopCustomerId() {
+        return shopCustomerId;
+    }
+
+    public int getMembershipPeriod() {
+        return membershipPeriod;
+    }
+
+    public List<Integer> getIdentificationStatus() {
+        return identificationStatus;
+    }
+
+    public List<List<String>> getPastMerchandiseCategory() {
+        return pastMerchandiseCategory;
+    }
+
+    public List<String> getPastBrandName() {
+        return pastBrandName;
+    }
+
+    public List<Integer> getPastPaymentWay() {
+        return pastPaymentWay;
+    }
+
+    public String getTerminalId() {
+        return terminalId;
     }
 }
